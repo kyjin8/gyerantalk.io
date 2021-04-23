@@ -1,7 +1,13 @@
 var express = require('express');
 const { User } = require('../public/models/Users');
 const { auth } = require('../public/middleware/auth');
+const bodyParser = require('body-parser');
 var router = express.Router();
+
+router.use(express.json());
+router.use(express.urlencoded({ extended: false }));
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({extended:false}));
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -10,18 +16,16 @@ router.get('/', function(req, res, next) {
 
 router.post('/register',(req,res)=>{
   // 회원가입 할 때 필요한 정보들을 client에서 가져오면
-  // 그것들을 데이터 베이스에 가져온다.
-  const user = new User(req.body);
+    // 그것들을 데이터 베이스에 가져온다.
+    const user = new User(req.body);
 
-  // 몽고 DB 함수
-  user.save((err,doc)=>{
-
-    if(err) return res.json({ success : false, err })
-
-    return res.status(200).json({
-      success : true
+    // 몽고 DB 함수
+    user.save((err,doc)=>{
+        if(err) return res.json({ success : false, err})
+        return res.status(200).json({
+            success : true
+        })
     })
-  })
 });
 
 router.post('/login',(req,res)=>{
@@ -52,6 +56,7 @@ router.post('/login',(req,res)=>{
 
 router.get('/auth',auth,(req,res)=>{
   res.status(200).json({
+    _id : req.user._id,
     userId : req.user.userId,
      // role이 0이면 일반유저 role이 1 2 3 이든 0이 아니면 관리자
     isAdmin : req.user.role === 0 ? false : true,
@@ -64,7 +69,7 @@ router.get('/auth',auth,(req,res)=>{
 })
 
 router.get('/logout', auth,(req, res)=>{
-  User.findOneAndUpdate({ userId : req.user.userId },
+  User.findOneAndUpdate({ _id : req.user._id },
       { token : "" }, (err, user) =>{
               if(err) return res.json({ success : false, err });
               return res.status(200).send({

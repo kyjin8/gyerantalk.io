@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
     password : {
         type : String,
         minlength : 5,
-        maxlength : 200,
+        maxlength : 50,
         trim : true, // 빈칸 없애주는 역할
         required : true,
     },
@@ -67,7 +67,6 @@ userSchema.pre('save', function(next) {
         bcrypt.genSalt(saltRounds, function(err, salt){
             if(err) return next(err);
 
-            // 해쉬값 부여
             bcrypt.hash(user.password, salt, function(err, hash){
                 if(err) return next(err);
                 user.password = hash;

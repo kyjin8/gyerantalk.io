@@ -16,6 +16,8 @@ npm i bcrypt
 npm i jsonwebtoken
 // 유효검사 라이브러리
 npm i joi
+// json 정제 라이브러리
+npm i body-parser
 
 
 
@@ -24,6 +26,10 @@ npm i joi
 yarn create react-app frontend
 
 yarn add http-proxy-middleware
+
+yarn add react-redux redux redux-promise redux-thunk
+
+yarn add react-router-dom
 
 // 동시에 백엔드와 프론트 돌릴려면 프론트에도 해줘야 한다.
 npm install
