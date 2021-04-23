@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const saltRounds = process.env.saltRounds;
+const saltRounds = Number(process.env.saltRounds);
 const jwt = require('jsonwebtoken');
-const Joi = require("joi");
 const secretToken = process.env.secretToken;
 
 // 몽고 DB 스키마
@@ -17,7 +16,7 @@ const userSchema = mongoose.Schema({
     password : {
         type : String,
         minlength : 5,
-        maxlength : 50,
+        maxlength : 200,
         trim : true, // 빈칸 없애주는 역할
         required : true,
     },
@@ -32,6 +31,7 @@ const userSchema = mongoose.Schema({
         type : String,
         maxlength : 50,
         unique : true,
+        required : true,
     },
     role : { // 번호에 따라 관리자인지 일반유저인지 판별
         type : Number,
@@ -92,7 +92,7 @@ userSchema.methods.comparePassword = function(plainPassword, cb) {
 userSchema.methods.generateToken = function(cb){
     var user = this;
     // jsonwebtoken을 이용해서 token을 생성하기
-    var token = jwt.sign(user.userId.toHexString(), secretToken);
+    var token = jwt.sign(user._id.toHexString(), secretToken);
 
     user.token = token;
 
@@ -109,7 +109,7 @@ userSchema.statics.findByToken = function(token, cb) {
     jwt.verify(token, secretToken, function(err, decoded) {
         // 유저 아이디를 이용해서 유저를 찾은 다음에
         // 클라이언트에서 가져온 token과 DB에 보관된 토큰이 일치하는 지 확인
-        user.findOne({ "userId" : decoded, "token" : token},function(err, user) {
+        user.findOne({ "_id" : decoded, "token" : token},function(err, user) {
             if(err) return cb(err);
             return cb(null, user);
         })

@@ -16,7 +16,7 @@ router.post('/register',(req,res)=>{
   // 몽고 DB 함수
   user.save((err,doc)=>{
 
-    if(err) return res.json({ success : false, err });
+    if(err) return res.json({ success : false, err })
 
     return res.status(200).json({
       success : true
@@ -34,6 +34,7 @@ router.post('/login',(req,res)=>{
         message : "입력하신 아이디는 없습니다."
       })
     }
+    
     // 요청된 아이디가 데이터베이스에 있다면 비밀번호가 맞는 비밀번호 인지 확인
     user.comparePassword(req.body.password, (err, isMatch)=>{
       if(!isMatch) return res.json({ loginSuccess: false, message: "비밀번호가 틀렸습니다." });
@@ -62,7 +63,7 @@ router.get('/auth',auth,(req,res)=>{
   });
 })
 
-app.get('/logout', auth,(req, res)=>{
+router.get('/logout', auth,(req, res)=>{
   User.findOneAndUpdate({ userId : req.user.userId },
       { token : "" }, (err, user) =>{
               if(err) return res.json({ success : false, err });
