@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index",
     "server": "nodemon index",
-    "dev": "concurrently \" npm run server \" \" npm run start --prefix frontend \""
+    "dev": "concurrently \" npm run server \" \" npm run start --prefix ../frontend \""
   },
   "dependencies": {
     "amdefine": "^1.0.1",
