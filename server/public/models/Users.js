@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = process.env.saltRounds;
 const jwt = require('jsonwebtoken');
 const Joi = require("joi");
+const secretToken = process.env.secretToken;
 
 // 몽고 DB 스키마
 const userSchema = mongoose.Schema({
@@ -36,7 +37,7 @@ const userSchema = mongoose.Schema({
         type : Number,
         default : 0,
     },
-    image : String,
+    image : String, // 이미지
     token : { // 토큰
         type : String,
     },
@@ -53,6 +54,7 @@ const userSchema = mongoose.Schema({
 // 복잡한 유효성 검사, 트리거 이벤트 처리 등 사용자를 삭제하면 사용자 관련 블로그 포스트도 삭제하기 같은 경우
 // 또는 에러 헨들링에 쓰인다.
 
+// 저장관련 함수
 userSchema.pre('save', function(next) {
 
     // 몽구스 userSchema
@@ -64,20 +66,57 @@ userSchema.pre('save', function(next) {
         // 비밀번호를 암호화 시킨다.
         bcrypt.genSalt(saltRounds, function(err, salt){
             if(err) return next(err);
-            
+
             // 해쉬값 부여
             bcrypt.hash(user.password, salt, function(err, hash){
                 if(err) return next(err);
                 user.password = hash;
                 next();
             })
+
         })
     }else{
         // 비밀번호가 아닌 다른 것을 바꿀때는 넘기기만 하면 된다.
         next();
-    }
-    
+    }  
 })
+
+userSchema.methods.comparePassword = function(plainPassword, cb) {
+    // plainPassword 1234567 암호화된 해쉬 값 비밀번호 비교
+    bcrypt.compare(plainPassword, this.password, function(err, isMatch){
+        if(err) return cb(err);
+        return cb(null, isMatch);
+    })
+}
+
+userSchema.methods.generateToken = function(cb){
+    var user = this;
+    // jsonwebtoken을 이용해서 token을 생성하기
+    var token = jwt.sign(user.userId.toHexString(), secretToken);
+
+    user.token = token;
+
+    user.save(function(err, user){
+        if(err) return cb(err);
+        return cb(null, user);
+    })
+}
+
+userSchema.statics.findByToken = function(token, cb) {
+    var user = this;
+    // 토큰을 복호화 한다. decode
+    // 토큰, user._id + '문자' = token을 만든 문자 값, 함수
+    jwt.verify(token, secretToken, function(err, decoded) {
+        // 유저 아이디를 이용해서 유저를 찾은 다음에
+        // 클라이언트에서 가져온 token과 DB에 보관된 토큰이 일치하는 지 확인
+        user.findOne({ "userId" : decoded, "token" : token},function(err, user) {
+            if(err) return cb(err);
+            return cb(null, user);
+        })
+    })
+}
+
+
 
 // 유저 스키마 모델 만들기
 const User = mongoose.model('User',userSchema);
