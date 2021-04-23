@@ -55,7 +55,27 @@ const userSchema = mongoose.Schema({
 
 userSchema.pre('save', function(next) {
 
+    // 몽구스 userSchema
     const user = this;
+
+    // 패스워드가 바뀌는 것을 감지하면 아래의 해쉬를 사용한다.
+    if(user.isModified('password')){
+        // bcrypt 라이브러리로
+        // 비밀번호를 암호화 시킨다.
+        bcrypt.genSalt(saltRounds, function(err, salt){
+            if(err) return next(err);
+            
+            // 해쉬값 부여
+            bcrypt.hash(user.password, salt, function(err, hash){
+                if(err) return next(err);
+                user.password = hash;
+                next();
+            })
+        })
+    }else{
+        // 비밀번호가 아닌 다른 것을 바꿀때는 넘기기만 하면 된다.
+        next();
+    }
     
 })
 
