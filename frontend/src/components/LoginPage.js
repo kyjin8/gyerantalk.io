@@ -1,12 +1,23 @@
 import React, {useState} from 'react';
-// import {useDispatch} from 'react-redux';
-// import { loginUser } from '../../../_actions/user_action';
-// import { withRouter } from 'react-router-dom';
-import { Grid, Paper, Avatar, TextField, Button, Typography, Link } from '@material-ui/core';
+import {useDispatch} from 'react-redux';
+import { loginUser } from '../api/actions/user_action';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Grid, Paper, Avatar, TextField, Button, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+    customTextField: {
+      "& input::placeholder": {
+        color : '#fff',
+        fontWeight : 'bolder'
+      }
+    }
+})
 
 const LoginPage = (props) => {
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const [UserId, setUserId] = useState("");
     const [Password, setPassword] = useState("");
@@ -23,24 +34,35 @@ const LoginPage = (props) => {
             userId : UserId,
             password : Password,
         }
-        console.log(body);
+
+        dispatch(loginUser(body))
+        .then(response => {
+            if(response.payload.loginSuccess){
+                props.history.push('/main');
+            }else{
+                alert('Error');
+            }
+        })
+
     }
 
     const paperStyle = {
         padding : 20,
-        height : '70vh',
+        height : '568px',
         width : 280,
-        margin : '20px auto',
+        margin : '0 auto',
         textAlign : 'center',
         background : '#f6bd63',
+        position: 'absolute',
+        top:'50%',
+        left:'50%',
+        transform: 'translate(-50%, -50%)'
     }
     const avatarStyle = {
         width : '230px',
         height : '90px',
-        // marginBottom: '30px',
         margin: '10px 0 30px',
         background : '#f6bd63',
-        // border : '1px solid black',
     }
     const btnstyle = {
         margin : '8px 0',
@@ -62,12 +84,18 @@ const LoginPage = (props) => {
         height : '30px',
         marginBottom : '20px',
         background : '#855460',
-        color : '#fff',
+        color : '#fff'
     }
+    const linkstyle ={
+        color : '#fff',
+        fontWeight : 'bolder',
+    }
+
+    const classes = useStyles();
 
     return (
         <Grid>
-            <Paper elevation={10} style={paperStyle}>
+            <Paper elevation={10} style={paperStyle} classes={{root:classes.customTextField}}>
                 <Grid align="center">
                     <img src="/text_transparent.png" style={logostyle}></img>
                     <Avatar style={avatarStyle} ><img src="/gyeran_height_cut.png" style={imgstyle} /></Avatar>
@@ -88,7 +116,7 @@ const LoginPage = (props) => {
                     <Button type="submit" style={btnstyle} variant="contained" fullWidth>Sign in</Button>
                 </form>
                 <Typography>
-                    <Link href="#">
+                    <Link to="/register" style={linkstyle}>
                         Sign up
                     </Link>
                 </Typography>
@@ -97,4 +125,4 @@ const LoginPage = (props) => {
     )
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);

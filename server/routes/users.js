@@ -79,4 +79,20 @@ router.get('/logout', auth,(req, res)=>{
       )
 })
 
+router.post('/checkId',(req,res)=>{
+  // 요청된 아이디를 데이터베이스에서 있는지 찾는다.
+  User.findOne({ userId : req.body.userId },(err,user)=>{
+    if(!user){
+      return res.status(200).json({
+        checkId : true,
+        message : "사용가능합니다"
+      })
+    }
+    return res.status(200).json({
+      checkId : false,
+      message : "이미 아이디가 있습니다"
+    })
+  })
+})
+
 module.exports = router;
