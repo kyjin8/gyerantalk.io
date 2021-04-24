@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
     password : {
         type : String,
         minlength : 5,
-        maxlength : 50,
+        maxlength : 100,
         trim : true, // 빈칸 없애주는 역할
         required : true,
     },

@@ -14,13 +14,20 @@ const Main = (props) => {
             }
         })
     }
+
     return (
         <div>
-            메인페이지
-            <button onClick={onClickHandler}>
-                로그아웃
-            </button>
+            <div>
+                메인페이지
+                <button onClick={onClickHandler}>
+                    로그아웃
+                </button>
+            </div>
+            <div>
+                dddd
+            </div>
         </div>
+
     )
 }
 
