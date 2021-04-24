@@ -81,16 +81,33 @@ router.get('/logout', auth,(req, res)=>{
 
 router.post('/checkId',(req,res)=>{
   // 요청된 아이디를 데이터베이스에서 있는지 찾는다.
+  console.log(req.body.userId,'11111111')
   User.findOne({ userId : req.body.userId },(err,user)=>{
     if(!user){
       return res.status(200).json({
         checkId : true,
-        message : "사용가능합니다"
+        message : "사용가능"
       })
     }
     return res.status(200).json({
       checkId : false,
-      message : "이미 아이디가 있습니다"
+      message : "사용불가능"
+    })
+  })
+})
+
+router.post('/checkNick',(req,res)=>{
+  // 요청된 아이디를 데이터베이스에서 있는지 찾는다.
+  User.findOne({ userNickName : req.body.userNickName },(err,user)=>{
+    if(!user){
+      return res.status(200).json({
+        checkNick : true,
+        message : "사용가능"
+      })
+    }
+    return res.status(200).json({
+      checkNick : false,
+      message : "사용불가능"
     })
   })
 })

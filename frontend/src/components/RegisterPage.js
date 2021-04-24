@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useDispatch} from 'react-redux';
-import { registerUser, checkId } from '../api/actions/user_action';
+import { registerUser, checkId, checkNick } from '../api/actions/user_action';
 import { withRouter } from 'react-router-dom';
 import { Grid, Paper, Avatar, FormControlLabel, Checkbox, TextField, Button, Typography } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -18,6 +18,7 @@ const LoginPage = (props) => {
     const [Phone, setPhone] = useState("");
     const [checkPassword, setcheckPassword] = useState(true);
     const [NoticeId, setNoticeId] = useState("");
+    const [NoticeNick, setNoticeNick] = useState("");
 
     const onUserIdHandler = (e) => {
         setUserId(e.target.value);
@@ -46,11 +47,19 @@ const LoginPage = (props) => {
 
         dispatch(checkId(body))
         .then(response => {
-            if(response.payload.checkId){
-                setNoticeId('사용가능');
-            }else{
-                setNoticeId('사용불가능');
-            }
+            setNoticeId(response.payload.message);
+        })
+    }
+    const onCheckNick = (e) => {
+        
+        e.preventDefault();
+        let body = {
+            userNickName : NickName,
+        }
+
+        dispatch(checkNick(body))
+        .then(response => {
+            setNoticeNick(response.payload.message);
         })
     }
     const onSubmitHandler = (e) => {
@@ -73,7 +82,7 @@ const LoginPage = (props) => {
 
     const paperStyle ={
         padding : 20,
-        height : '800px',
+        height : '650px',
         width : 280,
         margin : '20px auto',
         // textAlign : 'center',
@@ -86,15 +95,24 @@ const LoginPage = (props) => {
         backgroundColor : 'gray',
         height : '1px'
     }
+    const divstyle1 ={
+        paddingLeft: '12.5px',
+        marginTop: '20px',
+    }
+    const divstyle2 ={
+        marginTop: '10px',
+        fontSize: '12px',
+    }
     const textStyle1 ={
-        width : 150,
+        width : 175,
         marginBottom : '10px',
     }
     const textStyle2 ={
+        width : 250,
         marginBottom : '10px',
     }
     const btnstyle ={
-        margin : '8px 0',
+        margin : '18px 0',
         fontWeight : 'bolder',
         color : '#fff',
         backgroundColor : '#845460'
@@ -115,6 +133,14 @@ const LoginPage = (props) => {
         fontWeight : 'bolder',
         fontSize : '10px',
     }
+    const linkstyle ={
+        color : 'inherit',
+    }
+    const spanstyle ={
+        fontSize : '25px',
+        fontWeight : 'bolder',
+        marginLeft : '70px',
+    }
 
     useEffect(()=>{
         if(Password !== ConfirmPassword){
@@ -129,60 +155,70 @@ const LoginPage = (props) => {
             <Paper elevation={10} style={paperStyle} >
                 <Grid align="left">
                     <Typography>
-                        <Link to="/">
+                        <Link to="/" style={linkstyle}>
                             <ArrowBackIosIcon />
                         </Link>
-                        회원가입
+                        <span style={spanstyle}>회원가입</span>
                     </Typography>
                 </Grid>
                 <hr style={hrstyle}/>
                 <form onSubmit={onSubmitHandler}>
-                    <TextField style={textStyle1} id="standard-basic" label="아이디" type="text" value={UserId} onChange={onUserIdHandler} />
-                    <button type="submit" style={btnstyle2} onClick={onCheckIdHandler}>중복확인</button>
-                    {NoticeId.length !== 0 ? <p style={pstyle}>{NoticeId}</p> : null }
-                    {checkPassword === true ? <TextField style={textStyle2} id="standard-basic" label="비밀번호" type="password" value={Password} onChange={onPasswordHandler} /> : <TextField error id="standard-error-helper-text" label="비밀번호" type="password" value={Password} onChange={onPasswordHandler} helperText="Incorrect entry." />}    
-                    {checkPassword === true ? <TextField style={textStyle2} id="standard-basic" label="비밀번호확인" type="password" value={ConfirmPassword} onChange={onPasswordHandler2} /> : <TextField error id="standard-error-helper-text" label="비밀번호확인" type="password" value={ConfirmPassword} onChange={onPasswordHandler2} />} 
-                    <TextField style={textStyle1} id="standard-basic" label="닉네임" type="text" value={NickName} onChange={onNickNameHandler} />
-                    <button type="submit" style={btnstyle2}>중복확인</button>
-                    <TextField style={textStyle2} id="standard-basic" label="이름" type="text" value={Name} onChange={onNameHandler} />
-                    <TextField style={textStyle1} id="standard-basic" label="휴대폰번호" type="number" value={Phone} onChange={onPhoneHandler} />
-                    <button type="submit" style={btnstyle2}>중복확인</button>
-                    <FormControlLabel 
-                        control={
-                            <Checkbox
-                                name="checkedB"
-                                color="primary"
+                    <div style={divstyle1}>
+                        <TextField style={textStyle1} id="standard-basic" label="아이디" type="text" value={UserId} onChange={onUserIdHandler} />
+                        <button type="submit" style={btnstyle2} onClick={onCheckIdHandler}>중복확인</button>
+                        {NoticeId.length !== 0 ? <p style={pstyle}>{NoticeId}</p> : null}
+                        {checkPassword === true ? <TextField style={textStyle2} id="standard-basic" label="비밀번호" type="password" value={Password} onChange={onPasswordHandler} /> : <TextField error id="standard-error-helper-text" label="비밀번호" type="password" value={Password} onChange={onPasswordHandler} helperText="Incorrect entry." />}
+                        {checkPassword === true ? <TextField style={textStyle2} id="standard-basic" label="비밀번호확인" type="password" value={ConfirmPassword} onChange={onPasswordHandler2} /> : <TextField error id="standard-error-helper-text" label="비밀번호확인" type="password" value={ConfirmPassword} onChange={onPasswordHandler2} />}
+                        <TextField style={textStyle1} id="standard-basic" label="닉네임" type="text" value={NickName} onChange={onNickNameHandler} />
+                        <button type="submit" style={btnstyle2} onClick={onCheckNick}>중복확인</button>
+                        {NoticeNick.length !== 0 ? <p style={pstyle}>{NoticeNick}</p> : null}
+                        <TextField style={textStyle2} id="standard-basic" label="이름" type="text" value={Name} onChange={onNameHandler} />
+                        <TextField style={textStyle1} id="standard-basic" label="휴대폰번호" type="number" value={Phone} onChange={onPhoneHandler} />
+                        <button type="submit" style={btnstyle2}>중복확인</button>
+
+                        <div style={divstyle2}>
+                            {/* <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="checkedB"
+                                        color="primary"
+                                    />
+                                }
+                                // label="모두 동의합니다"
                             />
-                        }
-                        label="모두 동의합니다"
-                    />
-                    <FormControlLabel 
-                        control={
-                            <Checkbox
-                                name="checkedB"
-                                color="primary"
+                            모두 동의합니다.<br/> */}
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="checkedB"
+                                        color="primary"
+                                    />
+                                }
+                                label="이용약관 동의"
                             />
-                        }
-                        label="이용약관 동의"
-                    />
-                    <FormControlLabel 
-                        control={
-                            <Checkbox
-                                name="checkedB"
-                                color="primary"
+                            {/* 이용약관 동의<br/> */}
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="checkedB"
+                                        color="primary"
+                                    />
+                                }
+                                label="개인정보 취급방침 동의"
                             />
-                        }
-                        label="개인정보 취급방침 동의"
-                    />
-                    <FormControlLabel 
-                        control={
-                            <Checkbox
-                                name="checkedB"
-                                color="primary"
+                            {/* 개인정보 취급방침 동의<br/> */}
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="checkedB"
+                                        color="primary"
+                                    />
+                                }
+                                label="마케팅 정보 수신 동의"
                             />
-                        }
-                        label="마케팅 정보 수신 동의"
-                    />
+                            {/* 마케팅 정보 수신 동의<br/> */}
+                        </div>
+                    </div>
                     <Button type="submit" style={btnstyle} variant="contained" fullWidth>Sign up</Button>
                 </form>
             </Paper>

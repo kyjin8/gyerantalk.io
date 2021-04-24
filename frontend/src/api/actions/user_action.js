@@ -4,6 +4,7 @@ const LOGIN_USER = "login_user";
 const REGISTER_USER = "register_user";
 const AUTH_USER = "auth_user";
 const CHECK_ID = 'checkid_user';
+const CHECK_NICK = 'checknick_user';
 
 export function loginUser(dataToSubmit){
     const request = axios.post('/api/users/login',dataToSubmit)
@@ -36,11 +37,21 @@ export function auth(dataToSubmit){
 }
 
 export function checkId(dataToSubmit){
-    const request = axios.get('/api/users/checkId')
+    const request = axios.post('/api/users/checkId',dataToSubmit)
     .then(response => response.data)
     
     return {
         type : CHECK_ID,
+        payload : request
+    }
+}
+
+export function checkNick(dataToSubmit){
+    const request = axios.post('/api/users/checkNick',dataToSubmit)
+    .then(response => response.data)
+    
+    return {
+        type : CHECK_NICK,
         payload : request
     }
 }

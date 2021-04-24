@@ -2,6 +2,7 @@ const LOGIN_USER = "login_user";
 const REGISTER_USER = "register_user";
 const AUTH_USER = "auth_user";
 const CHECK_ID = 'checkid_user';
+const CHECK_NICK = 'checknick_user';
 
 export default function(state={}, action){
     switch (action.type) {
@@ -13,6 +14,8 @@ export default function(state={}, action){
             return {...state, userData : action.payload };
         case CHECK_ID:
             return {...state, chekckId : action.payload};
+        case CHECK_NICK:
+            return {...state, checkNick : action.payload};    
         default:
             return state;
     }
