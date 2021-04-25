@@ -15,7 +15,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
-          <Route exact path="/main" component={Auth(Main, true)} />
+          <Route exact path="/main/:category?" component={Auth(Main, true)} />
         </Switch>
       </div>
     </Router>

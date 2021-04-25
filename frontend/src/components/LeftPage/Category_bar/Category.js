@@ -6,9 +6,12 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import '../../MainPage/Main.scss';
 
 const Category = () => {
+
+
+
     return (
         <div className="left_category">
-            <PersonIcon style={{ fontSize: 30 }}/>
+            <PersonIcon style={{ fontSize: 30 }} />
             <QuestionAnswerRoundedIcon style={{ fontSize: 30 }} />
             <LanguageIcon style={{ fontSize: 30 }} />
             <MoreHorizIcon style={{ fontSize: 30 }} />
