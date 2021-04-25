@@ -5,7 +5,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import QuestionAnswerRoundedIcon from '@material-ui/icons/QuestionAnswerRounded';
 import LanguageIcon from '@material-ui/icons/Language';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-// import Category from './Category_bar/Category';
 import FriendList from './FriendList/FriendList.js';
 import ChatList from './ChatList/ChatList';
 
