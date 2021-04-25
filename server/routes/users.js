@@ -81,7 +81,6 @@ router.get('/logout', auth,(req, res)=>{
 
 router.post('/checkId',(req,res)=>{
   // 요청된 아이디를 데이터베이스에서 있는지 찾는다.
-  console.log(req.body.userId,'11111111')
   User.findOne({ userId : req.body.userId },(err,user)=>{
     if(!user){
       return res.status(200).json({
@@ -110,6 +109,20 @@ router.post('/checkNick',(req,res)=>{
       message : "사용불가능"
     })
   })
+})
+
+router.get('/get',auth,(req,res)=>{
+  res.status(200).json({
+    _id : req.user._id,
+    userId : req.user.userId,
+     // role이 0이면 일반유저 role이 1 2 3 이든 0이 아니면 관리자
+    isAdmin : req.user.role === 0 ? false : true,
+    isAuth : true,
+    userName : req.user.userName,
+    userNickName : req.user.userNickName,
+    role : req.user.role,
+    image : req.user.image
+  });
 })
 
 module.exports = router;

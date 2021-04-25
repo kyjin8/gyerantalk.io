@@ -1,10 +1,15 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './Main.scss';
 import LeftPage from '../LeftPage/LeftPage';
-
+import { getUser } from '../../api/actions/main_action';
 const Main = (props) => {
+
+    const dispatch = useDispatch();
+
+    const [UserData, setUserData] = useState("");
 
     const onClickHandler = () =>{
         axios.get('/api/users/logout')
@@ -16,11 +21,18 @@ const Main = (props) => {
             }
         })
     }
+    
+    useEffect(()=>{
+        dispatch(getUser())
+        .then(response => {
+            setUserData(response.payload);
+        })
+    },[])
 
     return (
         <div className="container">
             <div className="box">
-                <LeftPage props={props}/>
+                <LeftPage props={props} UserData={UserData}/>
                 {/* <div className="right_side">
                     dddd
                 </div> */}

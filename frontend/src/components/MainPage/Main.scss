@@ -17,14 +17,14 @@
                     color: #fff;
                 }
                 .default_active:hover{
-                    color : #495057;
+                    color : #310b0b;
                 }
                 .active{
                     font-weight : 500;
-                    border-bottom : 2px solid #22b8cf;
-                    color: #22b8cf;
+                    border-bottom : 2px solid #9c3d54;
+                    color: #9c3d54;
                     .active:hover{
-                    color : #3bc9db;
+                    color : #310b0b;
                     }
                 }
             }
@@ -51,6 +51,51 @@
                     .add_friend{
                         margin-left: 5px;
                     }
+                }
+            }
+            .myProfile{
+                padding : 10px;
+                display: flex;
+                align-items: center;
+                img{
+                    margin-left: 15px;
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                }
+                .text_site{
+                    margin-left : 20px;
+                    .top{
+                        font-size: 17px;
+                        font-weight: bolder;
+                        margin-bottom: 5px;
+                    }
+                    .bottom{
+                        font-size: 10px;
+                        color: #7c7c7c;
+                        font-weight: bolder;
+                    }
+                }
+            }
+            .line{
+                width: 85%;
+                border-bottom: 2px solid rgba(170, 170, 170, 0.829);
+                margin: 0 auto;
+            }
+            .plus_site{
+                width: 80%;
+                margin: 0 auto;
+                padding: 5px;
+                display: flex;
+                align-items: center;
+                .plus_icon{
+                    width: 50px;
+                    height: 40px;
+                }
+                div{
+                    margin-left : 10px;
+                    font-weight: bolder;
+                    font-size: 18px;
                 }
             }
         }

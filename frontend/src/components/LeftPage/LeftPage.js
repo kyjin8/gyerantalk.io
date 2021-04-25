@@ -8,10 +8,9 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import FriendList from './FriendList/FriendList.js';
 import ChatList from './ChatList/ChatList';
 
-const LeftPage = ({match}) => {
+const LeftPage = ({match, UserData}) => {
 
     const data = match.params.category || 'FriendList';
-    console.log(data);
 
     return (
         <div className="left_side">
@@ -25,8 +24,8 @@ const LeftPage = ({match}) => {
                 <LanguageIcon style={{ fontSize: 30 }} />
                 <MoreHorizIcon style={{ fontSize: 30 }} />
             </div>
-            {data === 'FriendList' ? <FriendList /> : null}
-            {data === 'ChatList' ? <ChatList /> : null}
+            {data === 'FriendList' ? <FriendList UserData={UserData}/> : null}
+            {data === 'ChatList' ? <ChatList UserData={UserData}/> : null}
         </div>
     )
 
