@@ -41,6 +41,10 @@ const userSchema = mongoose.Schema({
         type : String,
         default : '/profile.png'
     }, // 이미지
+    message : {
+        type : String,
+        default : '상태메세지'
+    },
     token : { // 토큰
         type : String,
     },

@@ -9,7 +9,7 @@ const MyProfile = ({UserData}) => {
             <img src={UserData.image} />
             <div className="text_site">
                 <div className="top">{UserData.userName}</div>
-                <div className="bottom"> 상태 메시지 </div>
+                <div className="bottom">{UserData.message}</div>
             </div>
         </div>
     )

@@ -64,7 +64,8 @@ router.get('/auth',auth,(req,res)=>{
     userName : req.user.userName,
     userNickName : req.user.userNickName,
     role : req.user.role,
-    image : req.user.image
+    image : req.user.image,
+    message : req.user.message,
   });
 })
 
@@ -121,7 +122,8 @@ router.get('/get',auth,(req,res)=>{
     userName : req.user.userName,
     userNickName : req.user.userNickName,
     role : req.user.role,
-    image : req.user.image
+    image : req.user.image,
+    message : req.user.message,
   });
 })
 
