@@ -4,21 +4,35 @@
         justify-content: center;
         .left_side{
             width: 280px;
-            padding: 10px;
+            // padding: 10px;
             height: 568px;
             box-shadow: 0px 0px 5px 5px rgba(182, 182, 182, 0.521);
+            .left_category{
+                padding: 5px;
+                display: flex;
+                justify-content: space-around;
+                background-color: #f6bd63;
+                color: #fff;
+            }
             .left_title{
+                padding: 5px;
                 display: flex;
                 justify-content: space-between;
                 font-size: 25px;
                 font-weight: bolder;
+                border-bottom: 2px solid rgba(170, 170, 170, 0.829);
                 // align-items: center;
                 .search_friend{
                     display: flex;
                     align-items: center;
                     input{
-                        width: 150px;
-                        height: 20px;
+                        width: 130px;
+                        height: 15px;
+                        border: 2px solid #f6bd63;
+                        border-radius: 15px 15px;
+                        outline: none;
+                        padding: 5px;
+                        margin-right: 5px;
                     }
                     .add_friend{
                         margin-left: 5px;

@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../MainPage/Main.scss';
-import LeftTitle from './Title/LeftTitle';
-import MyProfile from './MyProfile/MyProfile.js'
-
+import Category from './Category_bar/Category';
+import FriendList from './FriendList/FriendList.js';
 
 const LeftPage = (props) => {
 
-    
+    const [Profile, setProfile] = useState("")
 
     return (
         <div className="left_side">
-            <LeftTitle />
-            <MyProfile />
+            <Category />
+            <FriendList />
         </div>
     )
+
 }
 
 export default withRouter(LeftPage);

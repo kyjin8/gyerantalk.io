@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useRef, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import '../../MainPage/Main.scss';
+import '../../../MainPage/Main.scss';
 import {
     SearchOutlined,
     UserAddOutlined
