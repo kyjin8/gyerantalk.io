@@ -37,7 +37,10 @@ const userSchema = mongoose.Schema({
         type : Number,
         default : 0,
     },
-    image : String, // 이미지
+    image : {
+        type : String,
+        default : '/profile.png'
+    }, // 이미지
     token : { // 토큰
         type : String,
     },

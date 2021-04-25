@@ -33,5 +33,7 @@ yarn add react-router-dom
 
 yarn add axios
 
+npm i --save @ant-design/icons
+
 // 동시에 백엔드와 프론트 돌릴려면 프론트에도 해줘야 한다.
 npm install

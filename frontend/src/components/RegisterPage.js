@@ -19,6 +19,7 @@ const LoginPage = (props) => {
     const [checkPassword, setcheckPassword] = useState(true);
     const [NoticeId, setNoticeId] = useState("");
     const [NoticeNick, setNoticeNick] = useState("");
+    const [Checking, setChecking] = useState(0);
 
     const onUserIdHandler = (e) => {
         setUserId(e.target.value);
@@ -48,6 +49,9 @@ const LoginPage = (props) => {
         dispatch(checkId(body))
         .then(response => {
             setNoticeId(response.payload.message);
+            if(response.payload.message === "사용가능"){
+                setChecking(Checking + 1);
+            }
         })
     }
     const onCheckNick = (e) => {
@@ -60,6 +64,9 @@ const LoginPage = (props) => {
         dispatch(checkNick(body))
         .then(response => {
             setNoticeNick(response.payload.message);
+            if(response.payload.message === "사용가능"){
+                setChecking(Checking + 1);
+            }
         })
     }
     const onSubmitHandler = (e) => {
@@ -128,6 +135,12 @@ const LoginPage = (props) => {
         border : 'none',
         cursor : 'pointer',
     }
+    const disablestyle ={
+        margin : '18px 0',
+        fontWeight : 'bolder',
+        color : '#fff',
+        backgroundColor : 'rgb(189, 189, 189)',
+    }
     const pstyle ={
         margin : '0 0',
         fontWeight : 'bolder',
@@ -143,10 +156,20 @@ const LoginPage = (props) => {
     }
 
     useEffect(()=>{
-        if(Password !== ConfirmPassword){
+        // if(Password !== ConfirmPassword){
+        //     setcheckPassword(false);
+        // }else{
+        //     setcheckPassword(true);
+        // }
+        if(Password.length === 0 && ConfirmPassword.length === 0){
+            setcheckPassword(true);
+        }else if(Password.length < 5 && ConfirmPassword.length < 5){
+            setcheckPassword(false);
+        }else if(Password !== ConfirmPassword){
             setcheckPassword(false);
         }else{
             setcheckPassword(true);
+            setChecking(Checking + 1);
         }
     },[Password, ConfirmPassword])
 
@@ -168,7 +191,7 @@ const LoginPage = (props) => {
                         <button type="submit" style={btnstyle2} onClick={onCheckIdHandler}>중복확인</button>
                         {NoticeId.length !== 0 ? <p style={pstyle}>{NoticeId}</p> : null}
                         {checkPassword === true ? <TextField style={textStyle2} id="standard-basic" label="비밀번호" type="password" value={Password} onChange={onPasswordHandler} /> : <TextField error id="standard-error-helper-text" label="비밀번호" type="password" value={Password} onChange={onPasswordHandler} helperText="Incorrect entry." />}
-                        {checkPassword === true ? <TextField style={textStyle2} id="standard-basic" label="비밀번호확인" type="password" value={ConfirmPassword} onChange={onPasswordHandler2} /> : <TextField error id="standard-error-helper-text" label="비밀번호확인" type="password" value={ConfirmPassword} onChange={onPasswordHandler2} />}
+                        {checkPassword === true ? <TextField style={textStyle2} id="standard-basic" label="비밀번호확인" type="password" value={ConfirmPassword} onChange={onPasswordHandler2} /> : <TextField error id="standard-error-helper-text" label="비밀번호확인" type="password" value={ConfirmPassword} onChange={onPasswordHandler2} helperText="최소 5자리 이상 조합"/>}
                         <TextField style={textStyle1} id="standard-basic" label="닉네임" type="text" value={NickName} onChange={onNickNameHandler} />
                         <button type="submit" style={btnstyle2} onClick={onCheckNick}>중복확인</button>
                         {NoticeNick.length !== 0 ? <p style={pstyle}>{NoticeNick}</p> : null}
@@ -192,6 +215,7 @@ const LoginPage = (props) => {
                                     <Checkbox
                                         name="checkedB"
                                         color="primary"
+                                        required
                                     />
                                 }
                                 label="이용약관 동의"
@@ -202,6 +226,7 @@ const LoginPage = (props) => {
                                     <Checkbox
                                         name="checkedB"
                                         color="primary"
+                                        required
                                     />
                                 }
                                 label="개인정보 취급방침 동의"
@@ -212,6 +237,7 @@ const LoginPage = (props) => {
                                     <Checkbox
                                         name="checkedB"
                                         color="primary"
+                                        required
                                     />
                                 }
                                 label="마케팅 정보 수신 동의"
@@ -219,7 +245,8 @@ const LoginPage = (props) => {
                             {/* 마케팅 정보 수신 동의<br/> */}
                         </div>
                     </div>
-                    <Button type="submit" style={btnstyle} variant="contained" fullWidth>Sign up</Button>
+                    {Checking === 3 ? <Button type="submit" style={btnstyle} variant="contained" fullWidth>Sign up</Button> : <Button disabled style={disablestyle} variant="contained" fullWidth>Sign up</Button>}
+                    
                 </form>
             </Paper>
         </Grid>
