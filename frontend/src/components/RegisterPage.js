@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useDispatch} from 'react-redux';
-import { registerUser, checkId, checkNick } from '../api/actions/user_action';
+import { registerUser, checkId, checkNick, checkPhone } from '../api/actions/user_action';
 import { withRouter } from 'react-router-dom';
 import { Grid, Paper, Avatar, FormControlLabel, Checkbox, TextField, Button, Typography } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -19,6 +19,7 @@ const LoginPage = (props) => {
     const [checkPassword, setcheckPassword] = useState(true);
     const [NoticeId, setNoticeId] = useState("");
     const [NoticeNick, setNoticeNick] = useState("");
+    const [NoticePhone, setNoticePhone] = useState("");
     const [Checking, setChecking] = useState(0);
 
     const onUserIdHandler = (e) => {
@@ -37,7 +38,10 @@ const LoginPage = (props) => {
         setName(e.target.value);
     }
     const onPhoneHandler = (e) => {
-        setPhone(e.target.value);
+        const regex = /^[0-9\b -]{0,13}$/;
+        if (regex.test(e.target.value)){
+            setPhone(e.target.value);
+        }
     }
     const onCheckIdHandler = (e) => {
 
@@ -64,6 +68,21 @@ const LoginPage = (props) => {
         dispatch(checkNick(body))
         .then(response => {
             setNoticeNick(response.payload.message);
+            if(response.payload.message === "사용가능"){
+                setChecking(Checking + 1);
+            }
+        })
+    }
+    const onCheckPhone = (e) => {
+        
+        e.preventDefault();
+        let body = {
+            userPhone : Phone,
+        }
+
+        dispatch(checkPhone(body))
+        .then(response => {
+            setNoticePhone(response.payload.message);
             if(response.payload.message === "사용가능"){
                 setChecking(Checking + 1);
             }
@@ -173,6 +192,12 @@ const LoginPage = (props) => {
         }
     },[Password, ConfirmPassword])
 
+    useEffect(()=>{
+        if(Phone.length === 11) {
+            setPhone(Phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
+        }
+    }, [Phone]);
+
     return (
         <Grid>
             <Paper elevation={10} style={paperStyle} >
@@ -197,7 +222,8 @@ const LoginPage = (props) => {
                         {NoticeNick.length !== 0 ? <p style={pstyle}>{NoticeNick}</p> : null}
                         <TextField style={textStyle2} id="standard-basic" label="이름" type="text" value={Name} onChange={onNameHandler} />
                         <TextField style={textStyle1} id="standard-basic" label="휴대폰번호" type="number" value={Phone} onChange={onPhoneHandler} />
-                        <button type="submit" style={btnstyle2}>중복확인</button>
+                        <button type="submit" style={btnstyle2} onClick={onCheckPhone}>중복확인</button>
+                        {NoticePhone.length !== 0 ? <p style={pstyle}>{NoticePhone}</p> : null}
 
                         <div style={divstyle2}>
                             {/* <FormControlLabel
@@ -245,7 +271,7 @@ const LoginPage = (props) => {
                             {/* 마케팅 정보 수신 동의<br/> */}
                         </div>
                     </div>
-                    {Checking === 3 ? <Button type="submit" style={btnstyle} variant="contained" fullWidth>Sign up</Button> : <Button disabled style={disablestyle} variant="contained" fullWidth>Sign up</Button>}
+                    {Checking === 4 ? <Button type="submit" style={btnstyle} variant="contained" fullWidth>Sign up</Button> : <Button disabled style={disablestyle} variant="contained" fullWidth>Sign up</Button>}
                     
                 </form>
             </Paper>
