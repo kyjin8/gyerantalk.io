@@ -2,6 +2,7 @@ var express = require('express');
 const { User } = require('../public/models/Users');
 const { auth } = require('../public/middleware/auth');
 const bodyParser = require('body-parser');
+const { Friend } = require('../public/models/Friends');
 var router = express.Router();
 
 router.use(express.json());
@@ -112,22 +113,6 @@ router.post('/checkNick',(req,res)=>{
   })
 })
 
-router.get('/get',auth,(req,res)=>{
-  res.status(200).json({
-    _id : req.user._id,
-    userId : req.user.userId,
-     // role이 0이면 일반유저 role이 1 2 3 이든 0이 아니면 관리자
-    isAdmin : req.user.role === 0 ? false : true,
-    isAuth : true,
-    userName : req.user.userName,
-    userNickName : req.user.userNickName,
-    userPhone : req.user.userPhone,
-    role : req.user.role,
-    image : req.user.image,
-    message : req.user.message,
-  })
-})
-
 router.post('/checkPhone',(req,res)=>{
   // 요청된 아이디를 데이터베이스에서 있는지 찾는다.
   User.findOne({ userPhone : req.body.userPhone },(err,user)=>{
@@ -143,5 +128,29 @@ router.post('/checkPhone',(req,res)=>{
     })
   })
 })
+
+router.get('/get',auth,(req,res)=>{
+  res.status(200).json({
+    _id : req.user._id,
+    userId : req.user.userId,
+     // role이 0이면 일반유저 role이 1 2 3 이든 0이 아니면 관리자
+    isAdmin : req.user.role === 0 ? false : true,
+    isAuth : true,
+    userName : req.user.userName,
+    userNickName : req.user.userNickName,
+    userPhone : req.user.userPhone,
+    role : req.user.role,
+    image : req.user.image,
+    message : req.user.message,
+  })
+})
+// router.
+
+// router.post('/friendAdd',(req,res)=>{
+
+//   const friend = new Friend(req.body);
+
+
+// })
 
 module.exports = router;
