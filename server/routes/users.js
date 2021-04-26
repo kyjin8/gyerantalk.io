@@ -2,6 +2,7 @@ var express = require('express');
 const { User } = require('../public/models/Users');
 const { auth } = require('../public/middleware/auth');
 const bodyParser = require('body-parser');
+const { Friend } = require('../public/models/Friends');
 var router = express.Router();
 
 router.use(express.json());
@@ -143,5 +144,14 @@ router.post('/checkPhone',(req,res)=>{
     })
   })
 })
+
+// router.
+
+// router.post('/friendAdd',(req,res)=>{
+
+//   const friend = new Friend(req.body);
+
+
+// })
 
 module.exports = router;

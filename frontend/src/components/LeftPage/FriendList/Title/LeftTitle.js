@@ -6,6 +6,7 @@ import {
     SearchOutlined,
     UserAddOutlined
 } from '@ant-design/icons';
+import SearchIcon from '@material-ui/icons/Search';
 
 const LeftTitle = ({
     Search,
@@ -32,8 +33,8 @@ const LeftTitle = ({
         <div className="left_title">
             <div>친구</div>
             <div className="search_friend">
-                {Search ? <input type="text" placeholder="친구검색" value={InputText} ref={inputEl} onChange={onInputTextHandler}/> : null}
-                {Friend || FriendClick ? <input type="text" placeholder="친구추가" value={InputText2} ref={inputEl2} onChange={onInputTextHandler2}/> : null}
+                {Search ? <div className="input_box"><input type="text" placeholder="친구검색" value={InputText} ref={inputEl} onChange={onInputTextHandler} /><SearchIcon className="search_icon" /></div> : null}
+                {Friend || FriendClick ? <div className="input_box"><input type="text" placeholder="친구추가" value={InputText2} ref={inputEl2} onChange={onInputTextHandler2}/><SearchIcon className="search_icon" /></div> : null}
                 <SearchOutlined onClick={onToggle}/>
                 <UserAddOutlined onClick={onToggle2} className="add_friend"/>
             </div>
