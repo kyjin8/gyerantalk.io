@@ -20,7 +20,12 @@ const LoginPage = (props) => {
     const [NoticeId, setNoticeId] = useState("");
     const [NoticeNick, setNoticeNick] = useState("");
     const [NoticePhone, setNoticePhone] = useState("");
-    const [Checking, setChecking] = useState(0);
+    // const [Checking, setChecking] = useState(0);
+    const [isCheckedId, setisCheckedId] = useState(false);
+    const [isCheckedNick, setisCheckedNick] = useState(false);
+    const [isCheckedPhone, setisCheckedPhone] = useState(false);
+    const [isCheckedPassword, setisCheckedPassword] = useState(false);
+
 
     const onUserIdHandler = (e) => {
         setUserId(e.target.value);
@@ -53,8 +58,10 @@ const LoginPage = (props) => {
         dispatch(checkId(body))
         .then(response => {
             setNoticeId(response.payload.message);
-            if(response.payload.message === "사용가능"){
-                setChecking(Checking + 1);
+            if(response.payload.checkId){
+                setisCheckedId(true)
+            } else {
+                setisCheckedId(false)
             }
         })
     }
@@ -68,8 +75,10 @@ const LoginPage = (props) => {
         dispatch(checkNick(body))
         .then(response => {
             setNoticeNick(response.payload.message);
-            if(response.payload.message === "사용가능"){
-                setChecking(Checking + 1);
+            if(response.payload.checkNick){
+                setisCheckedNick(true)
+            } else {
+                setisCheckedNick(false)
             }
         })
     }
@@ -83,8 +92,10 @@ const LoginPage = (props) => {
         dispatch(checkPhone(body))
         .then(response => {
             setNoticePhone(response.payload.message);
-            if(response.payload.message === "사용가능"){
-                setChecking(Checking + 1);
+            if(response.payload.checkPhone){
+                setisCheckedPhone(true)
+            } else {
+                setisCheckedPhone(false)
             }
         })
     }
@@ -183,13 +194,16 @@ const LoginPage = (props) => {
         // }
         if(Password.length === 0 && ConfirmPassword.length === 0){
             setcheckPassword(true);
+            setisCheckedPassword(false);
         }else if(Password.length < 5 && ConfirmPassword.length < 5){
             setcheckPassword(false);
+            setisCheckedPassword(false);
         }else if(Password !== ConfirmPassword){
             setcheckPassword(false);
+            setisCheckedPassword(false);
         }else{
             setcheckPassword(true);
-            setChecking(Checking + 1);
+            setisCheckedPassword(true);
         }
     },[Password, ConfirmPassword])
 
@@ -272,7 +286,8 @@ const LoginPage = (props) => {
                             {/* 마케팅 정보 수신 동의<br/> */}
                         </div>
                     </div>
-                    {Checking >= 4 ? <Button type="submit" style={btnstyle} variant="contained" fullWidth>Sign up</Button> : <Button disabled style={disablestyle} variant="contained" fullWidth>Sign up</Button>}
+                    {/* {Checking >= 4 ? <Button type="submit" style={btnstyle} variant="contained" fullWidth>Sign up</Button> : <Button disabled style={disablestyle} variant="contained" fullWidth>Sign up</Button>} */}
+                    {isCheckedId && isCheckedNick && isCheckedPhone && isCheckedPassword ? <Button type="submit" style={btnstyle} variant="contained" fullWidth>Sign up</Button> : <Button disabled style={disablestyle} variant="contained" fullWidth>Sign up</Button>}
                     
                 </form>
             </Paper>
