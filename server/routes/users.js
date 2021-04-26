@@ -121,6 +121,7 @@ router.get('/get',auth,(req,res)=>{
     isAuth : true,
     userName : req.user.userName,
     userNickName : req.user.userNickName,
+    userPhone : req.user.userPhone,
     role : req.user.role,
     image : req.user.image,
     message : req.user.message,

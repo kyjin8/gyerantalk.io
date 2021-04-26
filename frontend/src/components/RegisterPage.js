@@ -95,6 +95,7 @@ const LoginPage = (props) => {
             password : Password,
             userNickName : NickName,
             userName : Name,
+            userPhone : Phone,
         }
         dispatch(registerUser(body))
         .then(response => {
@@ -194,7 +195,7 @@ const LoginPage = (props) => {
 
     useEffect(()=>{
         if(Phone.length === 11) {
-            setPhone(Phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
+            setPhone(Phone.replace(/-/g,'').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
         }
     }, [Phone]);
 
@@ -221,7 +222,7 @@ const LoginPage = (props) => {
                         <button type="submit" style={btnstyle2} onClick={onCheckNick}>중복확인</button>
                         {NoticeNick.length !== 0 ? <p style={pstyle}>{NoticeNick}</p> : null}
                         <TextField style={textStyle2} id="standard-basic" label="이름" type="text" value={Name} onChange={onNameHandler} />
-                        <TextField style={textStyle1} id="standard-basic" label="휴대폰번호" type="number" value={Phone} onChange={onPhoneHandler} />
+                        <TextField style={textStyle1} id="standard-basic" label="휴대폰번호" type="text" value={Phone} onChange={onPhoneHandler} />
                         <button type="submit" style={btnstyle2} onClick={onCheckPhone}>중복확인</button>
                         {NoticePhone.length !== 0 ? <p style={pstyle}>{NoticePhone}</p> : null}
 
@@ -271,7 +272,7 @@ const LoginPage = (props) => {
                             {/* 마케팅 정보 수신 동의<br/> */}
                         </div>
                     </div>
-                    {Checking === 4 ? <Button type="submit" style={btnstyle} variant="contained" fullWidth>Sign up</Button> : <Button disabled style={disablestyle} variant="contained" fullWidth>Sign up</Button>}
+                    {Checking >= 4 ? <Button type="submit" style={btnstyle} variant="contained" fullWidth>Sign up</Button> : <Button disabled style={disablestyle} variant="contained" fullWidth>Sign up</Button>}
                     
                 </form>
             </Paper>
