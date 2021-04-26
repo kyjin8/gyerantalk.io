@@ -144,13 +144,18 @@ router.get('/get',auth,(req,res)=>{
     message : req.user.message,
   })
 })
-// router.
 
-// router.post('/friendAdd',(req,res)=>{
+router.post('/friendSearch',(req,res)=>{
 
-//   const friend = new Friend(req.body);
+  // const friend = new Friend(req.body);
+  console.log('node.js 조회 : ',req.body.data);
+  const data = req.body.data;
+  User.find({ userId : {$regex : "^"+data}},(err,user)=>{
+    res.status(200).json({
+      friend : user
+    })
+  })
+})
 
-
-// })
 
 module.exports = router;

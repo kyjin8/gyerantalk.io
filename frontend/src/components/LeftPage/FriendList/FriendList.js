@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LeftTitle from './Title/LeftTitle';
 import MyProfile from './MyProfile/MyProfile';
 import PlusFriend from './PlusFriend/PlusFriend';
 import { withRouter } from 'react-router-dom';
+import SearchFriend from './PlusFriend/SearchFriend';
+import { searchFriend } from '../../../api/actions/friend_action';
+import {useDispatch} from 'react-redux';
 
 const FriendList = ({UserData}) => {
+
+    const dispatch = useDispatch();
 
     const [Search, setSearch] = useState(false);
     const [Friend, setFriend] = useState(false);
     const [FriendClick, setFriendClick] = useState(false);
     const [InputText, setInputText] = useState("");
     const [InputText2, setInputText2] = useState("");
+    const [friendDB, setfriendDB] = useState("");
 
     const onToggle = () =>{
         setSearch(!Search);
@@ -33,6 +39,22 @@ const FriendList = ({UserData}) => {
     const onInputTextHandler2 = (e) =>{
         setInputText2(e.target.value);
     }
+
+    useEffect(() => {
+        if(InputText2 !== ""){
+            let body = {
+                data : InputText2
+            }
+            
+            dispatch(searchFriend(body))
+            .then(response => {
+                setfriendDB(response.payload);
+            })
+
+        }else{
+            setfriendDB("");
+        }
+    }, [InputText2])
     
     return (
         <div>
@@ -51,9 +73,16 @@ const FriendList = ({UserData}) => {
                 UserData={UserData}
             />
             <div className="line" />
-            <PlusFriend 
-                onToggle3={onToggle3}
-            />
+            {InputText2.length === 0 ?
+                <PlusFriend
+                    onToggle3={onToggle3}
+                />
+                :
+                <SearchFriend
+                    friendDB={friendDB}
+                    UserData={UserData}
+                />
+            }
             <div className="line" />
 
         </div>

@@ -90,6 +90,30 @@
                 width: 85%;
                 border-bottom: 2px solid rgba(170, 170, 170, 0.829);
                 margin: 0 auto;
+                .myProfile{
+                    padding : 10px;
+                    display: flex;
+                    align-items: center;
+                    img{
+                        margin-left: 15px;
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                    }
+                    .text_site{
+                        margin-left : 20px;
+                        .top{
+                            font-size: 17px;
+                            font-weight: bolder;
+                            margin-bottom: 5px;
+                        }
+                        .bottom{
+                            font-size: 10px;
+                            color: #7c7c7c;
+                            font-weight: bolder;
+                        }
+                    }
+                }
             }
             .plus_site{
                 width: 80%;
