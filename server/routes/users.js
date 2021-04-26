@@ -157,5 +157,35 @@ router.post('/friendSearch',(req,res)=>{
   })
 })
 
+router.post('/addFriend',(req,res)=>{
+
+  const friendId = req.body.data;
+  console.log(friendId)
+  const userId = req.body.user;
+
+  User.findOne({ userId : friendId},(err,user)=>{
+
+    let body = {
+      userId : userId,
+      friendId : user.userId,
+      friendNickName : user.userNickName,
+      friendImage : user.image,
+      friendMessage : user.message,
+    }
+    console.log('body',body);
+    const friend = new Friend(body);
+
+    friend.save((err,doc)=>{
+      if(err) return res.json({ success : false, err})
+      return res.status(200).json({
+          success : true
+      })
+    })
+
+    
+  })
+
+  
+})
 
 module.exports = router;
