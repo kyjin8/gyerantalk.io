@@ -4,7 +4,7 @@ import MyProfile from './MyProfile/MyProfile';
 import PlusFriend from './PlusFriend/PlusFriend';
 import { withRouter } from 'react-router-dom';
 import SearchFriend from './PlusFriend/SearchFriend';
-import { searchFriend } from '../../../api/actions/friend_action';
+import { searchFriend, friendAdd } from '../../../api/actions/friend_action';
 import {useDispatch} from 'react-redux';
 
 const FriendList = ({UserData}) => {
@@ -40,7 +40,15 @@ const FriendList = ({UserData}) => {
         setInputText2(e.target.value);
     }
     const onPlustHandler = (e) =>{
-        let body = {}
+        let body = {
+            data : e,
+            user : UserData.userId
+        }
+        
+        dispatch(friendAdd(body))
+        .then(response => {
+            console.log('성공!');
+        })
     }
 
     useEffect(() => {
