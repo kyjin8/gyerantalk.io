@@ -39,6 +39,9 @@ const FriendList = ({UserData}) => {
     const onInputTextHandler2 = (e) =>{
         setInputText2(e.target.value);
     }
+    const onPlustHandler = (e) =>{
+        let body = {}
+    }
 
     useEffect(() => {
         if(InputText2 !== ""){
@@ -81,6 +84,7 @@ const FriendList = ({UserData}) => {
                 <SearchFriend
                     friendDB={friendDB}
                     UserData={UserData}
+                    onPlustHandler={onPlustHandler}
                 />
             }
             <div className="line" />
