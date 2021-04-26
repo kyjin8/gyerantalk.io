@@ -112,4 +112,20 @@ router.post('/checkNick',(req,res)=>{
   })
 })
 
+router.post('/checkPhone',(req,res)=>{
+  // 요청된 아이디를 데이터베이스에서 있는지 찾는다.
+  User.findOne({ userPhone : req.body.userPhone },(err,user)=>{
+    if(!user){
+      return res.status(200).json({
+        checkPhone : true,
+        message : "사용가능"
+      })
+    }
+    return res.status(200).json({
+      checkPhone : false,
+      message : "사용불가능"
+    })
+  })
+})
+
 module.exports = router;

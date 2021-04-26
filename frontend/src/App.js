@@ -4,7 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
+import RegisterPage from './components/RegisterPage_tmp';
 import Main from './components/MainPage/Main';
 import Auth from './api/auth/auth';
 

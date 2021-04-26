@@ -33,6 +33,12 @@ const userSchema = mongoose.Schema({
         unique : true,
         required : true,
     },
+    userPhone : {
+        type : String,
+        maxlength : 13,
+        unique : true,
+        required : true,
+    },
     role : { // 번호에 따라 관리자인지 일반유저인지 판별
         type : Number,
         default : 0,
