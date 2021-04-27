@@ -1,6 +1,7 @@
 import React from 'react';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import '../../../MainPage/Main.scss';
+import { withRouter } from 'react-router-dom';
 
 const SearchFriend = ({friendDB, UserData, onPlustHandler }) => {
 
@@ -51,4 +52,4 @@ const SearchFriend = ({friendDB, UserData, onPlustHandler }) => {
     
 };
 
-export default SearchFriend
+export default withRouter(SearchFriend);

@@ -147,8 +147,6 @@ router.get('/get',auth,(req,res)=>{
 
 router.post('/friendSearch',(req,res)=>{
 
-  // const friend = new Friend(req.body);
-  console.log('node.js 조회 : ',req.body.data);
   const data = req.body.data;
   User.find({ userId : {$regex : "^"+data}},(err,user)=>{
     res.status(200).json({
@@ -195,6 +193,18 @@ router.post('/updateUser', (req, res) => {
             })
         }
     )
+})
+
+router.post('/showList',(req,res)=>{
+  console.log(req.body.userId);
+  const data = req.body.userId;
+
+  Friend.find({ userId : {$regex : "^"+data}},(err,user)=>{
+    res.status(200).json({
+      Myfriend : user
+    });
+  })
+
 })
 
 module.exports = router;

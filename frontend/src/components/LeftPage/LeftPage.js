@@ -9,7 +9,7 @@ import FriendList from './FriendList/FriendList.js';
 import ChatList from './ChatList/ChatList';
 import UpdateUser from './UpdateUser/UpdateUser';
 
-const LeftPage = ({match, UserData}) => {
+const LeftPage = ({match, UserData, ListFriend}) => {
 
     const data = match.params.category || 'FriendList';
 
@@ -25,7 +25,7 @@ const LeftPage = ({match, UserData}) => {
                 <LanguageIcon style={{ fontSize: 30 }} />
                 <MoreHorizIcon style={{ fontSize: 30 }} />
             </div>
-            {data === 'FriendList' ? <FriendList UserData={UserData}/> : null}
+            {data === 'FriendList' ? <FriendList UserData={UserData} ListFriend={ListFriend}/> : null}
             {data === 'ChatList' ? <ChatList UserData={UserData}/> : null}
             {data === 'UpdateUser' ? <UpdateUser UserData={UserData}/> : null}
         </div>
