@@ -6,6 +6,7 @@ const AUTH_USER = "auth_user";
 const CHECK_ID = 'checkid_user';
 const CHECK_NICK = 'checknick_user';
 const CHECK_PHONE = 'checkphone_user';
+const UPDATE_USER = 'update_user';
 
 export function loginUser(dataToSubmit){
     const request = axios.post('/api/users/login',dataToSubmit)
@@ -63,6 +64,16 @@ export function checkPhone(dataToSubmit){
     
     return {
         type : CHECK_PHONE,
+        payload : request
+    }
+}
+
+export function updateUser(dataToSubmit){
+    const request = axios.post('/api/users/updateUser',dataToSubmit)
+    .then(response => response.data)
+    
+    return {
+        type : UPDATE_USER,
         payload : request
     }
 }
