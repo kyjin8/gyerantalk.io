@@ -29,16 +29,6 @@ const Main = (props) => {
         dispatch(getUser())
         .then(response => {
             setUserData(response.payload);
-
-            // let body = {
-            //     userId : response.payload.userId
-            // }
-
-            // dispatch(getFriendList(body))
-            // .then(response => {
-            //     setListFriend(response.payload);
-            //     console.log(response.payload)
-            // })
         })
     },[])
 
