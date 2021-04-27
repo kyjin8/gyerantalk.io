@@ -4,6 +4,20 @@ const { auth } = require('../public/middleware/auth');
 const bodyParser = require('body-parser');
 const { Friend } = require('../public/models/Friends');
 var router = express.Router();
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+    // cb(null, path.dirname(__dirname) + "/public/images/uploaded/");
+  },
+  filename: (req, file, cb) => {
+    // cb(null, `${Date.now()}_${file.originalname}`);
+    cb(null, new Date().valueOf() + '_' + file.originalname);
+  },
+ });
+// const upload = multer({ storage: storage }).single("profile_img");
+const upload = multer({ storage: storage });
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
@@ -182,9 +196,16 @@ router.post('/addFriend',(req,res)=>{
   })
 })
 
-router.post('/updateUser', (req, res) => {
-  console.log('11111111',req.user);
-  console.log('2222222',req.body);
+router.post('/updateUser', upload.single('uploadfile'), (req, res) => {
+  const file = req.file.filename;
+  upload(req, res, (err) => {
+    if (err) return res.json({ success: false, err });
+    return res.json({
+      success: true,
+      image: res.req.file.path,
+      fileName: res.req.file.filename,
+    });
+  });
   User.findOneAndUpdate({ userId : req.body.userId },
     { userNickName: req.body.userNickName, message: req.body.message }, (err, user) =>{
             if(err) return res.json({ success : false, err });
