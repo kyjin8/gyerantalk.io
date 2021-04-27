@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 import SearchFriend from './PlusFriend/SearchFriend';
 import { searchFriend, friendAdd } from '../../../api/actions/friend_action';
 import {useDispatch} from 'react-redux';
+import ShowFriend from './ShowFriend/ShowFriend';
+import { getFriendList } from '../../../api/actions/friend_action';
 
 const FriendList = ({UserData}) => {
 
@@ -17,6 +19,8 @@ const FriendList = ({UserData}) => {
     const [InputText, setInputText] = useState("");
     const [InputText2, setInputText2] = useState("");
     const [friendDB, setfriendDB] = useState("");
+    const [ListFriend, setListFriend] = useState("");
+    const [ClickEvent, setClickEvent] = useState(false);
 
     const onToggle = () =>{
         setSearch(!Search);
@@ -39,6 +43,7 @@ const FriendList = ({UserData}) => {
     const onInputTextHandler2 = (e) =>{
         setInputText2(e.target.value);
     }
+
     const onPlustHandler = (e) =>{
         let body = {
             data : e,
@@ -47,9 +52,22 @@ const FriendList = ({UserData}) => {
         
         dispatch(friendAdd(body))
         .then(response => {
-            console.log('성공!');
+            setClickEvent(!ClickEvent);
         })
     }
+
+    useEffect(()=>{
+        console.log(UserData.userId);
+        let body = {
+            userId : UserData.userId
+        }
+
+        dispatch(getFriendList(body))
+        .then(response => {
+            setListFriend(response.payload);
+            console.log('렌더링');
+        })
+    },[ClickEvent])
 
     useEffect(() => {
         if(InputText2 !== ""){
@@ -66,6 +84,7 @@ const FriendList = ({UserData}) => {
             setfriendDB("");
         }
     }, [InputText2])
+
     
     return (
         <div>
@@ -96,7 +115,10 @@ const FriendList = ({UserData}) => {
                 />
             }
             <div className="line" />
-
+            <ShowFriend
+                UserData={UserData}
+                ListFriend={ListFriend}
+            />
         </div>
     )
 }

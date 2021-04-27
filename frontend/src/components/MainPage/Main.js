@@ -5,11 +5,14 @@ import { withRouter } from 'react-router-dom';
 import './Main.scss';
 import LeftPage from '../LeftPage/LeftPage';
 import { getUser } from '../../api/actions/main_action';
+import { getFriendList } from '../../api/actions/friend_action';
+
 const Main = (props) => {
 
     const dispatch = useDispatch();
 
     const [UserData, setUserData] = useState("");
+    // const [ListFriend, setListFriend] = useState("");
 
     const onClickHandler = () =>{
         axios.get('/api/users/logout')
@@ -26,6 +29,16 @@ const Main = (props) => {
         dispatch(getUser())
         .then(response => {
             setUserData(response.payload);
+
+            // let body = {
+            //     userId : response.payload.userId
+            // }
+
+            // dispatch(getFriendList(body))
+            // .then(response => {
+            //     setListFriend(response.payload);
+            //     console.log(response.payload)
+            // })
         })
     },[])
 

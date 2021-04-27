@@ -1,5 +1,6 @@
 import React from 'react';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import { withRouter } from 'react-router-dom';
 
 const PlusFriend = ({onToggle3}) => {
 
@@ -11,4 +12,4 @@ const PlusFriend = ({onToggle3}) => {
     )
 }
 
-export default PlusFriend;
+export default withRouter(PlusFriend);
