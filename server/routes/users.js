@@ -196,7 +196,6 @@ router.post('/updateUser', (req, res) => {
 })
 
 router.post('/showList',(req,res)=>{
-  console.log(req.body.userId);
   const data = req.body.userId;
 
   Friend.find({ userId : {$regex : "^"+data}},(err,user)=>{

@@ -3,7 +3,7 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 import '../../../MainPage/Main.scss';
 import { withRouter } from 'react-router-dom';
 
-const SearchFriend = ({friendDB, UserData, onPlustHandler }) => {
+const SearchFriend = React.memo(({friendDB, UserData, onPlustHandler }) => {
 
     if(friendDB.friend){
         if(friendDB.friend.length !== 0){ //검색결과 있을 때
@@ -50,6 +50,6 @@ const SearchFriend = ({friendDB, UserData, onPlustHandler }) => {
     }
     
     
-};
+});
 
 export default withRouter(SearchFriend);

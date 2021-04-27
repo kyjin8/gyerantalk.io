@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { withRouter } from 'react-router-dom';
 
-const ShowFriend = ({UserData, ListFriend}) => {
+const ShowFriend = React.memo(({UserData, ListFriend, ClickEvent, setClickEvent}) => {
 
     if(ListFriend.Myfriend !== undefined){
         return (
@@ -26,6 +26,6 @@ const ShowFriend = ({UserData, ListFriend}) => {
             </div>
         )
     }
-}
+})
 
 export default withRouter(ShowFriend);

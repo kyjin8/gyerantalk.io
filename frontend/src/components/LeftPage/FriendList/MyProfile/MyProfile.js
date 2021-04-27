@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
 
-const MyProfile = ({UserData}) => {
+const MyProfile = React.memo(({UserData}) => {
+
     return (
         <div className="myProfile">
             <Link to="/main/UpdateUser">
@@ -14,6 +15,6 @@ const MyProfile = ({UserData}) => {
             </Link>
         </div>
     )
-}
+})
 
 export default withRouter(MyProfile);

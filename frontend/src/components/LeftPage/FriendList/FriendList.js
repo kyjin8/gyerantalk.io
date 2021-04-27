@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import LeftTitle from './Title/LeftTitle';
 import MyProfile from './MyProfile/MyProfile';
 import PlusFriend from './PlusFriend/PlusFriend';
@@ -57,7 +57,10 @@ const FriendList = ({UserData}) => {
     }
 
     useEffect(()=>{
-        console.log(UserData.userId);
+        setClickEvent(!ClickEvent);
+    },[UserData])
+
+    useEffect(()=>{
         let body = {
             userId : UserData.userId
         }
@@ -65,7 +68,6 @@ const FriendList = ({UserData}) => {
         dispatch(getFriendList(body))
         .then(response => {
             setListFriend(response.payload);
-            console.log('렌더링');
         })
     },[ClickEvent])
 
@@ -118,6 +120,8 @@ const FriendList = ({UserData}) => {
             <ShowFriend
                 UserData={UserData}
                 ListFriend={ListFriend}
+                setClickEvent={setClickEvent}
+                ClickEvent={ClickEvent}
             />
         </div>
     )
