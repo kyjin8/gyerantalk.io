@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
-const MyProfile = ({UserData}) => {
+const MyProfile = React.memo(({UserData}) => {
 
     return (
         <div className="myProfile">
@@ -13,6 +13,6 @@ const MyProfile = ({UserData}) => {
             </div>
         </div>
     )
-}
+})
 
 export default withRouter(MyProfile);

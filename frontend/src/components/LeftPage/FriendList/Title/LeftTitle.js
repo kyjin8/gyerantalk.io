@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import SearchIcon from '@material-ui/icons/Search';
 
-const LeftTitle = ({
+const LeftTitle = React.memo(({
     Search,
     Friend,
     FriendClick,
@@ -40,6 +40,6 @@ const LeftTitle = ({
             </div>
         </div>
     )
-}
+})
 
 export default withRouter(LeftTitle);
