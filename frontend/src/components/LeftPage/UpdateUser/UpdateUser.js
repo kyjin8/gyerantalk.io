@@ -1,35 +1,47 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { updateUser } from "../../../api/actions/user_action";
+import { updateUser, uploadImage } from "../../../api/actions/user_action";
 import { Button } from '@material-ui/core';
 
-function image_get(e) {
-    console.log('1')
-    const formData = new FormData();
-
-    formData.append('nickname',e.target.nick);
-    formData.append('message',e.target.message);
-    formData.append('img',e.target.profile_img[0]);
-
-    return formData;
-}
-
-function image_upload(data) {
-    console.log('2');
-    return console.log(data);
-}
 
 const UpdateUser = ({UserData, history}) => {
-    const dispatch = useDispatch();
 
-    const userNick = UserData.userNickName;
-    const userMessage = UserData.message;
+    const dispatch = useDispatch();
+    
+    function image_get(e) {
+        console.log('image_get 실행')
+        const formData = new FormData();
+        formData.append('nickname',e.target.nick);
+        formData.append('message',e.target.message);
+        formData.append('profile_img',e.target.profile_img[0]);
+        return formData;
+    }
+    
+    function image_upload(formData) {
+        console.log('image_upload 실행',formData)
+        dispatch(uploadImage(formData))
+        .then(response => console.log('111111111111',response.payload))
+
+        return console.log(formData);
+    }
+
     const [inputs, setInputs] = useState({
-        nick: '',
-        message: '',
+        nick: UserData.userNickName,
+        message: UserData.message,
     })
-    // const [img, setImage] = useState(null)
+    useEffect(() => {
+        setInputs({
+            nick: UserData.userNickName,
+            message: UserData.message,
+        })
+    }, [UserData])
+
+    const [image, setImage] = useState(UserData.image);
+
+    useEffect(() => {
+        setImage(UserData.image)
+    }, [UserData, image])
 
     const {nick, message} = inputs
 
@@ -41,16 +53,18 @@ const UpdateUser = ({UserData, history}) => {
         }
         setInputs(nextInputs)
     }
-
     // const onChangeImg = (e) => {
     //     const formData = new FormData();
-    //     formData.append('file', img);
+    //     formData.append('file', img)
     // }
-
-    const onSubmitHandler = async(e) => {
+    const onChangeImg = (e) => {
+        console.log('1111',e.target.files[0])
+        setImage(e.target.files[0]);
+    }
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
         const formData = await image_get(e);
-        await image_upload(formData);
+        const a = await image_upload(formData);
         // let body = {
         //     userId : UserData.userId,
         //     userNickName: inputs.nick,
@@ -79,15 +93,16 @@ const UpdateUser = ({UserData, history}) => {
         <div className="update_user">
             <div>프로필 수정</div>
             <form onSubmit={onSubmitHandler} encType="multipart/form-data">
-                <label className="profile_img_wrapper" for="uploadfile">
-                    <img src={UserData.image} />
-                </label>
+                {/* <label className="profile_img_wrapper" for="profile_img">
+                    <img src={image} />
+                </label> */}
+                <img src={image} />
                 {/* <input type="file" name="uploadfile" class="uploadfile" accept='image/jpg,impge/png,image/jpeg,image/gif' value="" />
                  <input type="text" placeholder={userNick} value={Input1} ref={inputEl1}/>
-                <input type="text" placeholder={userMessage} value={Input2} ref={inputEl2}/>
-                <input type="file" accept='image/jpg,impge/png,image/jpeg,image/gif' name='profile_img'/> */}
-                <input className="nick" type="text" placeholder={userNick} value={nick} onChange={onChange} name="nick"/>
-                <input className="message" type="text" placeholder={userMessage} value={message} onChange={onChange} name="message"/>
+                <input type="text" placeholder={userMessage} value={Input2} ref={inputEl2}/> */}
+                <input type="file" accept='image/jpg,impge/png,image/jpeg,image/gif' onChange={onChangeImg} name='profile_img'/>
+                <input className="nick" type="text" value={nick} onChange={onChange} name="nick"/>
+                <input className="message" type="text" value={message} onChange={onChange} name="message"/>
                 <Button type="submit" style={btnstyle} variant="contained" fullWidth>수정 완료</Button>
             </form>
         </div>
