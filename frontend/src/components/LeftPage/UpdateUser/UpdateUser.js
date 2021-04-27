@@ -27,7 +27,7 @@ const UpdateUser = ({UserData, history}) => {
     }
     const onChangeImg = (e) => {
         const formData = new FormData();
-        formData.append('file', img);
+        formData.append('file', img)
     }
     const onSubmitHandler = (e) => {
         e.preventDefault();
