@@ -13,6 +13,10 @@ const friendSchema = mongoose.Schema({
         type : String,
         required : true,
     },
+    friendName : {
+        type : String,
+        required : true,
+    },
     friendNickName : {
         type : String,
         required : true,
