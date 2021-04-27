@@ -6,15 +6,15 @@ import { Button } from '@material-ui/core';
 
 const UpdateUser = ({UserData, history}) => {
     const dispatch = useDispatch();
-    // const [userNickName, setuserNick] = useState("");
-    // const [userMessage, setuserMessage] = useState("");
-    // const {userNick, userMessage} = UserData;
+
     const userNick = UserData.userNickName;
     const userMessage = UserData.message;
     const [inputs, setInputs] = useState({
         nick: '',
         message: '',
     })
+    const [img, setImage] = useState(null)
+
     const {nick, message} = inputs
 
     const onChange = (e) => {
@@ -24,6 +24,10 @@ const UpdateUser = ({UserData, history}) => {
             [className] : value,
         }
         setInputs(nextInputs)
+    }
+    const onChangeImg = (e) => {
+        const formData = new FormData();
+        formData.append('file', img);
     }
     const onSubmitHandler = (e) => {
         e.preventDefault();
@@ -54,8 +58,11 @@ const UpdateUser = ({UserData, history}) => {
     return (
         <div className="update_user">
             <div>프로필 수정</div>
-            <form onSubmit={onSubmitHandler}>
-                <img src={UserData.image} />
+            <form onSubmit={onSubmitHandler} encType="multipart/form-data">
+                <label className="profile_img_wrapper" for="uploadfile">
+                    <img src={UserData.image} />
+                </label>
+                <input type="file" name="uploadfile" class="uploadfile" accept='image/jpg,impge/png,image/jpeg,image/gif' value="" />
                 {/* <input type="text" placeholder={userNick} value={Input1} ref={inputEl1}/>
                 <input type="text" placeholder={userMessage} value={Input2} ref={inputEl2}/> */}
                 <input className="nick" type="text" placeholder={userNick} value={nick} onChange={onChange}/>
