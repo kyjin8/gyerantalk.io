@@ -7,6 +7,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import FriendList from './FriendList/FriendList.js';
 import ChatList from './ChatList/ChatList';
+import Internet from './Internet/Internet';
 
 const LeftPage = ({match, UserData, ListFriend}) => {
 
@@ -21,11 +22,14 @@ const LeftPage = ({match, UserData, ListFriend}) => {
                 <NavLink className="default_active" activeClassName="active" to="/main/ChatList">
                     <QuestionAnswerRoundedIcon style={{ fontSize: 30 }} />
                 </NavLink>
-                <LanguageIcon style={{ fontSize: 30 }} />
+                <NavLink className="default_active" activeClassName="active" to="/main/Internet">
+                    <LanguageIcon style={{ fontSize: 30 }} />
+                </NavLink>
                 <MoreHorizIcon style={{ fontSize: 30 }} />
             </div>
             {data === 'FriendList' ? <FriendList UserData={UserData} ListFriend={ListFriend}/> : null}
             {data === 'ChatList' ? <ChatList UserData={UserData}/> : null}
+            {data === 'Internet' ? <Internet UserData={UserData}/> : null}
         </div>
     )
 
