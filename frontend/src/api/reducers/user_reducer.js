@@ -5,6 +5,7 @@ const CHECK_ID = 'checkid_user';
 const CHECK_NICK = 'checknick_user';
 const GET_USER = "get_user";
 const CHECK_PHONE = 'checkphone_user';
+const UPDATE_USER = 'update_user';
 
 export default function(state={}, action){
     switch (action.type) {
@@ -22,6 +23,8 @@ export default function(state={}, action){
             return {...state, userData : action.payload};
         case CHECK_PHONE:
             return {...state, checkPhone : action.payload};
+        case UPDATE_USER:
+            return {...state, updateUser : action.payload};
         default:
             return state;
     }

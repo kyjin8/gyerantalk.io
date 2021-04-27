@@ -181,11 +181,20 @@ router.post('/addFriend',(req,res)=>{
           success : true
       })
     })
-
-    
   })
+})
 
-  
+router.post('/updateUser', (req, res) => {
+  console.log('11111111',req.user);
+  console.log('2222222',req.body);
+  User.findOneAndUpdate({ userId : req.body.userId },
+    { userNickName: req.body.userNickName, message: req.body.message }, (err, user) =>{
+            if(err) return res.json({ success : false, err });
+            return res.status(200).send({
+                success : true
+            })
+        }
+    )
 })
 
 module.exports = router;

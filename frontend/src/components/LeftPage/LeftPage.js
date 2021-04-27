@@ -7,6 +7,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import FriendList from './FriendList/FriendList.js';
 import ChatList from './ChatList/ChatList';
+import UpdateUser from './UpdateUser/UpdateUser';
 
 const LeftPage = ({match, UserData}) => {
 
@@ -26,9 +27,9 @@ const LeftPage = ({match, UserData}) => {
             </div>
             {data === 'FriendList' ? <FriendList UserData={UserData}/> : null}
             {data === 'ChatList' ? <ChatList UserData={UserData}/> : null}
+            {data === 'UpdateUser' ? <UpdateUser UserData={UserData}/> : null}
         </div>
     )
-
 }
 
 export default withRouter(LeftPage);
