@@ -180,6 +180,7 @@ router.post('/addFriend',(req,res)=>{
     let body = {
       userId : userId,
       friendId : user.userId,
+      friendName : user.userName,
       friendNickName : user.userNickName,
       friendImage : user.image,
       friendMessage : user.message,
