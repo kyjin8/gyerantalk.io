@@ -30,22 +30,12 @@ const SearchFriend = React.memo(({friendDB, UserData, onPlustHandler }) => {
         }
         else{          //검색결과 없을 때
             return(
-                <div className="myProfile">
-                    <div className="text_site">
-                        <div className="top">친구없엉</div>
-                        <div className="bottom">ㅇㅎㅇ</div>
-                    </div>
-                </div>
+                <></>
             )
         }
     }else{          //검색결과 없을 때
         return(
-            <div className="myProfile">
-                <div className="text_site">
-                    <div className="top">친구없엉</div>
-                    <div className="bottom">ㅇㅎㅇ</div>
-                </div>
-            </div>
+            <></>
         )
     }
     
