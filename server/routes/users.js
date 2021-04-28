@@ -4,20 +4,42 @@ const { auth } = require('../public/middleware/auth');
 const bodyParser = require('body-parser');
 const { Friend } = require('../public/models/Friends');
 var router = express.Router();
-const multer = require('multer');
+const multer = require('multer')
+const fs = require('fs')
+const path = require('path')
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-    // cb(null, path.dirname(__dirname) + "/public/images/uploaded/");
-  },
-  filename: (req, file, cb) => {
-    // cb(null, `${Date.now()}_${file.originalname}`);
-    cb(null, new Date().valueOf() + '_' + file.originalname);
-  },
- });
+fs.readdir('uploads', (error) => {
+  if(error) {
+    fs.mkdirSync('uploads');
+  }
+})
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, cb) {
+      cb(null, "uploads/");
+    },
+    filename(req, file, cb) {
+      const ext = path.extname(file.originalname);
+      cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
+    },
+  }),
+  // limits: { fileSize: 5 * 1024 * 1024 },
+});
+
+
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "uploads/");
+//     // cb(null, path.dirname(__dirname) + "/public/images/uploaded/");
+//   },
+//   filename: (req, file, cb) => {
+//     // cb(null, `${Date.now()}_${file.originalname}`);
+//     cb(null, new Date().valueOf() + '_' + file.originalname);
+//   },
+//  });
 // const upload = multer({ storage: storage }).single("profile_img");
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
@@ -215,6 +237,12 @@ router.post('/updateUser', upload.single('uploadfile'), (req, res) => {
             })
         }
     )
+})
+
+router.post('/uploadImage', upload.single('profile_img'), (req, res) => {
+  console.log('aaaaaaaaa',req);
+  // console.log('aaaaaaaaa',req.file);
+  res.json({ url : `/img/${req.file.filename}`});
 })
 
 router.post('/showList',(req,res)=>{
