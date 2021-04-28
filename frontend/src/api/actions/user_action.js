@@ -82,11 +82,6 @@ export function updateUser(dataToSubmit){
 export function uploadImage(dataToSubmit){
     const request = axios.post('/api/users/uploadImage', dataToSubmit)
     .then(response => response.data)
-<<<<<<< HEAD
-    console.log('tlqkf');
-=======
-
->>>>>>> minmin
     return {
         type: UPLOAD_IMAGE,
         payload: request
