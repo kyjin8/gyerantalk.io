@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import { withRouter } from 'react-router-dom';
+import '../../../MainPage/Main.scss';
+
 const NewsItem = ({ article, Count, setCount }) => {
 
     const { title, description, url, urlToImage } = article;
