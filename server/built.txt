@@ -18,6 +18,8 @@ npm i jsonwebtoken
 npm i joi
 // json 정제 라이브러리
 npm i body-parser
+//
+npm i socket.io@2
 
 
 
@@ -35,5 +37,6 @@ yarn add axios
 
 npm i --save @ant-design/icons
 
+yarn add socket.io-client@2.2.0
 // 동시에 백엔드와 프론트 돌릴려면 프론트에도 해줘야 한다.
 npm install

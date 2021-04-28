@@ -6,7 +6,7 @@ import QuestionAnswerRoundedIcon from '@material-ui/icons/QuestionAnswerRounded'
 import LanguageIcon from '@material-ui/icons/Language';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import FriendList from './FriendList/FriendList.js';
-import ChatList from './ChatList/ChatList';
+import Chat from './ChatList/Chat';
 // import UpdateUser from './UpdateUser/UpdateUser';
 import UpdateUser from './UpdateUser/UpdateTest';
 import Internet from './Internet/Internet';
@@ -30,7 +30,7 @@ const LeftPage = ({match, UserData, ListFriend}) => {
                 <MoreHorizIcon style={{ fontSize: 30 }} />
             </div>
             {data === 'FriendList' ? <FriendList UserData={UserData} ListFriend={ListFriend}/> : null}
-            {data === 'ChatList' ? <ChatList UserData={UserData}/> : null}
+            {data === 'ChatList' ? <Chat UserData={UserData}/> : null}
             {data === 'UpdateUser' ? <UpdateUser UserData={UserData}/> : null}
             {data === 'Internet' ? <Internet UserData={UserData}/> : null}
         </div>
