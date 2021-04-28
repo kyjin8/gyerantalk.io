@@ -8,7 +8,7 @@ const NewsItem = ({ article, Count, setCount }) => {
         return (
             <div>
                 {urlToImage && (
-                    <div>
+                    <div className="box_article">
                         <a href={url} target="_blank" rel="noopner noreferrer">
                             <img src={urlToImage} alt="thumbnail" />
                             <span>{title}</span>

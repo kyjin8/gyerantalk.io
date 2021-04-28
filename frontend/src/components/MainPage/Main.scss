@@ -184,7 +184,7 @@
             }
 
 
-            // Internet
+            // Internet-title
             .intTitle{
                 display: flex;
                 justify-content: space-around;
@@ -192,6 +192,24 @@
                 padding: 5px;
                 font-weight: bolder;
                 font-size: 16px;
+            }
+            // Internet-body-news
+            .loading{
+                font-size: 50px;
+                font-weight: bolder;
+                color : #f6bd63;
+                margin-left: 40%;
+                margin-top: 60%;
+            }
+            .news_top{
+                .box_article{
+                    width: 50px;
+                    height: 50px;
+                    a{
+                        text-decoration: none;
+                        color: #000;
+                    }
+                }
             }
         }
         .right_side{

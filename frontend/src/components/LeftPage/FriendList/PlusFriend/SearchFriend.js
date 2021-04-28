@@ -3,7 +3,7 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 import '../../../MainPage/Main.scss';
 import { withRouter } from 'react-router-dom';
 
-const SearchFriend = React.memo(({friendDB, UserData, onPlustHandler }) => {
+const SearchFriend = React.memo(({friendDB, UserData, onPlustHandler, ListFriend }) => {
 
     if(friendDB.friend){
         if(friendDB.friend.length !== 0){ //검색결과 있을 때
@@ -30,12 +30,12 @@ const SearchFriend = React.memo(({friendDB, UserData, onPlustHandler }) => {
         }
         else{          //검색결과 없을 때
             return(
-                <></>
+                <div>검색 결과가 없습니다</div>
             )
         }
     }else{          //검색결과 없을 때
         return(
-            <></>
+            <div>검색 결과가 없습니다</div>
         )
     }
     

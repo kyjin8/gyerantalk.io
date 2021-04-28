@@ -19,7 +19,7 @@ const News = ({ UserData }) => {
     // 대기중 일때 실행
     if (loading) {
         return (
-            <LoadingOutlined />
+            <LoadingOutlined className="loading"/>
         )
     }
     // 값이 없으면 null 값으로 반환
@@ -33,7 +33,7 @@ const News = ({ UserData }) => {
     const { articles } = resolved.data;
 
     return (
-        <div>
+        <div className="news_top">
             {articles.map((article)=>(
                 <NewsItem key={article.url} article={article} Count={Count} setCount={setCount}/>
                 ))}

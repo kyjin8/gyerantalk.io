@@ -114,6 +114,7 @@ const FriendList = ({UserData}) => {
                     friendDB={friendDB}
                     UserData={UserData}
                     onPlustHandler={onPlustHandler}
+                    ListFriend={ListFriend}
                 />
             }
             <div className="line" />
