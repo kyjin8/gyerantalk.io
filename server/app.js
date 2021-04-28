@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 몽구스 DB 연결 설정
-mongoose.connect(process.env.mongoURI,{
+const connect = mongoose.connect(process.env.mongoURI,{
   // 에러같은 것들이 조금 뜨기는 하는데 안뜨게 하는 설정
   useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 })
@@ -56,3 +56,34 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+const { Chat } = require('./public/models/Chat');
+
+io = require('socket.io')();
+io.on('connection',socket=>{
+  socket.on('Input Chat Message', msg=>{
+    console.log('11111111111');
+    connect.then(db => {
+      console.log('2222222222');
+      try {
+        let chat = new Chat({
+          message : msg.chatMessage, 
+          sender : msg._id,
+          type : msg.type,
+        })
+
+        chat.save((err,doc) => {
+          if(err) return res.json({success : false, err})
+
+          Chat.find({"_id":doc._id})
+          .populate("sender")
+          .exec((err,doc));
+
+          return io.emit("Output Chat Message", doc);
+        })
+      } catch (error) {
+        console.error(error);
+      }
+    })
+  })
+})
