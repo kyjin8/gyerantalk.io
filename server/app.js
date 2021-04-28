@@ -35,9 +35,11 @@ const connect = mongoose.connect(process.env.mongoURI,{
 // 라우터 설정
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const chatRouter = require('./routes/chats');
 // 라우터 적용
 app.use('/', indexRouter); // index 위치
 app.use('/api/users', usersRouter); // 로그인 / 회원가입 위치
+app.use('/api/chats', chatRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
