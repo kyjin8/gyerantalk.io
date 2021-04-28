@@ -9,7 +9,7 @@ const Internet = ({match, Userdata}) => {
     return (
         <div>
             <IntTitle />
-            {data === 'News' ? <News /> : null}
+            {data === 'News' ? <News Userdata={Userdata}/> : null}
             {data === 'Shop' ? <Shop /> : null}
         </div>
     )

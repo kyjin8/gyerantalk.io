@@ -38,7 +38,7 @@ const LoginPage = (props) => {
         dispatch(loginUser(body))
         .then(response => {
             if(response.payload.loginSuccess){
-                props.history.push('/main');
+                props.history.push('/main/FriendList');
             }else{
                 alert('Error');
             }

@@ -4,6 +4,8 @@ const { auth } = require('../public/middleware/auth');
 const bodyParser = require('body-parser');
 const { Friend } = require('../public/models/Friends');
 var router = express.Router();
+
+//////////////////////
 const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
@@ -38,7 +40,7 @@ const upload = multer({
 //     cb(null, new Date().valueOf() + '_' + file.originalname);
 //   },
 //  });
-// const upload = multer({ storage: storage }).single("profile_img");
+// // const upload = multer({ storage: storage }).single("profile_img");
 // const upload = multer({ storage: storage });
 
 router.use(express.json());
@@ -219,24 +221,32 @@ router.post('/addFriend',(req,res)=>{
   })
 })
 
-router.post('/updateUser', upload.single('uploadfile'), (req, res) => {
-  const file = req.file.filename;
-  upload(req, res, (err) => {
-    if (err) return res.json({ success: false, err });
-    return res.json({
-      success: true,
-      image: res.req.file.path,
-      fileName: res.req.file.filename,
-    });
-  });
-  User.findOneAndUpdate({ userId : req.body.userId },
-    { userNickName: req.body.userNickName, message: req.body.message }, (err, user) =>{
-            if(err) return res.json({ success : false, err });
-            return res.status(200).send({
-                success : true
-            })
-        }
-    )
+router.post('/uploadImage', upload.single('file'), (req, res) => {
+
+  console.log(req.body);
+  console.log(req.body.Form);
+  console.log(req.body.file);
+  console.log(req.file.message);
+  // upload(req, res, (err) => {
+  //   if (err) return res.json({ success: false, err });
+  //   return res.json({
+  //     success: true,
+  //     image: res.req.file.path,
+  //     fileName: res.req.file.filename,
+  //   });
+  // });
+  // User.findOneAndUpdate({ userId : req.body.userId },
+  //   { userNickName: req.body.userNickName, message: req.body.message }, (err, user) =>{
+  //           if(err) return res.json({ success : false, err });
+  //           return res.status(200).send({
+  //               success : true
+  //           })
+  //       }
+  //   )
+  res.send({
+    success : true
+  })
+
 })
 
 router.post('/uploadImage', upload.single('profile_img'), (req, res) => {

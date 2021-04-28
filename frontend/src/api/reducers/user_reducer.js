@@ -27,7 +27,11 @@ export default function(state={}, action){
         case UPDATE_USER:
             return {...state, updateUser : action.payload};
         case UPLOAD_IMAGE:
+<<<<<<< HEAD
             return {...state, uploadImage : action.payload};
+=======
+            return {...state, uploadImage : action.payload}; 
+>>>>>>> minmin
         default:
             return state;
     }

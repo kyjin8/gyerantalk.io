@@ -11,7 +11,7 @@ const ShowFriend = React.memo(({UserData, ListFriend, ClickEvent, setClickEvent}
                         <div className="myProfile" key={friend._id}>
                             <img src={friend.friendImage} />
                             <div className="text_site">
-                                <div className="top">{friend.friendId}</div>
+                                <div className="top">{friend.friendName}</div>
                                 <div className="bottom">{friend.friendMessage}</div>
                             </div>
                         </div>
