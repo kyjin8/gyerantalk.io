@@ -6,6 +6,7 @@ const CHECK_NICK = 'checknick_user';
 const GET_USER = "get_user";
 const CHECK_PHONE = 'checkphone_user';
 const UPDATE_USER = 'update_user';
+const UPLOAD_IMAGE = 'upload_image';
 
 export default function(state={}, action){
     switch (action.type) {
@@ -25,6 +26,8 @@ export default function(state={}, action){
             return {...state, checkPhone : action.payload};
         case UPDATE_USER:
             return {...state, updateUser : action.payload};
+        case UPLOAD_IMAGE:
+            return {...state, uploadImage : action.payload};
         default:
             return state;
     }

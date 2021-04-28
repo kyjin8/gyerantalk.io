@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { updateUser } from "../../../api/actions/user_action";
 import { Button } from '@material-ui/core';
+import axios from 'axios';
 
 const UpdateUser = ({UserData, history}) => {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const UpdateUser = ({UserData, history}) => {
 
         this.register(formData)
     }
-    reg
+    
 
     const btnstyle ={
         margin : '18px 0',
