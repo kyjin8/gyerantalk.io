@@ -12,7 +12,7 @@ import UpdateUser from './UpdateUser/UpdateUser';
 // import UpdateUser from './UpdateUser/UpdateTest';
 import Internet from './Internet/Internet';
 
-const LeftPage = ({match, UserData, ListFriend}) => {
+const LeftPage = ({match, UserData, ListFriend, Update, setUpdate}) => {
 
     const data = match.params.category || 'FriendList';
 
@@ -32,7 +32,7 @@ const LeftPage = ({match, UserData, ListFriend}) => {
             </div>
             {data === 'FriendList' ? <FriendList UserData={UserData} ListFriend={ListFriend}/> : null}
             {data === 'ChatList' ? <Chat UserData={UserData}/> : null}
-            {data === 'UpdateUser' ? <UpdateUser UserData={UserData}/> : null}
+            {data === 'UpdateUser' ? <UpdateUser UserData={UserData} Update={Update} setUpdate={setUpdate}/> : null}
             {data === 'Internet' ? <Internet UserData={UserData}/> : null}
         </div>
     )

@@ -10,7 +10,7 @@ const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
 
-let storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "../frontend/public/uploads/");
   },
@@ -208,10 +208,13 @@ router.post('/updateUser', upload.single('profile_img'), (req, res) => {
   // console.log('ext', req.file.filename.split('.')[1]);
   User.findOneAndUpdate({ userId : req.body.userId },
     { userNickName: req.body.nick, message: req.body.message, image: changeName }, (err, user) =>{
-            if(err) return res.json({ success : false, err });
-            return res.status(200).send({
-                success : true
-            })
+      Friend.updateMany({ friendId: req.body.userId }, 
+        { $set: { friendNickName: req.body.nick, friendMessage: req.body.message, friendImage: changeName } },(err,fr)=>{
+          if(err) return res.json({ success : false, err });
+          return res.status(200).send({
+              success : true
+          })
+        })
         }
     )
 })

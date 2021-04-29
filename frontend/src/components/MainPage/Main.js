@@ -13,6 +13,7 @@ const Main = (props) => {
 
     const [UserData, setUserData] = useState("");
     // const [ListFriend, setListFriend] = useState("");
+    const [Update, setUpdate] = useState(false);
 
     const onClickHandler = () =>{
         axios.get('/api/users/logout')
@@ -32,10 +33,17 @@ const Main = (props) => {
         })
     },[])
 
+    useEffect(() => {
+        dispatch(getUser())
+        .then(response => {
+            setUserData(response.payload);
+        })
+    }, [Update])
+
     return (
         <div className="container">
             <div className="box">
-                <LeftPage props={props} UserData={UserData}/>
+                <LeftPage props={props} UserData={UserData} Update={Update} setUpdate={setUpdate}/>
                 {/* <div className="right_side">
                     dddd
                 </div> */}

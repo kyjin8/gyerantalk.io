@@ -1,4 +1,4 @@
-var express = require('express');
+const express = require('express');
 const { User } = require('../public/models/Users');
 const { auth } = require('../public/middleware/auth');
 const bodyParser = require('body-parser');
@@ -6,14 +6,15 @@ const { Friend } = require('../public/models/Friends');
 const { Chat } = require('../public/models/Chat');
 const multer = require('multer');
 const fs = require('fs');
-var router = express.Router();
+const router = express.Router();
 
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'uploads/')
+      cb(null, '../frontend/public/chats/')
     },
     filename: function (req, file, cb) {
-      cb(null, `${Date.now()}_${file.originalname}`)
+      // cb(null, `${Date.now()}_${file.originalname}`)
+      cb(null, Date.now()+'.'+file.originalname.split('.')[1]);
     },
     // fileFilter: (req, file, cb) => {
     //   const ext = path.extname(file.originalname)
@@ -46,7 +47,10 @@ router.post('/uploadfiles', auth,(req,res)=>{
         if(err){
             return res.json({success:false,err})
         }
-        return res.json({success:true, url : res.req.file.path})
+        // console.log('file', req.file)
+        // console.log('filename', req.file.filename);
+        // return res.json({success:true, url : res.req.file.path})
+        return res.json({success:true, url : '/chats/'+req.file.filename})
     });
   });
 
