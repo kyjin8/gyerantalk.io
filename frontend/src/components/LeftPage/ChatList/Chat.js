@@ -46,22 +46,24 @@ export class Chat extends Component {
 
     submitChatMessage = (e) => {
         e.preventDefault();
-
-        let chatMessage = this.state.chatMessage;
-        let _id = this.props.user.userData._id;
-        let userName = this.props.user.userData.userName;
-        let userImage = this.props.user.userData.image;
-        let nowTime = moment();
-        let type = "Text";
-
-        this.socket.emit("Input Chat Message", {
-            chatMessage,
-            _id,
-            userName,
-            userImage,
-            nowTime,
-            type,
-        });
+        if(this.state.chatMessage !== ""){
+            let chatMessage = this.state.chatMessage;
+            let _id = this.props.user.userData._id;
+            let userName = this.props.user.userData.userName;
+            let userImage = this.props.user.userData.image;
+            let nowTime = moment();
+            let type = "Text";
+    
+            this.socket.emit("Input Chat Message", {
+                chatMessage,
+                _id,
+                userName,
+                userImage,
+                nowTime,
+                type,
+            });
+        }
+        
         this.setState({ chatMessage: "" });
     }
 
@@ -105,11 +107,13 @@ export class Chat extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <div>
-                        {this.props.chats && (
-                            this.renderCards()
-                        )}
+                <div style={{height:'300px', overflow:'hidden'}}>
+                    <div style={{overflow:'scroll'}}>
+                        {
+                            this.props.chats && (
+                                this.renderCards()
+                            )
+                        }
                         <div
                             ref={el => {
                                 this.messagesEnd = el;
@@ -156,3 +160,5 @@ const mapStateToProps = state => {
 
 
 export default connect(mapStateToProps)(Chat);
+
+
