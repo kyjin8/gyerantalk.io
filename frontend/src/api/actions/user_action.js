@@ -7,7 +7,6 @@ const CHECK_ID = 'checkid_user';
 const CHECK_NICK = 'checknick_user';
 const CHECK_PHONE = 'checkphone_user';
 const UPDATE_USER = 'update_user';
-const UPLOAD_IMAGE = 'upload_image';
 
 export function loginUser(dataToSubmit){
     const request = axios.post('/api/users/login',dataToSubmit)
@@ -76,14 +75,5 @@ export function updateUser(dataToSubmit){
     return {
         type : UPDATE_USER,
         payload : request
-    }
-}
-
-export function uploadImage(dataToSubmit){
-    const request = axios.post('/api/users/uploadImage', dataToSubmit)
-    .then(response => response.data)
-    return {
-        type: UPLOAD_IMAGE,
-        payload: request
     }
 }

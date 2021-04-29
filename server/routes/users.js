@@ -10,38 +10,17 @@ const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
 
-fs.readdir('uploads', (error) => {
-  if(error) {
-    fs.mkdirSync('uploads');
-  }
-})
-
-const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, cb) {
-      cb(null, "uploads/");
-    },
-    filename(req, file, cb) {
-      const ext = path.extname(file.originalname);
-      cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
-    },
-  }),
-  // limits: { fileSize: 5 * 1024 * 1024 },
-});
-
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "uploads/");
-//     // cb(null, path.dirname(__dirname) + "/public/images/uploaded/");
-//   },
-//   filename: (req, file, cb) => {
-//     // cb(null, `${Date.now()}_${file.originalname}`);
-//     cb(null, new Date().valueOf() + '_' + file.originalname);
-//   },
-//  });
-// // const upload = multer({ storage: storage }).single("profile_img");
-// const upload = multer({ storage: storage });
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "../frontend/public/uploads/");
+  },
+  filename: (req, file, cb) => {
+    // cb(null, `${Date.now()}_${file.originalname}`);
+    cb(null, Date.now()+'.'+file.originalname.split('.')[1]);
+    // cb(null, Date.now()+'_'+encodeURI(file.originalname);
+  },
+ });
+const upload = multer({storage: storage});
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
@@ -221,38 +200,20 @@ router.post('/addFriend',(req,res)=>{
   })
 })
 
-router.post('/uploadImage', upload.single('file'), (req, res) => {
-
-  console.log(req.body);
-  console.log(req.body.Form);
-  console.log(req.body.file);
-  console.log(req.file.message);
-  // upload(req, res, (err) => {
-  //   if (err) return res.json({ success: false, err });
-  //   return res.json({
-  //     success: true,
-  //     image: res.req.file.path,
-  //     fileName: res.req.file.filename,
-  //   });
-  // });
-  // User.findOneAndUpdate({ userId : req.body.userId },
-  //   { userNickName: req.body.userNickName, message: req.body.message }, (err, user) =>{
-  //           if(err) return res.json({ success : false, err });
-  //           return res.status(200).send({
-  //               success : true
-  //           })
-  //       }
-  //   )
-  res.send({
-    success : true
-  })
-
-})
-
-router.post('/uploadImage', upload.single('profile_img'), (req, res) => {
-  console.log('aaaaaaaaa',req);
-  // console.log('aaaaaaaaa',req.file);
-  res.json({ url : `/img/${req.file.filename}`});
+router.post('/updateUser', upload.single('profile_img'), (req, res) => {
+  console.log('req.body', req.body);
+  console.log('req.file', req.file);
+  console.log('req.file.filename',req.file.filename);
+  const changeName = '/uploads/'+req.file.filename;
+  // console.log('ext', req.file.filename.split('.')[1]);
+  User.findOneAndUpdate({ userId : req.body.userId },
+    { userNickName: req.body.nick, message: req.body.message, image: changeName }, (err, user) =>{
+            if(err) return res.json({ success : false, err });
+            return res.status(200).send({
+                success : true
+            })
+        }
+    )
 })
 
 router.post('/showList',(req,res)=>{
