@@ -20,8 +20,29 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
-io.attach(server);
+const io = require("socket.io")(server,{
+  cors : {
+    origin : "*",
+  },
+})
 
+io.on("connection",(socket)=>{
+  
+  // 대화에 참여
+  const {roomId} = socket.handshake.query;
+  socket.join(roomId);
+
+  // 메세지 전송시
+  socket.on('newChatMessage',(data)=>{
+    io.in(roomId).emit('newChatMessage',data);
+  })
+
+  // 방을 나가거나 소켓이 닫히면
+  socket.on('disconnect', () =>{
+    socket.leave(roomId);
+  })
+
+})
 /**
  * Listen on provided port, on all network interfaces.
  */
