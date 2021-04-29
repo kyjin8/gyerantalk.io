@@ -7,8 +7,9 @@ import LanguageIcon from '@material-ui/icons/Language';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import FriendList from './FriendList/FriendList.js';
 import Chat from './ChatList/Chat';
-// import UpdateUser from './UpdateUser/UpdateUser';
-import UpdateUser from './UpdateUser/UpdateTest';
+import UpdateUser from './UpdateUser/UpdateUser';
+// import UpdateUser from './UpdateUser/UpdateUser_tmp';
+// import UpdateUser from './UpdateUser/UpdateTest';
 import Internet from './Internet/Internet';
 
 const LeftPage = ({match, UserData, ListFriend}) => {

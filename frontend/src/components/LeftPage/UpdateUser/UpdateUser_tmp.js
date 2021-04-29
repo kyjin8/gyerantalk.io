@@ -1,23 +1,42 @@
-import React, { useRef, useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { updateUser } from "../../../api/actions/user_action";
+import { updateUser, uploadImage, uploadImageTmp } from "../../../api/actions/user_action";
 import { Button } from '@material-ui/core';
-import axios from 'axios';
 
 const UpdateUser = ({UserData, history}) => {
     const dispatch = useDispatch();
 
-    const userNick = UserData.userNickName;
-    const userMessage = UserData.message;
+    const [image, setImage] = useState(UserData.image);
+    const [FilePath, setFilePath] = useState("")
     const [inputs, setInputs] = useState({
-        nick: '',
-        message: '',
+        nick: UserData.userNickName,
+        message: UserData.message,
     })
-    const [img, setImage] = useState(null)
-
     const {nick, message} = inputs
 
+    useEffect(() => {
+        setInputs({
+            nick: UserData.userNickName,
+            message: UserData.message,
+        })
+    }, [UserData])
+    useEffect(() => {
+        setImage(UserData.image);
+    }, [UserData, image]);
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        console.log('온체인지파일',e.target.nick.value, e.target.message.value, e.target.profile_img.files[0])
+        formData.append('userId', UserData.userId)
+        formData.append('pre_img', UserData.image)
+        formData.append('nick', e.target.nick.value)
+        formData.append('message', e.target.message.value)
+        formData.append('profile_img', e.target.profile_img.files[0])
+
+        dispatch(updateUser(formData))
+    }
     const onChange = (e) => {
         const {className, value} = e.target
         const nextInputs = {
@@ -26,21 +45,6 @@ const UpdateUser = ({UserData, history}) => {
         }
         setInputs(nextInputs)
     }
-    const onChangeImg = (e) => {
-        const formData = new FormData();
-        formData.append('file', img)
-    }
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        
-        const fomrData = new FormData();
-        formData.append('nick', e.target.nick.value);
-        formData.append('message', e.target.message);
-        formData.append('profile_img', e.target.profile_img.files[0]);
-
-        this.register(formData)
-    }
-    
 
     const btnstyle ={
         margin : '18px 0',
@@ -48,26 +52,22 @@ const UpdateUser = ({UserData, history}) => {
         color : '#fff',
         backgroundColor : '#845460'
     }
+    const imgStyle = {
+        width: '100%',
+        overFit: 'cover',
+    }
 
     return (
-        <div className="update_user">
+        <div>
             <div>프로필 수정</div>
-            {/* <form onSubmit={onSubmitHandler} encType="multipart/form-data">
-                <label className="profile_img_wrapper" for="uploadfile">
-                    <img src={UserData.image} />
+            <form onSubmit={onSubmit} encType="multipart/form-data" >
+                <label className="profile_img_wrapper" htmlFor="profile_img">
+                     <img style={imgStyle} src={image} />
                 </label>
-                <input type="file" name="uploadfile" class="uploadfile" accept='image/jpg,impge/png,image/jpeg,image/gif' value="" />
-                <input className="nick" type="text" placeholder={userNick} value={nick} onChange={onChange}/>
-                <input className="message" type="text" placeholder={userMessage} value={message} onChange={onChange}/>
+                <input type="file" name='profile_img' accept='image/jpg, image/png, image/jpeg, image/gif' />
+                <input className="nick" type="text" value={nick} onChange={onChange} name="nick"/>
+                <input className="message" type="text" value={message} onChange={onChange} name="message"/>
                 <Button type="submit" style={btnstyle} variant="contained" fullWidth>수정 완료</Button>
-            </form> */}
-            <form name="accountFrom" onSubmit={onSubmitHandler} encType='multipart/form-data' >
-                <label className="profile_img_wrapper" for="uploadfile">
-                    <img src={UserData.image} />
-                </label>
-                <input type="file" accept='image/jpg,impge/png,image/jpeg,image/gif' name="profile_img"></input>
-                <input type="text" name="nick"></input>
-                <input type="text" name="message"></input>
             </form>
         </div>
     )
