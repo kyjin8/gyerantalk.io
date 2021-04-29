@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { updateUser, uploadImage, uploadImageTmp } from "../../../api/actions/user_action";
 import { Button } from '@material-ui/core';
 
-const UpdateUser = ({UserData, history}) => {
+const UpdateUser = ({UserData, history, setUpdate, Update}) => {
     const dispatch = useDispatch();
 
     const [image, setImage] = useState(UserData.image);
@@ -35,6 +35,10 @@ const UpdateUser = ({UserData, history}) => {
         formData.append('profile_img', e.target.profile_img.files[0])
 
         dispatch(updateUser(formData))
+        .then(response=>{
+            history.push('/main/FriendList')
+            setUpdate(!Update)
+        })
     }
     const onChange = (e) => {
         const {className, value} = e.target
