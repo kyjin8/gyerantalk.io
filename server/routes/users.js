@@ -230,4 +230,6 @@ router.post('/showList',(req,res)=>{
 
 })
 
+router.get('')
+
 module.exports = router;

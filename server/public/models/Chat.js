@@ -14,9 +14,9 @@ const chatSchema = mongoose.Schema({
     roomName : {
         type : String,  
     },
-    anotherUser : {
-        type : String,
-    },
+    // anotherUser : {
+    //     type : String,
+    // },
     readMessage : {
         type : Boolean,
         default : false,

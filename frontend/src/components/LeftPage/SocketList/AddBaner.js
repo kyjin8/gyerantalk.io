@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../MainPage/Main.scss';
+import { withRouter } from 'react-router-dom';
 
 const AddBaner = () => {
 
@@ -33,4 +34,4 @@ const AddBaner = () => {
     )
 }
 
-export default AddBaner;
+export default withRouter(AddBaner);

@@ -1,5 +1,6 @@
 import React from 'react';
 import RateReviewIcon from '@material-ui/icons/RateReview';
+import { withRouter } from 'react-router-dom';
 
 const ChatTitle = () => {
     return (
@@ -10,4 +11,4 @@ const ChatTitle = () => {
     )
 }
 
-export default ChatTitle;
+export default withRouter(ChatTitle);

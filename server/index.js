@@ -52,7 +52,7 @@ io.on("connection",(socket)=>{
       sendUser: data.sendUser,
       roomName: data.roomName,
     }
-    console.log(body);
+    
     const chat = new Chat(body);
 
     chat.save((err,doc)=>{
