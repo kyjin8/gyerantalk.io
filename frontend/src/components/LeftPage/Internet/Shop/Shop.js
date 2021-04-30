@@ -9,8 +9,6 @@ const Shop = ({location}) => {
         return params;
     }
     const query = getUrlParams();
-    
-    console.log('aaa', query.item)
     const dataBase= [
         {
             image: '/shopping/shopping_1.png',
@@ -71,7 +69,7 @@ const Shop = ({location}) => {
                     </Link>
                 ))
                 :
-                <ShopItem productBox={dataBase[query.item]}/>
+                <ShopItem productBox={dataBase[query.item]} querynum={query.item}/>
                 }
             </div>
         </div>
