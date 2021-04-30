@@ -2,7 +2,7 @@ import React from 'react';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { withRouter } from 'react-router-dom';
 
-const PlusFriend = React.memo(({onToggle3}) => {
+const PlusFriend = React.memo(({onToggle3},props) => {
 
     return (
         <div className="plus_site">

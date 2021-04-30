@@ -7,12 +7,24 @@ const chatSchema = mongoose.Schema({
     message : {
         type : String,
     },
-    sender : {
+    sendUser : {
         type : Schema.Types.ObjectId,
         ref : 'User'
     },
-    type : {
-        type : String,
+    roomName : {
+        type : String,  
+    },
+    // syncTime: {
+    //     type: Date,
+    //     default: Date.now,
+    // },
+    // sender : {
+    //     type : Schema.Types.ObjectId,
+    //     ref : 'User'
+    // },
+    readMessage : {
+        type : Boolean,
+        default : false,
     },
 },{timestamps:true});
 
