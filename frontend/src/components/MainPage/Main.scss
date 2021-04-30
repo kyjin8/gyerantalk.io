@@ -5,11 +5,16 @@
     .box{
         display: flex;
         justify-content: center;
+        a{
+            text-decoration: none;
+            color : #000;
+        }
         .left_side{
+            border-radius: 10px 10px;
             width: 280px;
             // padding: 10px;
             height: 568px;
-            overflow: scroll;
+            overflow: hidden; // scroll 대신 hidden으로 바꿈
             box-sizing: border-box;
             box-shadow: 0px 0px 5px 5px rgba(182, 182, 182, 0.521);
             .left_category{
@@ -68,7 +73,7 @@
                 }
             }
             // 프로필 영역
-            .myProfile{
+            .myfile{
                 padding : 10px;
                 display: flex;
                 align-items: center;
@@ -102,6 +107,39 @@
                     font-size: 30px;
                     color : #f6bd63;
                     margin-left: 50px;
+                }
+            }
+            .change_update{
+                height: 520px;
+                .change{
+                    font-size: 25px;
+                    font-weight: bolder;
+                }
+                .form_change{
+                    padding: 5px;
+                    height: 510px;
+                    display: flex;
+                    align-items: center;
+                    input{
+                        padding: 2px 2px;
+                        margin-top: 2px;
+                        margin-bottom: 2px;
+                        width: 250px;
+                        font-size: 14px;
+                        font-weight: bolder;
+                        outline: none;
+                    }
+                }
+                form{
+                    
+                    .profile_img_wrapper{
+                        
+                        img{
+                            width: 200px;
+                            height: 200px;
+                            border-radius: 100%;
+                        }
+                    }
                 }
             }
             // 친구추가영역
@@ -142,6 +180,7 @@
                 padding: 5px;
                 display: flex;
                 align-items: center;
+                cursor: pointer;
                 .plus_icon{
                     width: 50px;
                     height: 40px;
@@ -192,6 +231,17 @@
                 padding: 5px;
                 font-weight: bolder;
                 font-size: 16px;
+                .default_active:hover{
+                    color : #310b0b;
+                }
+                .active{
+                    font-weight : 500;
+                    border-bottom : 2px solid #9c3d54;
+                    color: #9c3d54;
+                    .active:hover{
+                    color : #310b0b;
+                    }
+                }
             }
             // Internet-body-news
             .loading{
@@ -202,6 +252,8 @@
                 margin-top: 60%;
             }
             .news_top{
+                overflow: scroll;
+                height: 500px;
                 .box_article{
                     border-bottom: 2px solid rgba(170, 170, 170, 0.829);
                     padding: 2px;
@@ -222,6 +274,140 @@
                             font-weight: bolder;
                         }
                     }
+                }
+            }
+            .chatting_area{
+                height: 530px;
+                background-color: #f6bd63;
+                .chat_inside{
+                    padding: 5px;
+                    height: 470px;
+                    overflow: scroll;
+                    background-color: #9c3d54;
+                    .chat_box{
+                        ol{
+                            padding:0;
+                            .talk_box{
+                                display: flex;
+                                justify-content: flex-end;
+                                // width: 280px;
+                                img{
+                                    width: 50px;
+                                    height: 50px;
+                                    border-radius: 100%;
+                                    margin-left: 10px;
+                                }
+                                .say{
+                                    display: flex;
+                                    flex-direction: column;
+                                    text-align: right;
+                                    // width: 170px;
+                                    .span_name{
+                                        font-weight: bolder;
+                                        font-size: 14px;
+                                    }
+                                    .span_mess{
+                                        background-color: #f6bd63;
+                                        border-radius: 10px 10px;
+                                        padding: 5px;
+                                    }
+                                }
+                            }
+                            .talk_box1{
+                                display: flex;
+                                justify-content: flex-start;
+                                // width: 280px;
+                                img{
+                                    width: 50px;
+                                    height: 50px;
+                                    border-radius: 100%;
+                                    margin-left: 10px;
+                                }
+                                .say1{
+                                    display: flex;
+                                    flex-direction: column;
+                                    text-align: left;
+                                    // width: 170px;
+                                    .span_name1{
+                                        font-weight: bolder;
+                                        font-size: 14px;
+                                    }
+                                    .span_mess1{
+                                        background-color: #f6bd63;
+                                        border-radius: 10px 10px;
+                                        padding: 5px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .btns{
+                    margin-top: 5px;
+                    display: flex;
+                    justify-content: space-around;
+                    .chat_input{
+                        // border: none;
+                        padding: 4px;
+                        border: 2px solid #7c7c7c;
+                        border-radius: 20px 20px;
+                        width: 220px;
+                    }
+                    input:focus {outline:none;}
+                    .send-message-button{
+                        background-color: #9c3d54;
+                        color: #fff;
+                        border-radius: 10px 10px;
+                        padding: 4px;
+                    }
+                }
+            }
+            .home-container{
+                .chat_titles{
+                    display: flex;
+                    align-items: center;
+                    svg{
+                        width: 25px;
+                        height: 25px;
+                    }
+                    font-size: 25px;
+                    padding: 5px;
+                    font-weight: bolder;
+                    border-bottom: 2px solid rgba(170, 170, 170, 0.829);
+                }
+                img{
+                    width : 280px;
+                    height: 60px;
+                    border-bottom: 2px solid rgba(170, 170, 170, 0.829);
+                }
+            }
+            .friend_profile{
+                height: 530px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                background-color: beige;
+                img{
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 100%;
+                }
+                .friend_name{
+                    font-size: 25px;
+                    font-weight: bolder;
+                }
+                .friend_say{
+                    color : #7c7c7c;
+                    font-weight: bolder;
+                }
+                svg{
+                    font-size: 80px;
+                    color:#f6bd63;
+                }
+                svg:hover{
+                    color: #f3ad3d;
+                    cursor: pointer;
                 }
             }
         }

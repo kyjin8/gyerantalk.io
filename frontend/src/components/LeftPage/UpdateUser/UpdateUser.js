@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { updateUser, uploadImage, uploadImageTmp } from "../../../api/actions/user_action";
 import { Button } from '@material-ui/core';
+import '../../MainPage/Main.scss';
 
 const UpdateUser = ({UserData, history, setUpdate, Update}) => {
     const dispatch = useDispatch();
@@ -61,17 +62,19 @@ const UpdateUser = ({UserData, history, setUpdate, Update}) => {
     }
 
     return (
-        <div>
-            <div>프로필 수정</div>
-            <form onSubmit={onSubmit} encType="multipart/form-data">
-                <label className="profile_img_wrapper" htmlFor="profile_img">
-                     <img style={imgStyle} src={image} />
-                </label>
-                <input type="file" name='profile_img' accept='image/jpg, image/png, image/jpeg, image/gif' multiple={false} />
-                <input className="nick" type="text" value={nick} onChange={onChange} name="nick"/>
-                <input className="message" type="text" value={message} onChange={onChange} name="message"/>
-                <Button type="submit" style={btnstyle} variant="contained" fullWidth>수정 완료</Button>
-            </form>
+        <div className="change_update">
+            <div className="change">프로필 수정</div>
+            <div className="form_change">
+                <form onSubmit={onSubmit} encType="multipart/form-data">
+                    <label className="profile_img_wrapper" htmlFor="profile_img">
+                        <img style={imgStyle} src={image} />
+                    </label>
+                    <input type="file" name='profile_img' accept='image/jpg, image/png, image/jpeg, image/gif' multiple={false} />
+                    <input className="nick" type="text" value={nick} onChange={onChange} name="nick"/>
+                    <input className="message" type="text" value={message} onChange={onChange} name="message"/>
+                    <Button type="submit" style={btnstyle} variant="contained" fullWidth>수정 완료</Button>
+                </form>
+            </div>
         </div>
     )
 }

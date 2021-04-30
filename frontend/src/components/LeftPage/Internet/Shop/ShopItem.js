@@ -86,7 +86,7 @@ const ShopItem = ({productBox, querynum}) => {
     console.log('kakao', next_redirect_pc_url);
     return (
         productBox !== undefined ?
-        <div>
+        <div style={{overflow:'scroll',height:'500px'}}>
             <img className="products_img" src={productBox.image} style={{width: '100%'}}/>
             <div className="products_title" style={{fontSize: '13px',  margin: '5% 0 3%', lineHeight: '1.8'}}>{productBox.productName}</div>
             <div className="products_price" style={{fontWeight: '700'}}>{productBox.productPrice.toLocaleString()}원</div>

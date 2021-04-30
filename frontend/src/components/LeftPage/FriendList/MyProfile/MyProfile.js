@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 const MyProfile = React.memo(({UserData}) => {
 
     return (
-        <div className="myProfile">
+        <div className="myfile">
             <Link to="/main/UpdateUser">
                 <img src={UserData.image} />
                 <div className="text_site">
