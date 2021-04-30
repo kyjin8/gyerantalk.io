@@ -14,10 +14,14 @@ const ChatingRoom = ({match, UserData}) => {
     // 처음 채팅 가져오기
     useEffect(() => {
 
-        dispatch(getChats(roomId))
+        let body = {
+            roomId : roomId
+        }
+        dispatch(getChats(body))
         .then(response =>{
-            console.log(response); 
-            setStartData(response.data);   
+            console.log('111111111',response); 
+            setStartData(response.payload);
+            console.log('11',response.payload);
         })
 
     }, [])
@@ -40,37 +44,65 @@ const ChatingRoom = ({match, UserData}) => {
     }, [newMessage])
 
     const onSubmitMessage = () => {
-        sendMessage(newMessage, UserData._id, roomId);
+        sendMessage(newMessage, UserData._id, roomId, UserData.userName, UserData.image);
         setnewMessage("");
     }
 
 
     return (
-        <div>
-            <h1>Room : {roomId}</h1>
-            {/* <div>
+        <div className="chatting_area">
+            <div className="chat_box">
                 <ol>
-                    {props.socket.chats !== [] ?
-                        props.socket.chats.map((data)=>(
-                            <div>안녕</div>
+                    {
+                        StartData.map((data)=>(
+                            data.sendUser._id === UserData._id ?
+                            <div style={{background:'red'}}>
+                                <img src={data.sendUser.image} />
+                                <div>
+                                    <div>{data.sendUser.userName}</div>
+                                    <div>{data.message}</div>
+                                </div>
+                            </div>
+                            :
+                            <div style={{background:'blue'}}>
+                                <img src={data.sendUser.image} />
+                                <div>
+                                    <div>{data.sendUser.userName}</div>
+                                    <div>{data.message}</div>
+                                </div>
+                            </div>
                         ))
-                        :
-                        <div>잘과</div>
                     }
                 </ol>
-            </div> */}
+            </div>
             <div>
                 <ol>
                     {
                         Messages.map((message, i)=>(
-                            <li
-                                key={i}
-                                className={`message-item ${
-                                    message.ownedByCurrentUser ? "my-message" : "received-message"
-                                }`}
-                            >
-                                {message.message}
-                            </li>
+                            message.ownedByCurrentUser ? 
+                            <div style={{background:'red'}}>
+                                <img src={UserData.image} />
+                                <div>
+                                    <div>{UserData.userName}</div>
+                                    <div>{message.message}</div>
+                                </div>
+                            </div>
+                            :
+                            <div style={{background:'blue'}}>
+                                <img src={message.image} />
+                                <div>
+                                    <div>{message.userName}</div>
+                                    <div>{message.message}</div>
+                                </div>
+                            </div>
+                            // <li
+                            //     key={i}
+                            //     className={`message-item ${
+                            //         message.ownedByCurrentUser ? "my-message" : "received-message"
+                            //     }`}
+                            // >
+                            //     {message.message}
+                            // </li>
                         ))
                     }
                 </ol>

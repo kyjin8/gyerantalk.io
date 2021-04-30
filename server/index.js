@@ -45,7 +45,14 @@ io.on("connection",(socket)=>{
   socket.on('newChatMessage',(data)=>{
     console.log('실행');
 
-    const chat = new Chat(data);
+    let body = {
+      message: data.messageBody,
+      senderId: data.senderId,
+      sendUser: data.sendUser,
+      roomName: data.roomName,
+    }
+
+    const chat = new Chat(body);
 
     chat.save((err,doc)=>{
       console.log('성공');

@@ -33,16 +33,16 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:false}));
 
 /* GET users listing. */
-router.get('/getChat' , async(req, res) => {
+router.post('/getChat' , async(req, res) => {
     // await Chat.find()
     //     .populate("sender")
     //     .exec((err, chats) => {
     //         if(err) return res.status(400).send(err);
     //         res.status(200).send(chats)
     //     })
-    console.log('1111111',req.data);
+    console.log('1111111',req.body.roomId);
     console.log('디스패치');
-    await Chat.find()
+    await Chat.find({roomName : req.body.roomId})
     .populate('sendUser')
     .exec((err, chats) => {
       if (err) return res.status(400).send(err);
