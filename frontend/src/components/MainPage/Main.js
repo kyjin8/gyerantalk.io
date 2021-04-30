@@ -47,8 +47,8 @@ const Main = (props) => {
                 {/* <div className="right_side">
                     dddd
                 </div> */}
-                <button onClick={onClickHandler}>
-                        로그아웃
+                <button style={{marginLeft:'10px'}} onClick={onClickHandler}>
+                    로그아웃
                 </button>
             </div>
         </div>

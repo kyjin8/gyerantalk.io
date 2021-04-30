@@ -9,19 +9,14 @@ const chatSchema = mongoose.Schema({
     },
     sendUser : {
         type : Schema.Types.ObjectId,
-        ref : 'User'
+        ref : 'User',
     },
     roomName : {
         type : String,  
     },
-    // syncTime: {
-    //     type: Date,
-    //     default: Date.now,
-    // },
-    // sender : {
-    //     type : Schema.Types.ObjectId,
-    //     ref : 'User'
-    // },
+    anotherUser : {
+        type : String,
+    },
     readMessage : {
         type : Boolean,
         default : false,

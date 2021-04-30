@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import ChatTitle from './ChatTitle';
+import AddBaner from './AddBaner';
 
 const ChatingList = ({UserData}) => {
 
@@ -12,7 +14,8 @@ const ChatingList = ({UserData}) => {
 
     return (
         <div className="home-container">
-            <div>채팅</div>
+            <ChatTitle />
+            <AddBaner />
             <input 
                 type="text"
                 placeholder="Room"

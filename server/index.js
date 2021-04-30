@@ -44,14 +44,15 @@ io.on("connection",(socket)=>{
   // 메세지 전송시
   socket.on('newChatMessage',(data)=>{
     console.log('실행');
+    console.log(data);
 
     let body = {
-      message: data.messageBody,
+      message: data.message,
       senderId: data.senderId,
       sendUser: data.sendUser,
       roomName: data.roomName,
     }
-
+    console.log(body);
     const chat = new Chat(body);
 
     chat.save((err,doc)=>{
