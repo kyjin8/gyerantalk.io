@@ -7,6 +7,7 @@
 const app = require('./app');
 const debug = require('debug')('react-backend:server');
 const http = require('http');
+const { Chat } = require('./public/models/Chat');
 
 /**
  * Get port from environment and store in Express.
@@ -20,8 +21,52 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
-io.attach(server);
 
+/**
+ * Create Socket.io
+ */
+const io = require("socket.io")(server,{
+  cors : {
+    origin : "*",
+  },
+})
+
+io.on("connection",(socket)=>{
+
+  console.log('소켓실행');
+  
+  // 대화에 참여
+  const {roomId} = socket.handshake.query;
+  socket.join(roomId, ()=>{
+    console.log('방생성');
+  });
+
+  // 메세지 전송시
+  socket.on('newChatMessage',(data)=>{
+    console.log('실행');
+
+    let body = {
+      message: data.messageBody,
+      senderId: data.senderId,
+      sendUser: data.sendUser,
+      roomName: data.roomName,
+    }
+
+    const chat = new Chat(body);
+
+    chat.save((err,doc)=>{
+      console.log('성공');
+    })
+    
+    io.in(roomId).emit('newChatMessage',data);
+  })
+
+  // 방을 나가거나 소켓이 닫히면
+  socket.on('disconnect', () =>{
+    socket.leave(roomId);
+  })
+
+})
 /**
  * Listen on provided port, on all network interfaces.
  */

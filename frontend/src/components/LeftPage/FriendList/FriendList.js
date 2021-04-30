@@ -5,7 +5,7 @@ import PlusFriend from './PlusFriend/PlusFriend';
 import { withRouter } from 'react-router-dom';
 import SearchFriend from './PlusFriend/SearchFriend';
 import { searchFriend, friendAdd } from '../../../api/actions/friend_action';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import ShowFriend from './ShowFriend/ShowFriend';
 import { getFriendList } from '../../../api/actions/friend_action';
 

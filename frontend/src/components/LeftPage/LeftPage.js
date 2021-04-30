@@ -11,6 +11,8 @@ import UpdateUser from './UpdateUser/UpdateUser';
 // import UpdateUser from './UpdateUser/UpdateUser_tmp';
 // import UpdateUser from './UpdateUser/UpdateTest';
 import Internet from './Internet/Internet';
+import ChatingList from './SocketList/ChatingList';
+import ChatingRoom from './SocketList/ChatingRoom';
 
 const LeftPage = ({match, UserData, ListFriend, Update, setUpdate}) => {
 
@@ -22,7 +24,10 @@ const LeftPage = ({match, UserData, ListFriend, Update, setUpdate}) => {
                 <NavLink className="default_active" activeClassName="active" to="/main/FriendList">
                     <PersonIcon style={{ fontSize: 30 }} />
                 </NavLink>
-                <NavLink className="default_active" activeClassName="active" to="/main/ChatList">
+                {/* <NavLink className="default_active" activeClassName="active" to="/main/ChatList">
+                    <QuestionAnswerRoundedIcon style={{ fontSize: 30 }} />
+                </NavLink> */}
+                <NavLink className="default_active" activeClassName="active" to="/main/ChatingList">
                     <QuestionAnswerRoundedIcon style={{ fontSize: 30 }} />
                 </NavLink>
                 <NavLink className="default_active" activeClassName="active" to="/main/Internet">
@@ -31,7 +36,9 @@ const LeftPage = ({match, UserData, ListFriend, Update, setUpdate}) => {
                 <MoreHorizIcon style={{ fontSize: 30 }} />
             </div>
             {data === 'FriendList' ? <FriendList UserData={UserData} ListFriend={ListFriend}/> : null}
-            {data === 'ChatList' ? <Chat UserData={UserData}/> : null}
+            {/* {data === 'ChatList' ? <Chat UserData={UserData}/> : null}       */}
+            {data === 'ChatingList' ? <ChatingList UserData={UserData} /> : null}
+            {data === 'ChatingRoom' ? <ChatingRoom UserData={UserData}/> : null}
             {data === 'UpdateUser' ? <UpdateUser UserData={UserData} Update={Update} setUpdate={setUpdate}/> : null}
             {data === 'Internet' ? <Internet UserData={UserData}/> : null}
         </div>

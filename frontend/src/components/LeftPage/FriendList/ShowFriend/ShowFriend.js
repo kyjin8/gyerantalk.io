@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import { withRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const ShowFriend = React.memo(({UserData, ListFriend, ClickEvent, setClickEvent}) => {
 
