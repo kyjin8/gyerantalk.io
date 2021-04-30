@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const CHAT_SERVER = 'chat_server';
 const AFTER_POST_MESSAGE = 'after_post_message';
+const GET_FRIEND = 'get_friend';
 
 export function getChats(dataToSubmit){
     const request = axios.get('/api/chats/getChat')
@@ -21,3 +22,12 @@ export function afterPostMessage(data){
     }
 }
 
+export function getFriend(data){
+    const request = axios.post('/api/chats/friend', data)
+        .then(response => response.data)
+
+    return {
+        type : GET_FRIEND,
+        payload : request
+    }
+}
