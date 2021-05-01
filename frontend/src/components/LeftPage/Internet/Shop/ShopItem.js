@@ -12,9 +12,11 @@ const ShopItem = ({productBox, querynum}) => {
         cid: "TC0ONETIME",
         partner_order_id: "partner_order_id",
         partner_user_id: "partner_user_id",
-        item_name: productBox.title,
+        // item_name: productBox.title,
+        item_name: "choco",
         quantity: 1,
-        total_amount: productBox.productPrice,
+        // total_amount: productBox.productPrice,
+        total_amount: 30000,
         tax_free_amount: 0,
         approval_url: "http://localhost:3000/payment/approve",
         fail_url: "http://localhost:3000/payment/fail",
@@ -60,8 +62,8 @@ const ShopItem = ({productBox, querynum}) => {
         // axios.post('/kapi/payment/ready')
         axios({
           // 프록시에 카카오 도메인을 설정했으므로 결제 준비 url만 주자
-          // url: "https://kapi.kakao.com/kapi/payment/ready",
-          url: "/kapi/payment/ready",
+        //   url: "https://kapi.kakao.com/kapi/payment/ready",
+          url: "https://kapi.kakao.com/v1/payment/ready",
           // 결제 준비 API는 POST 메소드라고 한다.
           method: "POST",
           headers: {
@@ -72,9 +74,10 @@ const ShopItem = ({productBox, querynum}) => {
           // 설정한 매개변수들
           params,
         }).then((response) => {
+            axios(response.next_redirect_pc_url)
           // 응답에서 필요한 data만 뽑는다.
           const {
-            data: { next_redirect_pc_url, tid },
+            data: { next_redirect_pc_url, tid }
           } = response;
           console.log(next_redirect_pc_url);
           console.log(tid);
@@ -90,7 +93,7 @@ const ShopItem = ({productBox, querynum}) => {
             <img className="products_img" src={productBox.image} style={{width: '100%'}}/>
             <div className="products_title" style={{fontSize: '13px',  margin: '5% 0 3%', lineHeight: '1.8'}}>{productBox.productName}</div>
             <div className="products_price" style={{fontWeight: '700'}}>{productBox.productPrice.toLocaleString()}원</div>
-            {/* <a href={ next_redirect_pc_url }>{ next_redirect_pc_url }</a> */}
+            <a href={ next_redirect_pc_url }>{ next_redirect_pc_url }</a>
             <button onClick={onClick}>Gyeran PAY</button>
             <img className="products_desc" style={{width: '100%'}} src={productBox.productDesc}/>
         </div>
