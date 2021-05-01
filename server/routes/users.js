@@ -226,7 +226,6 @@ router.post('/showList',(req,res)=>{
     res.status(200).json({
       Myfriend : user
     });
-    
   })
 
 })

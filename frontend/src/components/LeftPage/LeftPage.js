@@ -38,11 +38,11 @@ const LeftPage = ({match, UserData, Update, setUpdate}) => {
             </div>
             {data === 'FriendList' ? <FriendList UserData={UserData} /> : null}
             {/* {data === 'ChatList' ? <Chat UserData={UserData}/> : null}       */}
-            {data === 'ChatingList' ? <ChatingList UserData={UserData} /> : null}
-            {data === 'ChatingRoom' ? <ChatingRoom UserData={UserData}/> : null}
-            {data === 'UpdateUser' ? <UpdateUser UserData={UserData} Update={Update} setUpdate={setUpdate}/> : null}
-            {data === 'Internet' ? <Internet UserData={UserData}/> : null}
-            {data === 'ViewFriend' ? <ViewFriend UserData={UserData} /> : null}
+            {data === 'ChatingList' && <ChatingList UserData={UserData} /> }
+            {data === 'ChatingRoom' && <ChatingRoom UserData={UserData}/> }
+            {data === 'UpdateUser' && <UpdateUser UserData={UserData} Update={Update} setUpdate={setUpdate}/> }
+            {data === 'Internet' && <Internet UserData={UserData}/> }
+            {data === 'ViewFriend' && <ViewFriend UserData={UserData} /> }
         </div>
     )
 }

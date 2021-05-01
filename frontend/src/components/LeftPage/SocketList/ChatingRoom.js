@@ -10,43 +10,49 @@ import { checkMember } from '../../../api/actions/chat_action';
 const ChatingRoom = ({match, UserData},props) => {
 
     const dispatch = useDispatch();
-
     const [roomId, setroomId] = useState(match.params.search);
-    const [Body, setBody] = useState({});
+    const [Body, setBody] = useState("");
+    const [changeRoom, setchangeRoom] = useState("")
 
     // const roomId = match.params.search;
     const checkMembers = match.params.search.split('_');
+// 민기_예진
 
-    // 처음 채팅 가져오기
-    useEffect(() => {
-
+// 예진_민기
+    useEffect(()=>{
         let member = {
-            one : checkMembers[0],
-            two : checkMembers[1],
+            one: checkMembers[0],
+            two: checkMembers[1],
         };
         dispatch(checkMember(member))
-        .then(response =>{
-            setroomId(response.payload)
-            setBody({
-                roomId : response.payload
+            .then(response => {
+                if(match.params.search !== response.payload.url){
+                    window.location.assign(`/main/ChatingRoom/${response.payload.url}`);
+                    
+                }
+                else{
+                    console.log('시발');
+                    setroomId(response.payload.url)
+                    setBody({
+                        roomId: response.payload.url
+                    })
+
+                }
+                
             })
-        })
-        .then(()=>{
+    },[match])
+    useEffect(()=>{
+        dispatch(getChats(Body))
+            .then(response => {
+                setStartData(response.payload);
+                console.log(response.payload, '두번째');
+            })
+    },[Body])
+    useEffect(()=>{
+        setchangeRoom(roomId);
+    },[roomId])
 
-            dispatch(getChats(Body))
-                .then(response =>{
-                    setStartData(response.payload);
-                    console.log(response.payload,'11111111111')
-                })
-        })
-        
-    }, [])
-
-    useEffect(() => {
-        
-    }, [Body])
-
-    const { Messages, sendMessage, setId } = useChat(roomId);
+    const { Messages, sendMessage, setId } = useChat(changeRoom);
     const [newMessage, setnewMessage] = useState("");
     const [Write, setWrite] = useState("")
     
@@ -64,7 +70,7 @@ const ChatingRoom = ({match, UserData},props) => {
     }, [newMessage])
 
     const onSubmitMessage = () => {
-        sendMessage(newMessage, UserData._id, roomId, UserData.userName, UserData.image);
+        sendMessage(newMessage, UserData._id, changeRoom, UserData.userName, UserData.image);
         setnewMessage("");
     }
 

@@ -36,10 +36,11 @@ router.post('/checkMember', async(req, res)=>{
   const ones = req.body.one+'_'+req.body.two;
   const twos = req.body.two+'_'+req.body.one;
   await Chat.find({roomName : ones},(err,chats)=>{
-    if(chats !== []) return res.json({url : ones});
+    console.log(chats,'ssssssssssssssss');
+    if(chats.length !== 0) return res.json({url : ones});
     Chat.find({roomName : twos},(err,cha)=>{
       console.log('twos 체크 : ',cha)
-      if(cha !== []) return res.json({url : twos});
+      if(cha.length !== 0) return res.json({url : twos});
       else res.json({url : ones});
     })
   })
@@ -49,7 +50,7 @@ router.post('/checkMember', async(req, res)=>{
 /* GET users listing. */
 router.post('/getChat' , async(req, res) => {
     console.log('디스패치');
-    console.log(req.body.roomId)
+    console.log(req.body, '해당방번호')
     await Chat.find({roomName : req.body.roomId})
     .populate('sendUser')
     .exec((err, chats) => {
@@ -89,5 +90,14 @@ router.post('/friend',(req,res)=>{
     res.send(friend_user);
   })
 })
+
+// router.post('/ListShow',(req,res)=>{
+
+//   const data1 = req.body._id;
+//   Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
+//   .distinct('roomName',(err,db)=>{
+//     console.log(db);
+//   });
+// })
 
 module.exports = router;

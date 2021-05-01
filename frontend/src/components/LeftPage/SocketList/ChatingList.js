@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import ChatTitle from './ChatTitle';
 import AddBaner from './AddBaner';
+import { ListFind } from '../../../api/actions/socket_action';
 
 const ChatingList = ({UserData}) => {
+
+    const dispatch = useDispatch();
 
     const [roomName, setRoomName ] = useState("");
 
@@ -12,20 +16,29 @@ const ChatingList = ({UserData}) => {
         setRoomName(event.target.value);
     };
 
+    useEffect(() => {
+        let body = {
+            _id : UserData._id
+        }
+        dispatch(ListFind(body))
+        .then(response => response.data);
+    }, [UserData])
+
     return (
         <div className="home-container">
             <ChatTitle />
             <AddBaner />
-            <input 
+            {/* <input 
                 type="text"
                 placeholder="Room"
                 value={roomName}
                 onChange={handleRoomNameChange}
                 className="text-input-field"
-            />
-            <Link to={`/main/ChatingRoom/${roomName}`}>
+            /> */}
+            {/* <Link to={`/main/ChatingRoom/${roomName}`}>
                 Join room
-            </Link>
+            </Link> */}
+            
         </div>
     )
 }
