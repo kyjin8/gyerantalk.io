@@ -21,7 +21,9 @@ const ChatingList = ({UserData}) => {
             _id : UserData._id
         }
         dispatch(ListFind(body))
-        .then(response => response.data);
+        .then(response => {
+            console.log(response.payload);
+        });
     }, [UserData])
 
     return (

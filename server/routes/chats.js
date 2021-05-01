@@ -91,13 +91,13 @@ router.post('/friend',(req,res)=>{
   })
 })
 
-// router.post('/ListShow',(req,res)=>{
+router.post('/ListShow',(req,res)=>{
 
-//   const data1 = req.body._id;
-//   Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
-//   .distinct('roomName',(err,db)=>{
-//     console.log(db);
-//   });
-// })
+  const data1 = req.body._id;
+  Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
+  .distinct('roomName',(err,db)=>{
+    res.send(db);
+  });
+})
 
 module.exports = router;
