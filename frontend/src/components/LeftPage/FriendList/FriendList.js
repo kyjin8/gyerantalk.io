@@ -89,7 +89,7 @@ const FriendList = ({UserData}) => {
 
     
     return (
-        <div>
+        <div style={{height:'520px',overflow:'scroll'}}>
             <LeftTitle 
                 Search={Search}
                 Friend={Friend}

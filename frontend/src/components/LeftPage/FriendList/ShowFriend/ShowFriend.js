@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const ShowFriend = React.memo(({UserData, ListFriend, ClickEvent, setClickEvent}) => {
 
@@ -9,13 +10,15 @@ const ShowFriend = React.memo(({UserData, ListFriend, ClickEvent, setClickEvent}
             <div>
                 {
                     ListFriend.Myfriend.map((friend)=>(
-                        <div className="myProfile" key={friend._id}>
-                            <img src={friend.friendImage} />
-                            <div className="text_site">
-                                <div className="top">{friend.friendName}</div>
-                                <div className="bottom">{friend.friendMessage}</div>
+                        <Link key={friend._id} to={`/main/ViewFriend/${friend.friendId}`} style={{textDecoration:'none',color:'#000'}}>
+                            <div className="myProfile" key={friend._id}>
+                                <img src={friend.friendImage} />
+                                <div className="text_site">
+                                    <div className="top">{friend.friendName}</div>
+                                    <div className="bottom">{friend.friendMessage}</div>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     ))
                 }
             </div>

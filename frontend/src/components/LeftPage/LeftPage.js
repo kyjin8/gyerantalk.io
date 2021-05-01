@@ -13,9 +13,10 @@ import UpdateUser from './UpdateUser/UpdateUser';
 import Internet from './Internet/Internet';
 import ChatingList from './SocketList/ChatingList';
 import ChatingRoom from './SocketList/ChatingRoom';
+import ViewFriend from './ViewFriend/ViewFriend';
 
-const LeftPage = ({match, UserData, ListFriend, Update, setUpdate}) => {
-
+const LeftPage = ({match, UserData, Update, setUpdate}) => {
+// 잠시 ListFriend props에 빼고 밑에 FriendList 페이지에 상속 지움
     const data = match.params.category || 'FriendList';
 
     return (
@@ -35,12 +36,13 @@ const LeftPage = ({match, UserData, ListFriend, Update, setUpdate}) => {
                 </NavLink>
                 <MoreHorizIcon style={{ fontSize: 30 }} />
             </div>
-            {data === 'FriendList' ? <FriendList UserData={UserData} ListFriend={ListFriend}/> : null}
+            {data === 'FriendList' ? <FriendList UserData={UserData} /> : null}
             {/* {data === 'ChatList' ? <Chat UserData={UserData}/> : null}       */}
             {data === 'ChatingList' ? <ChatingList UserData={UserData} /> : null}
             {data === 'ChatingRoom' ? <ChatingRoom UserData={UserData}/> : null}
             {data === 'UpdateUser' ? <UpdateUser UserData={UserData} Update={Update} setUpdate={setUpdate}/> : null}
             {data === 'Internet' ? <Internet UserData={UserData}/> : null}
+            {data === 'ViewFriend' ? <ViewFriend UserData={UserData} /> : null}
         </div>
     )
 }

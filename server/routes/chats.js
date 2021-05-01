@@ -34,13 +34,6 @@ router.use(bodyParser.urlencoded({extended:false}));
 
 /* GET users listing. */
 router.post('/getChat' , async(req, res) => {
-    // await Chat.find()
-    //     .populate("sender")
-    //     .exec((err, chats) => {
-    //         if(err) return res.status(400).send(err);
-    //         res.status(200).send(chats)
-    //     })
-    console.log('1111111',req.body.roomId);
     console.log('디스패치');
     await Chat.find({roomName : req.body.roomId})
     .populate('sendUser')
@@ -61,5 +54,25 @@ router.post('/uploadfiles', auth,(req,res)=>{
         return res.json({success:true, url : '/chats/'+req.file.filename})
     });
   });
+
+router.post('/friend',(req,res)=>{
+
+  User.findOne({userId : req.body.data},(err,user)=>{
+    const friend_user = {
+      _id : user._id,
+      userId : user.userId,
+      // role이 0이면 일반유저 role이 1 2 3 이든 0이 아니면 관리자
+      isAdmin : user.role === 0 ? false : true,
+      isAuth : true,
+      userName : user.userName,
+      userNickName : user.userNickName,
+      userPhone : user.userPhone,
+      role : user.role,
+      image : user.image,
+      message : user.message,
+    }
+    res.send(friend_user);
+  })
+})
 
 module.exports = router;

@@ -9,14 +9,18 @@ const NewsItem = ({ article, Count, setCount }) => {
     // if (Count % 3 === 0) {
         return (
             <div>
-                {urlToImage && (
+                
                     <div className="box_article">
                         <a href={url} target="_blank" rel="noopner noreferrer">
-                            <img src={urlToImage} alt="thumbnail" />
+                        {urlToImage ? 
+                            <img src={urlToImage} alt="해당 기사 사진이 오류입니다" />
+                            :
+                            <img src='/gyeran.png'/>
+                        }
                             <span>{title}</span>
                         </a>
                     </div>
-                )}
+               
             </div>
         )
     // }else {
