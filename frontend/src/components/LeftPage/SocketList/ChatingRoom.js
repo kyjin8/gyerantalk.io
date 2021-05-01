@@ -5,25 +5,46 @@ import TextsmsIcon from '@material-ui/icons/Textsms';
 import { useDispatch, useSelector } from 'react-redux';
 import { getChats } from '../../../api/actions/socket_action';
 import '../../MainPage/Main.scss';
+import { checkMember } from '../../../api/actions/chat_action';
 
-const ChatingRoom = ({match, UserData}) => {
+const ChatingRoom = ({match, UserData},props) => {
 
     const dispatch = useDispatch();
 
-    const roomId = match.params.search;
+    const [roomId, setroomId] = useState(match.params.search);
+    const [Body, setBody] = useState({});
+
+    // const roomId = match.params.search;
+    const checkMembers = match.params.search.split('_');
 
     // 처음 채팅 가져오기
     useEffect(() => {
 
-        let body = {
-            roomId : roomId
-        }
-        dispatch(getChats(body))
+        let member = {
+            one : checkMembers[0],
+            two : checkMembers[1],
+        };
+        dispatch(checkMember(member))
         .then(response =>{
-            setStartData(response.payload);
+            setroomId(response.payload)
+            setBody({
+                roomId : response.payload
+            })
         })
+        .then(()=>{
 
+            dispatch(getChats(Body))
+                .then(response =>{
+                    setStartData(response.payload);
+                    console.log(response.payload,'11111111111')
+                })
+        })
+        
     }, [])
+
+    useEffect(() => {
+        
+    }, [Body])
 
     const { Messages, sendMessage, setId } = useChat(roomId);
     const [newMessage, setnewMessage] = useState("");

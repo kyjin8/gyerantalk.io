@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getFriend } from '../../../api/actions/chat_action';
 import TelegramIcon from '@material-ui/icons/Telegram';
 
-const ViewFriend = ({match}) => {
+const ViewFriend = ({match, UserData}) => {
 
     const dispatch = useDispatch();
 
@@ -22,7 +22,6 @@ const ViewFriend = ({match}) => {
         dispatch(getFriend(body))
         .then(response => {
             setDataFriend(response.payload);
-            console.log(response.payload);
         })
 
     }, [])
@@ -33,7 +32,9 @@ const ViewFriend = ({match}) => {
                 <img src={DataFriend.image} />
                 <div className="friend_name">{DataFriend.userName}</div>
                 <div className="friend_say">{DataFriend.message}</div>
-                <TelegramIcon />
+                <Link to={`/main/ChatingRoom/${UserData._id}_${DataFriend._id}`}>
+                    <TelegramIcon />
+                </Link>
             </div>
         </div>
     )

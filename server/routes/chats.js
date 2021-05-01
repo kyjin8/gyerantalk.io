@@ -32,9 +32,24 @@ router.use(express.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:false}));
 
+router.post('/checkMember', async(req, res)=>{
+  const ones = req.body.one+'_'+req.body.two;
+  const twos = req.body.two+'_'+req.body.one;
+  await Chat.find({roomName : ones},(err,chats)=>{
+    if(chats !== []) return res.json({url : ones});
+    Chat.find({roomName : twos},(err,cha)=>{
+      console.log('twos 체크 : ',cha)
+      if(cha !== []) return res.json({url : twos});
+      else res.json({url : ones});
+    })
+  })
+  
+})
+
 /* GET users listing. */
 router.post('/getChat' , async(req, res) => {
     console.log('디스패치');
+    console.log(req.body.roomId)
     await Chat.find({roomName : req.body.roomId})
     .populate('sendUser')
     .exec((err, chats) => {
