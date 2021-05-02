@@ -5,6 +5,7 @@ import { ChatInform } from '../../../api/actions/socket_action';
 import moment from 'moment';
 import { FriendProfile } from '../../../api/actions/socket_action';
 import { withRouter } from 'react-router-dom';
+import '../../MainPage/Main.scss';
 
 const ChatItem = ({ chat, UserData},props) => {
     
@@ -85,17 +86,26 @@ const ChatItem = ({ chat, UserData},props) => {
     // }, [ Mes, MatchUrl, UserData ])
 
     return (
-        <div>
+        <div className="talking">
             {
                 Mes && Fri &&
                 <Link to={`/main/ChatingRoom/${chat}`}>
-                    <div>
+                    <div className="talk_site">
                         <img src={Fri.image} />
-                        <div>
-                            {Fri.userName}<br />
-                            {Mes.message}
+                        <div className="talk_pro">
+                            <span>
+                                {Fri.userName}
+                            </span><br/>
+                            <span className="talk_message">
+                                {Mes.message}
+                            </span>
                         </div>
-                        <div>{moment(Mes.createdAt).format('A HH:MM분')}</div>
+                        <div className="talk_div">
+                        <div className="talk_time">
+                            {moment(Mes.createdAt).format('A HH:MM분')}
+                        </div>
+
+                        </div>
                     </div>
                 </Link>
             }
