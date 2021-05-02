@@ -29,7 +29,7 @@ const ChatingList = ({UserData}) => {
     }, [UserData])
     
     const renderChat = () => 
-        ListRoom.map((chat)=>(
+        ListRoom.map( (chat)=>(
             <ChatItem key={chat} chat={chat} UserData={UserData}/>
         ))
 
