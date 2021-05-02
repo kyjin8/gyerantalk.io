@@ -54,37 +54,6 @@ const ChatItem = ({ chat, UserData},props) => {
         console.log(Mes)
     }, [Fri])
 
-    // useEffect(() => {
-    //     let body ={
-    //         chat : chat
-    //     }
-    //     dispatch(ChatInform(body))
-    //     .then(response => {
-    //         setMes(response.payload);
-    //         setMatchUrl(response.payload[0].roomName.split('_'))
-    //     })
-    
-    // }, [ UserData, chat ])
-    // useEffect(() => {
-    //     if(UserData._id === MatchUrl[0]){
-    //         let body ={
-    //             mem : MatchUrl[1]
-    //         }
-    //         dispatch(FriendProfile(body))
-    //         .then(response => {
-    //             setFri(response.payload[0])
-    //         })
-    //     }else{
-    //         let body ={
-    //             mem : MatchUrl[0]
-    //         }
-    //         dispatch(FriendProfile(body))
-    //         .then(response => {
-    //             setFri(response.payload[0])
-    //         })
-    //     }
-    // }, [ Mes, MatchUrl, UserData ])
-
     return (
         <div className="talking">
             {
