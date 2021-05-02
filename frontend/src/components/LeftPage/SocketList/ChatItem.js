@@ -5,6 +5,7 @@ import { ChatInform } from '../../../api/actions/socket_action';
 import moment from 'moment';
 import { FriendProfile } from '../../../api/actions/socket_action';
 
+
 const ChatItem = ({match, chat, UserData}) => {
 
     const dispatch = useDispatch();
@@ -23,10 +24,7 @@ const ChatItem = ({match, chat, UserData}) => {
             setMatchUrl(response.payload[0].roomName.split('_'))
         })
     }, [chat])
-    // useEffect(() => {
-    //     console.log(Mes[0],'1111111111');
-    //     setMatchUrl(Mes[0].roomName.split('_'))
-    // }, [Mes])
+
     useEffect(() => {
         if(MatchUrl.length !== 0){
             if(UserData._id === MatchUrl[0]){
@@ -36,7 +34,6 @@ const ChatItem = ({match, chat, UserData}) => {
                 dispatch(FriendProfile(body))
                 .then(response => {
                     setFri(response.payload)
-                    console.log(response.payload);
                 })
             }else{
                 let body ={
@@ -45,7 +42,6 @@ const ChatItem = ({match, chat, UserData}) => {
                 dispatch(FriendProfile(body))
                 .then(response => {
                     setFri(response.payload)
-                    console.log(response.payload);
                 })
             }
         }
@@ -54,21 +50,21 @@ const ChatItem = ({match, chat, UserData}) => {
 
     return (
         <div>
-            {Mes.length !== 0 ?
-            
-            <Link to={`/main/ChatingRoom/${Mes[0].roomName}`}>
-                <div>
-                    <img src={Fri[0].image} />
+            {Mes.length !== 0 && Fri.length !== 0 ?
+
+                <Link to={`/main/ChatingRoom/${Mes[0].roomName}`}>
                     <div>
-                        {Fri[0].userName}<br/>
-                        {Mes[0].message}
+                        <img src={Fri[0].image} />
+                        <div>
+                            {Fri[0].userName}<br />
+                            {Mes[0].message}
+                        </div>
+                        <div>{moment(Mes[0].createdAt).format('A HH:MM분')}</div>
                     </div>
-                    <div>{moment(Mes[0].createdAt).format('A HH:MM분')}</div>
-                </div>
-            </Link>
-                :
-                <></>
-        }
+                </Link>
+
+                : <></>
+            }
         </div>
     )
 }
