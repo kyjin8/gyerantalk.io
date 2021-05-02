@@ -114,10 +114,32 @@ router.post('/ListShow',(req,res,next)=>{
 //     }
 //   });
   Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
-  .sort({"createAt":-1})
   .distinct('roomName',(err,db)=>{
     console.log(db);
+    // res.send(db);
+    // for(i of db){
+    res.variable = db;
+    next();
+    // }
   })
 })
 
+router.post('/ListShow', async(req,res,next)=>{
+  const data = res.variable;
+  const chatDB = {};
+  await ch(data);
+
+})
+
+function ch(data){
+  const chatDB = {};
+  for(i of data){
+    Chat.find({roomName : i})
+    .sort({"createdAt":-1})
+    .limit(1)
+    .then((daata)=>{
+      console.log('dddddd',daata);
+    })
+  }
+}
 module.exports = router;

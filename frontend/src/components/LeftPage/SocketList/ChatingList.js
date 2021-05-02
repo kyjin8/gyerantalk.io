@@ -28,6 +28,9 @@ const ChatingList = ({UserData}) => {
             setListRoom(response.payload);
         });
     }, [UserData])
+    useEffect(()=>{
+        
+    }, [ListRoom])
 
     return (
         <div className="home-container">
