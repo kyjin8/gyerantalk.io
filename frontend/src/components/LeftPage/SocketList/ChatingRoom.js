@@ -16,9 +16,7 @@ const ChatingRoom = ({match, UserData},props) => {
 
     // const roomId = match.params.search;
     const checkMembers = match.params.search.split('_');
-// 민기_예진
 
-// 예진_민기
     useEffect(()=>{
         let member = {
             one: checkMembers[0],

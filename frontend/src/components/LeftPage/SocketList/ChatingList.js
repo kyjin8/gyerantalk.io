@@ -5,12 +5,14 @@ import { withRouter } from 'react-router-dom';
 import ChatTitle from './ChatTitle';
 import AddBaner from './AddBaner';
 import { ListFind } from '../../../api/actions/socket_action';
+import ChatItem from './ChatItem';
 
 const ChatingList = ({UserData}) => {
 
     const dispatch = useDispatch();
 
     const [roomName, setRoomName ] = useState("");
+    const [ListRoom, setListRoom] = useState([]);
 
     const handleRoomNameChange = (event) => {
         setRoomName(event.target.value);
@@ -22,7 +24,8 @@ const ChatingList = ({UserData}) => {
         }
         dispatch(ListFind(body))
         .then(response => {
-            console.log(response.payload);
+            console.log(response.payload,'1111111');
+            setListRoom(response.payload);
         });
     }, [UserData])
 
@@ -30,6 +33,16 @@ const ChatingList = ({UserData}) => {
         <div className="home-container">
             <ChatTitle />
             <AddBaner />
+            {/* {
+                ListRoom.forEach((datas) => {
+                
+                    <div>
+                        <ChatItem ids={datas}/>
+                        <div>안녕</div>
+                    </div>
+
+                })
+            } */}
             {/* <input 
                 type="text"
                 placeholder="Room"

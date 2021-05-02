@@ -91,13 +91,33 @@ router.post('/friend',(req,res)=>{
   })
 })
 
-router.post('/ListShow',(req,res)=>{
-
+router.post('/ListShow',(req,res,next)=>{
+  let chattingDB = {};
   const data1 = req.body._id;
+  let count = 0;
+  // Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
+  // .sort({"createdAt" : -1})
+  // .distinct('roomName',(err,db)=>{
+  //   res.send(db);
+  // });
+//  Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
+//   .sort({"createdAt" : -1})
+//   .distinct('roomName', (err,db)=>{
+//     for(i of db){
+//       Chat.find({roomName:i},(err,dbs)=>{
+//         // chattingDB.i = dbs[dbs.length-1];
+//         // console.log(dbs[dbs.length-1])
+//         return res.send({
+//           db : dbs
+//         })
+//       })
+//     }
+//   });
   Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
+  .sort({"createAt":-1})
   .distinct('roomName',(err,db)=>{
-    res.send(db);
-  });
+    console.log(db);
+  })
 })
 
 module.exports = router;
