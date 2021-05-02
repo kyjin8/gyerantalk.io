@@ -24,28 +24,22 @@ const ChatingList = ({UserData}) => {
         }
         dispatch(ListFind(body))
         .then(response => {
-            console.log(response.payload,'1111111');
             setListRoom(response.payload);
         });
     }, [UserData])
-    useEffect(()=>{
-        
-    }, [ListRoom])
+    
+    const renderChat = () => 
+        ListRoom.map((chat)=>(
+            <ChatItem key={chat} chat={chat} UserData={UserData}/>
+        ))
 
     return (
         <div className="home-container">
             <ChatTitle />
             <AddBaner />
-            {/* {
-                ListRoom.forEach((datas) => {
-                
-                    <div>
-                        <ChatItem ids={datas}/>
-                        <div>안녕</div>
-                    </div>
-
-                })
-            } */}
+            {
+                renderChat()
+            }
             {/* <input 
                 type="text"
                 placeholder="Room"

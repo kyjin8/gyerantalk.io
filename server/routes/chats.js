@@ -91,55 +91,28 @@ router.post('/friend',(req,res)=>{
   })
 })
 
-router.post('/ListShow',(req,res,next)=>{
-  let chattingDB = {};
+router.post('/ListShow',(req,res)=>{
   const data1 = req.body._id;
-  let count = 0;
-  // Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
-  // .sort({"createdAt" : -1})
-  // .distinct('roomName',(err,db)=>{
-  //   res.send(db);
-  // });
-//  Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
-//   .sort({"createdAt" : -1})
-//   .distinct('roomName', (err,db)=>{
-//     for(i of db){
-//       Chat.find({roomName:i},(err,dbs)=>{
-//         // chattingDB.i = dbs[dbs.length-1];
-//         // console.log(dbs[dbs.length-1])
-//         return res.send({
-//           db : dbs
-//         })
-//       })
-//     }
-//   });
   Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
   .distinct('roomName',(err,db)=>{
-    console.log(db);
-    // res.send(db);
-    // for(i of db){
-    res.variable = db;
-    next();
-    // }
+    res.send(db);
   })
 })
 
-router.post('/ListShow', async(req,res,next)=>{
-  const data = res.variable;
-  const chatDB = {};
-  await ch(data);
-
+router.post('/textMessage',(req,res)=>{
+  Chat.find({roomName : req.body.chat})
+  .populate('sendUser')
+  .limit(1)
+  .sort({'createdAt':-1})
+  .then(response => {
+    res.send(response);
+  });
 })
 
-function ch(data){
-  const chatDB = {};
-  for(i of data){
-    Chat.find({roomName : i})
-    .sort({"createdAt":-1})
-    .limit(1)
-    .then((daata)=>{
-      console.log('dddddd',daata);
-    })
-  }
-}
+router.post('/profiles',(req,res)=>{
+  User.find({_id:req.body.mem},(err,data)=>{
+    res.send(data);
+  })
+})
+
 module.exports = router;
