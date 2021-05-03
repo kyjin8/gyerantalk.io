@@ -8,7 +8,7 @@ import '../../MainPage/Main.scss';
 import { checkMember } from '../../../api/actions/chat_action';
 import axios from 'axios';
 
-const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate}) => {
+const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
 
     const dispatch = useDispatch();
     const [roomId, setroomId] = useState(match.params.search);
@@ -21,7 +21,6 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate}) => {
 
     // const roomId = match.params.search;
     const checkMembers = match.params.search.split('_');
-    
     useEffect(() => {
         let body = {
             roomId : roomId,
@@ -30,6 +29,16 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate}) => {
         axios.post('/api/chats/changeMes',body)
 
         setchecktUpdate(!checktUpdate)
+    }, [])
+    useEffect(() => {
+        let body = {
+            roomId : roomId,
+            userId : UserData._id
+        }
+        axios.post('/api/chats/changeMes',body)
+
+        setchecktUpdate(!checktUpdate)
+        
     }, [UserData, Messages])
 
     useEffect(()=>{

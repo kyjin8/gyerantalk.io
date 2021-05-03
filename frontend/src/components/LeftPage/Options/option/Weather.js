@@ -23,18 +23,18 @@ const Weather = ({UserData}) => {
     // 값이 없으면 null 값으로 반환
     if (!resolved) {
         return (
-            <div>뉴스오류</div>
+            <div>날씨오류</div>
         );
     }
 
     // resolved값이 유효할 때
-    const { weather } = resolved.data;
     const open = resolved;
+    const { weather } = resolved.data;
     console.log(open);
     return (
         <div className="news_top">
             <div>
-                {weather[0].main}과{weather[0].description}과<img src={`http://openweathermap.org/img/wn/${weather[0].icon}.png`} /><br/>
+                {weather[0].main}과{weather[0].description}과<img src={`http://openweathermap.org/img/wn/${weather[0].icon}.png`} />
                 {open.data.name}과 
             </div>
         </div>

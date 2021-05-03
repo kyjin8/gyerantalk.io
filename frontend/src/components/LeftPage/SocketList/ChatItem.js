@@ -18,7 +18,7 @@ const ChatItem = ({ chat, UserData, checktUpdate }) => {
     const [MatchUrl, setMatchUrl] = useState("");
     const [Fri, setFri] = useState("");
     const {Messages} = useChat(chat);
-    const [Num, setNum] = useState(0)
+    const [Num, setNum] = useState("");
 
     useEffect(() => {
         let body ={

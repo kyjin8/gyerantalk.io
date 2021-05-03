@@ -112,7 +112,9 @@ router.post('/profiles',(req,res)=>{
 })
 
 router.post('/changeMes',(req,res)=>{
-  Chat.updateMany({roomName:req.body.roomId,user:{$ne:req.body._id}},{$set:{readMessage:true}},(err,data)=>{
+  // user:{$ne:req.body._id}
+  Chat.updateMany({$and : [{roomName:req.body.roomId},{user:req.body._id}]},
+    {$set:{readMessage:true}},(err,data)=>{
     if(err) console.log(err)
     // console.log(data);
   })
