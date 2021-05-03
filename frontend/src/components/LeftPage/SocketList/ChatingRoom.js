@@ -5,27 +5,52 @@ import TextsmsIcon from '@material-ui/icons/Textsms';
 import { useDispatch, useSelector } from 'react-redux';
 import { getChats } from '../../../api/actions/socket_action';
 import '../../MainPage/Main.scss';
+import { checkMember } from '../../../api/actions/chat_action';
 
-const ChatingRoom = ({match, UserData}) => {
+const ChatingRoom = ({match, UserData},props) => {
 
     const dispatch = useDispatch();
+    const [roomId, setroomId] = useState(match.params.search);
+    const [Body, setBody] = useState("");
+    const [changeRoom, setchangeRoom] = useState("")
 
-    const roomId = match.params.search;
+    // const roomId = match.params.search;
+    const checkMembers = match.params.search.split('_');
 
-    // 처음 채팅 가져오기
-    useEffect(() => {
+    useEffect(()=>{
+        let member = {
+            one: checkMembers[0],
+            two: checkMembers[1],
+        };
+        dispatch(checkMember(member))
+            .then(response => {
+                if(match.params.search !== response.payload.url){
+                    window.location.assign(`/main/ChatingRoom/${response.payload.url}`);
+                    
+                }
+                else{
+                    console.log('시발');
+                    setroomId(response.payload.url)
+                    setBody({
+                        roomId: response.payload.url
+                    })
 
-        let body = {
-            roomId : roomId
-        }
-        dispatch(getChats(body))
-        .then(response =>{
-            setStartData(response.payload);
-        })
+                }
+                
+            })
+    },[match])
+    useEffect(()=>{
+        dispatch(getChats(Body))
+            .then(response => {
+                setStartData(response.payload);
+                console.log(response.payload, '두번째');
+            })
+    },[Body])
+    useEffect(()=>{
+        setchangeRoom(roomId);
+    },[roomId])
 
-    }, [])
-
-    const { Messages, sendMessage, setId } = useChat(roomId);
+    const { Messages, sendMessage, setId } = useChat(changeRoom);
     const [newMessage, setnewMessage] = useState("");
     const [Write, setWrite] = useState("")
     
@@ -43,7 +68,7 @@ const ChatingRoom = ({match, UserData}) => {
     }, [newMessage])
 
     const onSubmitMessage = () => {
-        sendMessage(newMessage, UserData._id, roomId, UserData.userName, UserData.image);
+        sendMessage(newMessage, UserData._id, changeRoom, UserData.userName, UserData.image);
         setnewMessage("");
     }
 

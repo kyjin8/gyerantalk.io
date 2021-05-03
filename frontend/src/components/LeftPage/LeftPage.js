@@ -14,6 +14,7 @@ import Internet from './Internet/Internet';
 import ChatingList from './SocketList/ChatingList';
 import ChatingRoom from './SocketList/ChatingRoom';
 import ViewFriend from './ViewFriend/ViewFriend';
+import Options from './Options/Options';
 
 const LeftPage = ({match, UserData, Update, setUpdate}) => {
 // 잠시 ListFriend props에 빼고 밑에 FriendList 페이지에 상속 지움
@@ -34,15 +35,18 @@ const LeftPage = ({match, UserData, Update, setUpdate}) => {
                 <NavLink className="default_active" activeClassName="active" to="/main/Internet">
                     <LanguageIcon style={{ fontSize: 30 }} />
                 </NavLink>
-                <MoreHorizIcon style={{ fontSize: 30 }} />
+                <NavLink className="default_active" activeClassName="active" to="/main/Options">
+                    <MoreHorizIcon style={{ fontSize: 30 }} />
+                </NavLink>
             </div>
             {data === 'FriendList' ? <FriendList UserData={UserData} /> : null}
             {/* {data === 'ChatList' ? <Chat UserData={UserData}/> : null}       */}
-            {data === 'ChatingList' ? <ChatingList UserData={UserData} /> : null}
-            {data === 'ChatingRoom' ? <ChatingRoom UserData={UserData}/> : null}
-            {data === 'UpdateUser' ? <UpdateUser UserData={UserData} Update={Update} setUpdate={setUpdate}/> : null}
-            {data === 'Internet' ? <Internet UserData={UserData}/> : null}
-            {data === 'ViewFriend' ? <ViewFriend UserData={UserData} /> : null}
+            {data === 'ChatingList' && <ChatingList UserData={UserData} /> }
+            {data === 'ChatingRoom' && <ChatingRoom UserData={UserData}/> }
+            {data === 'UpdateUser' && <UpdateUser UserData={UserData} Update={Update} setUpdate={setUpdate}/> }
+            {data === 'Internet' && <Internet UserData={UserData}/> }
+            {data === 'ViewFriend' && <ViewFriend UserData={UserData} /> }
+            {data === 'Options' && <Options UserData={UserData}/> }
         </div>
     )
 }
