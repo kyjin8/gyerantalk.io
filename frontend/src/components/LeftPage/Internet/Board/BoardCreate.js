@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { createPost } from '../../../../api/actions/post_action';
+import { Button } from "@material-ui/core";
+import './Board.scss';
 
 const BoardCreate = ({UserData, match, history}) => {
     const dispatch = useDispatch();
@@ -33,22 +35,22 @@ const BoardCreate = ({UserData, match, history}) => {
     }
 
     return (
-        <div>
+        <div className="wrapper">
             {/* <form action="/posts" method="post"> */}
             <form onSubmit={onSubmitCreate}>
-                <div className="form-group">
+                <div className="form_group">
                     <label htmlFor="title">제목</label>
                     <input type="text" id="title" name="title" value={title} className="title"
                     onChange={onChange}/>
                 </div>
-                <div className="form-group">
+                <div className="form_group">
                     <label htmlFor="body">내용</label>
                     <textarea id="body" name="body" rows="5" value={body} className="body"
                     onChange={onChange}></textarea>
                 </div>
-                <div>
-                    <a className="btn btn-primary" href="/posts">목록으로</a>
-                    <button type="submit" className="btn btn-primary">제출</button>
+                <div className="btn_group">
+                    <Button type="submit" className="btn btn_style">제출</Button>
+                    <a className="btn btn_primary" href="main/Internet/posts"><Button>취소</Button></a>
                 </div>
             </form>
         </div>
