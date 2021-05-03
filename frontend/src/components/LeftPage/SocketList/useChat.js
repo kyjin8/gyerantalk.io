@@ -42,6 +42,7 @@ const useChat = (roomId) => {
             roomName : roomId,
             userName : userName,
             image : image,
+            user : Id
         })
     }
 

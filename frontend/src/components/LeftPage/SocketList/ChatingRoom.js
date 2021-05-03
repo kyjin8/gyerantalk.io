@@ -6,16 +6,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getChats } from '../../../api/actions/socket_action';
 import '../../MainPage/Main.scss';
 import { checkMember } from '../../../api/actions/chat_action';
+import axios from 'axios';
 
-const ChatingRoom = ({match, UserData}) => {
+const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate}) => {
 
     const dispatch = useDispatch();
     const [roomId, setroomId] = useState(match.params.search);
     const [Body, setBody] = useState("");
     const [changeRoom, setchangeRoom] = useState("")
 
+    const { Messages, sendMessage, setId } = useChat(changeRoom);
+    const [newMessage, setnewMessage] = useState("");
+    const [Write, setWrite] = useState("")
+
     // const roomId = match.params.search;
     const checkMembers = match.params.search.split('_');
+    
+    useEffect(() => {
+        let body = {
+            roomId : roomId,
+            userId : UserData._id
+        }
+        axios.post('/api/chats/changeMes',body)
+
+        setchecktUpdate(!checktUpdate)
+    }, [UserData, Messages])
 
     useEffect(()=>{
         let member = {
@@ -47,10 +62,6 @@ const ChatingRoom = ({match, UserData}) => {
     useEffect(()=>{
         setchangeRoom(roomId);
     },[roomId])
-
-    const { Messages, sendMessage, setId } = useChat(changeRoom);
-    const [newMessage, setnewMessage] = useState("");
-    const [Write, setWrite] = useState("")
     
     const [StartData, setStartData] = useState([])
     

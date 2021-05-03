@@ -7,7 +7,7 @@ import AddBaner from './AddBaner';
 import { ListFind } from '../../../api/actions/socket_action';
 import ChatItem from './ChatItem';
 
-const ChatingList = ({UserData}) => {
+const ChatingList = ({UserData, checktUpdate, setchecktUpdate}) => {
 
     const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ const ChatingList = ({UserData}) => {
     
     const renderChat = () => 
         ListRoom.map( (chat)=>(
-            <ChatItem key={chat} chat={chat} UserData={UserData}/>
+            <ChatItem key={chat} chat={chat} UserData={UserData} checktUpdate={checktUpdate}/>
         ))
 
     return (
