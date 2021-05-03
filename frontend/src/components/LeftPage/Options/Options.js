@@ -75,7 +75,11 @@ const Options = ({UserData}) => {
             </div>
             
             <Weather UserData={UserData}/>
-            <button style={{marginLeft:'10px'}} onClick={onClickHandler}>
+            <div className="egg_cont">
+                <img className="egg_box" src="/gyeran.png" /><br/>
+                항상 계란톡을 이용해주셔서 감사합니다.
+            </div>
+            <button className="egg_log" style={{marginLeft:'10px'}} onClick={onClickHandler}>
                     로그아웃
             </button>
         </div>

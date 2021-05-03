@@ -164,7 +164,7 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
                     onChange={onDoingTyping}
                     placeholder="메시지를 작성하세요"
                 />
-                <button onClick={onSubmitMessage} className="send-message-button">
+                <button onClick={onSubmitMessage} className="send-message-button" >
                     Send
                 </button>
             </div>

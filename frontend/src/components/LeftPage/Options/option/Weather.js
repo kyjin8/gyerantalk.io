@@ -30,12 +30,21 @@ const Weather = ({UserData}) => {
     // resolved값이 유효할 때
     const open = resolved;
     const { weather } = resolved.data;
-    console.log(open);
+    console.log(resolved);
     return (
         <div className="news_top">
-            <div>
-                {weather[0].main}과{weather[0].description}과<img src={`http://openweathermap.org/img/wn/${weather[0].icon}.png`} />
-                {open.data.name}과 
+            <div className="news_head">
+                <img src={`http://openweathermap.org/img/wn/${weather[0].icon}.png`} />
+                <div className="news_weather">
+                    <ul>
+                        <li>위치 : {resolved.data.name}</li>
+                        <li>날씨 : {weather[0].main}</li>
+                        <li>풍속 : {resolved.data.wind.speed}</li>
+                    </ul>
+                    
+                    
+                    
+                </div>
             </div>
         </div>
     )
