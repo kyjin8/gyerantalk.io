@@ -23,6 +23,7 @@ const ChatItem = ({ chat, UserData }) => {
     const [Mes, setMes] = useState("");
     const [MatchUrl, setMatchUrl] = useState("");
     const [Fri, setFri] = useState("");
+    const {Messages} = useChat(chat);
 
     useEffect(() => {
         let body ={
@@ -50,7 +51,7 @@ const ChatItem = ({ chat, UserData }) => {
                 })
             }
         })
-    }, [ UserData, chat ])
+    }, [ UserData, chat, Messages ])
 
     return (
         <div className="talking">

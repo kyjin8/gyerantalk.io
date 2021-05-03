@@ -79,7 +79,7 @@ const ChatingRoom = ({match, UserData}) => {
                         {
                             StartData.map((data)=>(
                                 data.sendUser._id === UserData._id ?
-                                <div className="talk_box">
+                                <div key={data.message}className="talk_box">
                                     <div className="say">
                                         <span className="span_name">{data.sendUser.userName}</span>
                                         <span className="span_mess">{data.message}</span>
