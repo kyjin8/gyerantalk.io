@@ -6,8 +6,9 @@ import moment from 'moment';
 import { FriendProfile } from '../../../api/actions/socket_action';
 import { withRouter } from 'react-router-dom';
 import '../../MainPage/Main.scss';
+import useChat from './useChat';
 
-const ChatItem = ({ chat, UserData},props) => {
+const ChatItem = ({ chat, UserData }) => {
     
     // const state = useSelector(state =>(
     //     {
@@ -50,9 +51,6 @@ const ChatItem = ({ chat, UserData},props) => {
             }
         })
     }, [ UserData, chat ])
-    useEffect(() => {
-        console.log(Mes)
-    }, [Fri])
 
     return (
         <div className="talking">

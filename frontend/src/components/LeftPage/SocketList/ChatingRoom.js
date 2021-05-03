@@ -7,7 +7,7 @@ import { getChats } from '../../../api/actions/socket_action';
 import '../../MainPage/Main.scss';
 import { checkMember } from '../../../api/actions/chat_action';
 
-const ChatingRoom = ({match, UserData},props) => {
+const ChatingRoom = ({match, UserData}) => {
 
     const dispatch = useDispatch();
     const [roomId, setroomId] = useState(match.params.search);
@@ -29,7 +29,6 @@ const ChatingRoom = ({match, UserData},props) => {
                     
                 }
                 else{
-                    console.log('시발');
                     setroomId(response.payload.url)
                     setBody({
                         roomId: response.payload.url
@@ -43,7 +42,6 @@ const ChatingRoom = ({match, UserData},props) => {
         dispatch(getChats(Body))
             .then(response => {
                 setStartData(response.payload);
-                console.log(response.payload, '두번째');
             })
     },[Body])
     useEffect(()=>{
