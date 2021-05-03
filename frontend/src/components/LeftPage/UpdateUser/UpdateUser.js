@@ -28,6 +28,7 @@ const UpdateUser = ({UserData, history, setUpdate, Update}) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        
         const formData = new FormData();
         console.log('온체인지파일',e.target.nick.value, e.target.message.value, e.target.profile_img.files[0])
         formData.append('userId', UserData.userId)
@@ -56,10 +57,6 @@ const UpdateUser = ({UserData, history, setUpdate, Update}) => {
         color : '#fff',
         backgroundColor : '#845460'
     }
-    const imgStyle = {
-        width: '100%',
-        overFit: 'cover',
-    }
 
     return (
         <div className="change_update">
@@ -67,7 +64,7 @@ const UpdateUser = ({UserData, history, setUpdate, Update}) => {
             <div className="form_change">
                 <form onSubmit={onSubmit} encType="multipart/form-data">
                     <label className="profile_img_wrapper" htmlFor="profile_img">
-                        <img style={imgStyle} src={image} />
+                        <img src={image} />
                     </label>
                     <input type="file" name='profile_img' accept='image/jpg, image/png, image/jpeg, image/gif' multiple={false} />
                     <input className="nick" type="text" value={nick} onChange={onChange} name="nick"/>
