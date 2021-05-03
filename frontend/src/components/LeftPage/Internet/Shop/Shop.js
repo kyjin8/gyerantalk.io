@@ -69,7 +69,7 @@ const Shop = ({location}) => {
                     </Link>
                 ))
                 :
-                <ShopItem productBox={dataBase[query.item]} querynum={query.item}/>
+                <ShopItem key={query.item} productBox={dataBase[query.item]} querynum={query.item}/>
                 }
             </div>
         </div>

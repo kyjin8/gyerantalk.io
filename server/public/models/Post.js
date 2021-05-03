@@ -9,6 +9,12 @@ const postSchema = mongoose.Schema({
         type: String,
         require: true,
     },
+    writerData: {
+        // type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types,
+        ref: 'Post',
+        require: true,
+    },
     createdAt: {
         type: Date,
         default: Date.now(),

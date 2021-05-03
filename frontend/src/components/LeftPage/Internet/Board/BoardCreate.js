@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from "react-router-dom";
-import { createPosts } from '../../../../api/actions/post_action';
+import { createPost } from '../../../../api/actions/post_action';
 
-const BoardCU = ({UserData, match, history}) => {
+const BoardCreate = ({UserData, match, history}) => {
     const dispatch = useDispatch();
     const selection = match.params.select;
 
@@ -11,6 +11,7 @@ const BoardCU = ({UserData, match, history}) => {
         title: '',
         body: '',
     });
+    
     const {title, body} = inputs
 
     const onChange = (e) => {
@@ -21,11 +22,11 @@ const BoardCU = ({UserData, match, history}) => {
         }
         setInputs(nextInputs)
     }
-    const onSubmit = (e) => {
+    const onSubmitCreate = (e) => {
         e.preventDefault();
-        const Writer = UserData.userNickName;
+        const writerData = UserData;
         // console.log('submit', title, body, UserData.userNickName);
-        dispatch(createPosts({title, body}))
+        dispatch(createPost({title, body, writerData}))
         .then(res => {
             history.push('/main/Internet/posts');
         })
@@ -34,7 +35,7 @@ const BoardCU = ({UserData, match, history}) => {
     return (
         <div>
             {/* <form action="/posts" method="post"> */}
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmitCreate}>
                 <div className="form-group">
                     <label htmlFor="title">제목</label>
                     <input type="text" id="title" name="title" value={title} className="title"
@@ -50,11 +51,8 @@ const BoardCU = ({UserData, match, history}) => {
                     <button type="submit" className="btn btn-primary">제출</button>
                 </div>
             </form>
-            {/* BoardCU */}
-            {/* {selection === 'create' ? }
-            {selection === 'update' ? } */}
         </div>
     )
 }
 
-export default withRouter(BoardCU)
+export default withRouter(BoardCreate)

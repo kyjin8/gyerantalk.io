@@ -16,16 +16,11 @@ router.get('/', function(req, res){
     });
   });
   
-  // New
-  router.get('/create', function(req, res){
-    res.render('posts/create');
-  });
-  
   // create
   router.post('/', function(req, res){
     console.log('router body', req.body);
     Post.create(req.body, function(err, post){
-      if(err) return res.json(err);
+      if(err) return res.json({ success : false, err});
       // res.redirect('/posts');
       return res.status(200).json({
         success : true,
@@ -33,28 +28,37 @@ router.get('/', function(req, res){
     });
   });
   
-  // show
+  // view
   router.get('/:id', function(req, res){
     Post.findOne({_id:req.params.id}, function(err, post){
-      if(err) return res.json(err);
-      res.render('posts/show', {post:post});
+      if(err) return res.json({ success : false, err});
+      return res.status(200).json({
+        success : true,
+        post : post,
+      })
     });
   });
   
   // edit
-  router.get('/:id/edit', function(req, res){
+  router.get('/:id/update', function(req, res){
     Post.findOne({_id:req.params.id}, function(err, post){
       if(err) return res.json(err);
-      res.render('posts/edit', {post:post});
+      return res.status(200).json({
+        success : true,
+        post : post,
+      })
     });
   });
   
   // update
-  router.put('/:id', function(req, res){
+  router.post('/:id', function(req, res){
     req.body.updatedAt = Date.now();
     Post.findOneAndUpdate({_id:req.params.id}, req.body, function(err, post){
       if(err) return res.json(err);
-      res.redirect("/posts/"+req.params.id);
+      return res.status(200).json({
+        success : true,
+        post : post,
+      })
     });
   });
   
@@ -62,7 +66,9 @@ router.get('/', function(req, res){
   router.delete('/:id', function(req, res){
     Post.deleteOne({_id:req.params.id}, function(err){
       if(err) return res.json(err);
-      res.redirect('/posts');
+      return res.status(200).json({
+        success : true,
+      })
     });
   });
   
