@@ -10,11 +10,11 @@ module.exports = function(app) {
         changeOrigin: true,
       })
     );
-    app.use(
-      '/kapi', 
-      createProxyMiddleware({
-        target: 'https://kapi.kakao.com',
-        changeOrigin: true,
-      })
-    )
+    // app.use(
+    //   '/main/Internet/v1', 
+    //   createProxyMiddleware({
+    //     target: 'https://kapi.kakao.com',
+    //     changeOrigin: true,
+    //   })
+    // )
   };
