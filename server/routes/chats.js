@@ -32,9 +32,25 @@ router.use(express.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:false}));
 
+router.post('/checkMember', async(req, res)=>{
+  const ones = req.body.one+'_'+req.body.two;
+  const twos = req.body.two+'_'+req.body.one;
+  await Chat.find({roomName : ones},(err,chats)=>{
+    console.log(chats,'ssssssssssssssss');
+    if(chats.length !== 0) return res.json({url : ones});
+    Chat.find({roomName : twos},(err,cha)=>{
+      console.log('twos 체크 : ',cha)
+      if(cha.length !== 0) return res.json({url : twos});
+      else res.json({url : ones});
+    })
+  })
+  
+})
+
 /* GET users listing. */
 router.post('/getChat' , async(req, res) => {
     console.log('디스패치');
+    console.log(req.body, '해당방번호')
     await Chat.find({roomName : req.body.roomId})
     .populate('sendUser')
     .exec((err, chats) => {
@@ -72,6 +88,30 @@ router.post('/friend',(req,res)=>{
       message : user.message,
     }
     res.send(friend_user);
+  })
+})
+
+router.post('/ListShow',(req,res)=>{
+  const data1 = req.body._id;
+  Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
+  .distinct('roomName',(err,db)=>{
+    res.send(db);
+  })
+})
+
+router.post('/textMessage',(req,res)=>{
+  Chat.find({roomName : req.body.chat})
+  .populate('sendUser')
+  .limit(1)
+  .sort({'createdAt':-1})
+  .then(response => {
+    res.send(response);
+  });
+})
+
+router.post('/profiles',(req,res)=>{
+  User.find({_id:req.body.mem},(err,data)=>{
+    res.send(data);
   })
 })
 

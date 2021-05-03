@@ -363,6 +363,8 @@
                 }
             }
             .home-container{
+                overflow: scroll;
+                height: 500px;
                 .chat_titles{
                     display: flex;
                     align-items: center;
@@ -379,6 +381,39 @@
                     width : 280px;
                     height: 60px;
                     border-bottom: 2px solid rgba(170, 170, 170, 0.829);
+                }
+                .talking{
+                    img{
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 100%;
+                    }
+                    .talk_site{
+                        margin-top: 2px;
+                        border-bottom: 2px solid rgba(170, 170, 170, 0.829);
+                        display: flex;
+                        align-items: center;
+                        font-weight: bolder;
+                        padding: 2px;
+                        .talk_pro{
+                            font-size: 14px;
+                            width: 145px;
+                            .talk_message{
+                                color : #7c7c7c;
+                            }
+                            margin-left:10px;
+                        }
+                        .talk_div{
+                            display: flex;
+                            align-items: flex-start;
+                            height: 62px;
+                            .talk_time{
+                                margin-top: 4px;
+                                color: #7c7c7c;
+                                font-size: 10px;
+                            }
+                        }
+                    }
                 }
             }
             .friend_profile{
@@ -402,12 +437,15 @@
                     font-weight: bolder;
                 }
                 svg{
+                    border : 3px solid beige;
+                    border-radius: 100%;
                     font-size: 80px;
                     color:#f6bd63;
                 }
                 svg:hover{
                     color: #f3ad3d;
                     cursor: pointer;
+                    border: 3px solid #f3ad3d;
                 }
             }
         }

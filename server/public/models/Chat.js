@@ -21,6 +21,9 @@ const chatSchema = mongoose.Schema({
         type : Boolean,
         default : false,
     },
+    // anotherUser : {
+    //     type : String,
+    // },
 },{timestamps:true});
 
 // 유저 스키마 모델 만들기

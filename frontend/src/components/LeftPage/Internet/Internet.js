@@ -9,8 +9,8 @@ const Internet = ({match, Userdata}) => {
     return (
         <div>
             <IntTitle />
-            {data === 'News' ? <News Userdata={Userdata}/> : null}
-            {data === 'Shop' ? <Shop Userdata={Userdata}/> : null}
+            {data === 'News' && <News Userdata={Userdata}/> }
+            {data === 'Shop' && <Shop Userdata={Userdata}/> }
         </div>
     )
 }
