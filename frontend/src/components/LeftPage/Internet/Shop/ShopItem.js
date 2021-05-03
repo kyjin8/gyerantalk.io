@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+// import { payReady } from '../../../../api/actions/pay_action';
 
 const ShopItem = ({productBox, querynum}) => {
+  const dispatch = useDispatch();
     const [state, setState] = useState({
       // 응답에서 가져올 값들
       next_redirect_pc_url: "",
@@ -21,10 +24,6 @@ const ShopItem = ({productBox, querynum}) => {
         approval_url: "http://localhost:3000/payment/approve",
         fail_url: "http://localhost:3000/payment/fail",
         cancel_url: "http://localhost:3000/payment/cancel",
-        // approval_url: `http://localhost:3000/main/Internet/Shop?item=${querynum}`,
-        // approval_url: "http://localhost:3000",
-        // fail_url: "http://localhost:3000",
-        // cancel_url: "http://localhost:3000",
       },
     });
 
@@ -58,11 +57,7 @@ const ShopItem = ({productBox, querynum}) => {
     //////여기까지 카카오페이////
 
     const onClick = (e) => {
-        console.log('asdf');
-        // axios.post('/kapi/payment/ready')
         axios({
-          // 프록시에 카카오 도메인을 설정했으므로 결제 준비 url만 주자
-        //   url: "https://kapi.kakao.com/kapi/payment/ready",
           url: "https://kapi.kakao.com/v1/payment/ready",
           // 결제 준비 API는 POST 메소드라고 한다.
           method: "POST",
@@ -70,6 +65,7 @@ const ShopItem = ({productBox, querynum}) => {
             // 카카오 developers에 등록한 admin키를 헤더에 줘야 한다.
             Authorization: "KakaoAK ca4cd7847b43dd1a89e836e3ce896daf",
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+            // "Access-Control-Allow-Origin": "http://localhost:3000",
           },
           // 설정한 매개변수들
           params,
@@ -84,6 +80,17 @@ const ShopItem = ({productBox, querynum}) => {
           // 응답 data로 state 갱신
           setState({ next_redirect_pc_url, tid });
         });
+
+        //디스패치를 쓴다면
+        //dispatch(payReady(state, state.params))
+        // .then((response)=>{
+        //   const {
+        //     data: { next_redirect_pc_url, tid }
+        //   } = response;
+        //   console.log(next_redirect_pc_url);
+        //   console.log(tid);
+        //   setState({ next_redirect_pc_url, tid });
+        // })
     }
 
     console.log('kakao', next_redirect_pc_url);

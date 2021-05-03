@@ -1,9 +1,9 @@
-var express = require('express');
+const express = require('express');
 const { User } = require('../public/models/Users');
 const { auth } = require('../public/middleware/auth');
 const bodyParser = require('body-parser');
 const { Friend } = require('../public/models/Friends');
-var router = express.Router();
+const router = express.Router();
 
 //////////////////////
 const multer = require('multer')

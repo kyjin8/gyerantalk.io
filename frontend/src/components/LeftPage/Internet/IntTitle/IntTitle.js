@@ -11,7 +11,9 @@ const IntTitle = () => {
                 <div>쇼핑</div>
             </NavLink>
             <div>Egg TV</div>
-            <div>Egg Board</div>
+            <NavLink className="default_active" activeClassName="active" to="/main/Internet/posts">
+                <div>Egg Board</div>
+            </NavLink>
         </div>
     )
 }
