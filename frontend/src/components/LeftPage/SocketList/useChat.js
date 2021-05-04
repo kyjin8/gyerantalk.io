@@ -5,7 +5,7 @@ import socketIOClient from 'socket.io-client';
 const NEW_CHAT_MESSAGE_EVENT = 'newChatMessage';
 const SOCKET_SERVER_URL = "http://localhost:4000";
 
-const useChat = (roomId) => {
+const useChat = (roomId, checktUpdate, setchecktUpdate) => {
 
     const [Messages, setMessages] = useState([]);
     const socketRef = useRef();
@@ -24,6 +24,7 @@ const useChat = (roomId) => {
                 ownedByCurrentUser : message.senderId === socketRef.current.id,
             };
             setMessages((messages)=>[...messages, incomingMessage]);
+            setchecktUpdate(!checktUpdate);
         });
 
         // 소켓 연결이 끝나면 부순다
@@ -34,7 +35,7 @@ const useChat = (roomId) => {
     }, [roomId])
 
     // 같은 방에 있는 유저들에게 메세지를 전송한다
-    const sendMessage = (messageBody, Id, roomId, userName, image, another) => {
+    const sendMessage = (messageBody, Id, roomId, userName, image, anoter) => {
         socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
             message: messageBody,
             senderId: socketRef.current.id,
@@ -43,7 +44,7 @@ const useChat = (roomId) => {
             userName : userName,
             image : image,
             user : Id,
-            toUser : another,
+            toUser : anoter,
         })
     }
 
