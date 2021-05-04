@@ -58,7 +58,7 @@ const ShopItem = ({productBox, querynum}) => {
 
     const onClick = (e) => {
         axios({
-          url: "https://kapi.kakao.com/v1/payment/ready",
+          url: "/v1/payment/ready",
           // 결제 준비 API는 POST 메소드라고 한다.
           method: "POST",
           headers: {
@@ -70,7 +70,7 @@ const ShopItem = ({productBox, querynum}) => {
           // 설정한 매개변수들
           params,
         }).then((response) => {
-            axios(response.next_redirect_pc_url)
+            // axios(response.next_redirect_pc_url)
           // 응답에서 필요한 data만 뽑는다.
           const {
             data: { next_redirect_pc_url, tid }

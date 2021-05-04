@@ -31,7 +31,7 @@ const BoardList = ({match, UserData}) => {
                     <Link key={post._id} className="post_box" to={`/main/Internet/posts/${post._id}`}>
                         <div className="title_row" >
                             <div className="title_text">{post.title}</div>
-                            <img className="list_profile_img" src={post.writerData.image}/>
+                            <div className="img_wrapper"><img className="list_profile_img" src={post.writerData.image}/></div>
                         </div>
                         {/* <div className="body">{post.body}</div> */}
                     </Link>
