@@ -124,7 +124,17 @@
                     font-size: 30px;
                     color : #f6bd63;
                     margin-left: 50px;
+                    cursor: pointer;
                 }
+            }
+            .error_me{
+                padding: 3% 5%;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                background-color: #ffe194d1;
+                color: #404040;
+                height: 66px;
             }
             .change_update{
                 height: 520px;
@@ -429,6 +439,7 @@
                         margin-top: 2px;
                         border-bottom: 1px solid rgba(170, 170, 170, 0.829);
                         display: flex;
+                        justify-content: space-evenly;
                         align-items: center;
                         font-weight: bolder;
                         padding: 2px;
@@ -441,13 +452,23 @@
                             margin-left:10px;
                         }
                         .talk_div{
-                            display: flex;
-                            align-items: flex-start;
                             height: 62px;
                             .talk_time{
                                 margin-top: 4px;
                                 color: #7c7c7c;
                                 font-size: 10px;
+                            }
+                            .talk_count{
+                                font-size: 13px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 20px;
+                                background-color: #ff1515;
+                                color: #fff;
+                                margin-top: 10px;
+                                border-radius: 50%;
+                                margin-left: 16px;
                             }
                         }
                     }

@@ -83,10 +83,16 @@ const ChatItem = ({ chat, UserData, checktUpdate, setchecktUpdate }) => {
                             </span>
                         </div>
                         <div className="talk_div">
-                        <div className="talk_time">
-                            {moment(Mes.date).format('A h:mm')}
-                        </div>
-                        {Num}
+                            <div className="talk_time">
+                                {moment(Mes.date).format('A h:mm')}
+                            </div>
+                            <div className="talk_count">
+                                {
+                                    Num !== 0 ?
+                                    Num
+                                    : <></>
+                                    }
+                            </div>
                         </div>
                     </div>
                 </Link>

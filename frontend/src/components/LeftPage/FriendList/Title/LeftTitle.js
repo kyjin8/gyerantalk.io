@@ -35,7 +35,7 @@ const LeftTitle = React.memo(({
             <div className="search_friend">
                 {Search ? <div className="input_box"><input type="text" placeholder="친구검색" value={InputText} ref={inputEl} onChange={onInputTextHandler} /><SearchIcon className="search_icon" /></div> : null}
                 {Friend || FriendClick ? <div className="input_box"><input type="text" placeholder="친구추가" value={InputText2} ref={inputEl2} onChange={onInputTextHandler2}/><SearchIcon className="search_icon" /></div> : null}
-                <SearchOutlined onClick={onToggle}/>
+                {/* <SearchOutlined onClick={onToggle}/> */}
                 <UserAddOutlined onClick={onToggle2} className="add_friend"/>
             </div>
         </div>
