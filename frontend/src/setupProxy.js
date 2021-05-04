@@ -16,5 +16,12 @@ module.exports = function(app) {
         target: 'https://kapi.kakao.com',
         changeOrigin: true,
       })
+    );
+    app.use(
+      '/v1/payment/approve', 
+      createProxyMiddleware({
+        target: 'https://kapi.kakao.com',
+        changeOrigin: true,
+      })
     )
   };
