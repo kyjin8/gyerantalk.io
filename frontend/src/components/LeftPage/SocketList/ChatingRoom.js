@@ -6,16 +6,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getChats } from '../../../api/actions/socket_action';
 import '../../MainPage/Main.scss';
 import { checkMember } from '../../../api/actions/chat_action';
+import axios from 'axios';
 
-const ChatingRoom = ({match, UserData}) => {
+const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
 
     const dispatch = useDispatch();
     const [roomId, setroomId] = useState(match.params.search);
     const [Body, setBody] = useState("");
     const [changeRoom, setchangeRoom] = useState("")
 
+    const { Messages, sendMessage, setId } = useChat(changeRoom);
+    const [newMessage, setnewMessage] = useState("");
+    const [Write, setWrite] = useState("")
+
     // const roomId = match.params.search;
     const checkMembers = match.params.search.split('_');
+    useEffect(() => {
+        let body = {
+            roomId : roomId,
+            userId : UserData._id
+        }
+        axios.post('/api/chats/changeMes',body)
+
+        setchecktUpdate(!checktUpdate)
+    }, [])
+    useEffect(() => {
+        let body = {
+            roomId : roomId,
+            userId : UserData._id
+        }
+        axios.post('/api/chats/changeMes',body)
+
+        setchecktUpdate(!checktUpdate)
+        
+    }, [UserData, Messages])
 
     useEffect(()=>{
         let member = {
@@ -47,10 +71,6 @@ const ChatingRoom = ({match, UserData}) => {
     useEffect(()=>{
         setchangeRoom(roomId);
     },[roomId])
-
-    const { Messages, sendMessage, setId } = useChat(changeRoom);
-    const [newMessage, setnewMessage] = useState("");
-    const [Write, setWrite] = useState("")
     
     const [StartData, setStartData] = useState([])
     
@@ -79,7 +99,7 @@ const ChatingRoom = ({match, UserData}) => {
                         {
                             StartData.map((data)=>(
                                 data.sendUser._id === UserData._id ?
-                                <div className="talk_box">
+                                <div key={data.message}className="talk_box">
                                     <div className="say">
                                         <span className="span_name">{data.sendUser.userName}</span>
                                         <span className="span_mess">{data.message}</span>
@@ -144,7 +164,7 @@ const ChatingRoom = ({match, UserData}) => {
                     onChange={onDoingTyping}
                     placeholder="메시지를 작성하세요"
                 />
-                <button onClick={onSubmitMessage} className="send-message-button">
+                <button onClick={onSubmitMessage} className="send-message-button" >
                     Send
                 </button>
             </div>

@@ -21,9 +21,9 @@ const ShopItem = ({productBox, querynum}) => {
         // total_amount: productBox.productPrice,
         total_amount: 30000,
         tax_free_amount: 0,
-        approval_url: "http://localhost:3000/payment/approve",
-        fail_url: "http://localhost:3000/payment/fail",
-        cancel_url: "http://localhost:3000/payment/cancel",
+        approval_url: "http://localhost:3000/main/Options",
+        fail_url: "http://localhost:3000/main/Internet/Shop/Fail",
+        cancel_url: "http://localhost:3000/main/Internet/Shop",
       },
     });
 
@@ -63,7 +63,7 @@ const ShopItem = ({productBox, querynum}) => {
           method: "POST",
           headers: {
             // 카카오 developers에 등록한 admin키를 헤더에 줘야 한다.
-            Authorization: "KakaoAK ca4cd7847b43dd1a89e836e3ce896daf",
+            Authorization: "KakaoAK 2dee8d3f161198cdc441fa1f152f7cac",
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
             // "Access-Control-Allow-Origin": "http://localhost:3000",
           },

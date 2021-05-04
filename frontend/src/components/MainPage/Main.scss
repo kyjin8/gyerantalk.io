@@ -293,11 +293,13 @@
                     padding: 5px;
                     height: 470px;
                     overflow: scroll;
-                    background-color: #9c3d54;
+                    background-color: #ffc5aa;
+                    font-weight: bolder;
                     .chat_box{
                         ol{
                             padding:0;
                             .talk_box{
+                                margin-top: 3px;
                                 display: flex;
                                 justify-content: flex-end;
                                 // width: 280px;
@@ -317,13 +319,14 @@
                                         font-size: 14px;
                                     }
                                     .span_mess{
-                                        background-color: #f6bd63;
+                                        background-color: #ffdcc8;
                                         border-radius: 10px 10px;
                                         padding: 5px;
                                     }
                                 }
                             }
                             .talk_box1{
+                                margin-top: 3px;
                                 display: flex;
                                 justify-content: flex-start;
                                 // width: 280px;
@@ -343,7 +346,7 @@
                                         font-size: 14px;
                                     }
                                     .span_mess1{
-                                        background-color: #f6bd63;
+                                        background-color: #ffcd94;
                                         border-radius: 10px 10px;
                                         padding: 5px;
                                     }
@@ -457,6 +460,86 @@
                     cursor: pointer;
                     border: 3px solid #f3ad3d;
                 }
+            }
+            .option_container{
+                height: 500px;
+                width: 100%;
+                .option_box{
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    text-align: center;
+                    width: 100%;
+                    border-bottom : 2px solid rgba(182, 182, 182, 0.521);
+                    .option_list1{
+                        ul{
+                            margin: 0;
+                            padding: 0;
+                            padding: 10px;
+                            border-radius: 20px 20px;
+                            li{
+                                width: 50px;
+                                list-style: none;
+                            }
+                        }
+                        display: flex;
+                        justify-content: space-around;
+                        margin-bottom: 20px;
+                    }
+                    .option_list2{
+                        ul{
+                            margin: 0;
+                            padding: 0;
+                            padding: 10px;
+                            border-radius: 20px 20px;
+                            li{
+                                width: 50px;
+                                list-style: none;
+                            }
+                        }
+                        display: flex;
+                        justify-content: space-around;
+                        
+                    }
+                }
+                .news_top{
+                    width: 100%;
+                    border-bottom: 2px solid rgba(182, 182, 182, 0.521);
+                    height: 80px;
+                    .news_head{
+                        height: 100%;
+                        display: flex;
+                        justify-content: space-around;
+                        .news_weather{
+                            ul{
+                                font-weight: bolder;
+                                margin : 0;
+                                padding : 10px;
+                                list-style: none;
+                            }
+                        }
+                    }
+                }
+                .egg_cont{
+                    width: 100%;
+                    text-align: center;
+                    font-weight: bolder;
+                    font-size: 13px;
+                    text-shadow: 1px 1px #7c7c7c;
+                    .egg_box{
+                        width: 160px;
+                        height: 160px;
+                    }
+                }
+                .egg_log{
+                    width: 90%;
+                    margin: 0 auto;
+                    border: 1px solid #7c7c7c;
+                    border-radius: 10px 10px;
+                    background-color: #f6bd63;
+                    color: #fff;
+                    margin-top: 5px;
+                }
+                
             }
         }
         .right_side{
