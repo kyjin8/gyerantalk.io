@@ -9,6 +9,7 @@ import '../../MainPage/Main.scss';
 import useChat from './useChat';
 import axios from 'axios';
 import { CountHow } from '../../../api/actions/socket_action';
+import 'moment/locale/ko'; 
 
 const ChatItem = ({ chat, UserData, checktUpdate, setchecktUpdate }) => {
 
@@ -17,7 +18,7 @@ const ChatItem = ({ chat, UserData, checktUpdate, setchecktUpdate }) => {
     const [Mes, setMes] = useState("");
     const [MatchUrl, setMatchUrl] = useState("");
     const [Fri, setFri] = useState("");
-    const {Messages} = useChat(chat);
+    const {Messages} = useChat(chat, checktUpdate, setchecktUpdate);
     const [Num, setNum] = useState("");
 
     useEffect(() => {
@@ -83,7 +84,7 @@ const ChatItem = ({ chat, UserData, checktUpdate, setchecktUpdate }) => {
                         </div>
                         <div className="talk_div">
                         <div className="talk_time">
-                            {moment(Mes.createdAt).format('A HH:MM분')}
+                            {moment(Mes.date).format('A h:mm')}
                         </div>
                         {Num}
                         </div>

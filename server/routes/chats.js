@@ -90,6 +90,7 @@ router.post('/friend',(req,res)=>{
 router.post('/ListShow',(req,res)=>{
   const data1 = req.body._id;
   Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
+  .sort({'date':-1})
   .distinct('roomName',(err,db)=>{
     res.send(db);
   })
@@ -99,7 +100,7 @@ router.post('/textMessage',(req,res)=>{
   Chat.find({roomName : req.body.chat})
   .populate('sendUser')
   .limit(1)
-  .sort({'createdAt':-1})
+  .sort({'date':-1})
   .then(response => {
     res.send(response);
   });
@@ -112,7 +113,7 @@ router.post('/profiles',(req,res)=>{
 })
 
 router.post('/changeMes',(req,res)=>{
-  Chat.updateMany({$and : [{roomName:req.body.roomId,readMessage:false,user:{$ne : req.body._id}}]},
+  Chat.updateMany({$and : [{roomName:req.body.roomId,user:{$ne : req.body.userId},toUser:req.body.userId}]},
     {$set:{readMessage:true}},(err,data)=>{
     if(err) console.log(err)
   })
@@ -130,7 +131,7 @@ router.post('/countMessage',(req,res)=>{
 })
 
 router.post('/total',(req,res)=>{
-  Chat.find({$and : [{user:{$ne:req.body.userId},readMessage:false}]},(err,data)=>{
+  Chat.find({$and : [{user:{$ne:req.body.userId},readMessage:false,$or : [{roomName : {$regex : "^"+req.body.userId}}, {roomName : {$regex : req.body.userId+"$"}}]}]},(err,data)=>{
     console.log('전체채팅 개수 : ',data.length);
     let body = {
       number : data.length
