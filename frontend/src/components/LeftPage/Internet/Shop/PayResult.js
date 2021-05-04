@@ -4,8 +4,7 @@ import { Button } from "@material-ui/core";
 
 import axios from "axios";
 
-const PayResult= ({location}) => {
-    console.log('location search', location.search);
+const PayResult= ({location, match}) => {
     const [search, setSearch] = useState('');
     const [state, setState] = useState({
         params: {
@@ -19,6 +18,7 @@ const PayResult= ({location}) => {
         },
     });
     
+    const payresult = match.params.select;
     // url에 붙어서 온 pg_token을 결제 API에 줄 params에 할당
     // params.pg_token = search.split("=")[1];
     
@@ -27,26 +27,29 @@ const PayResult= ({location}) => {
         const { params } = state;
         console.log('params', params);
         console.log('result state', state);
-        
-        axios({
-          url: "/v1/payment/approve",
-          method: "POST",
-          headers: {
-            Authorization: "KakaoAK ca4cd7847b43dd1a89e836e3ce896daf",
-            "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-          },
-          params,
-        }).then((response) => {
-          // 결제 승인에 대한 응답 출력
-          console.log(response);
-        });
+        console.log('aa', state.params.pg_token);
+        if(state.params.pg_token !== undefined){
+            axios({
+            url: "/v1/payment/approve",
+            method: "POST",
+            headers: {
+                Authorization: "KakaoAK ca4cd7847b43dd1a89e836e3ce896daf",
+                "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+            },
+            params,
+            }).then((response) => {
+            // 결제 승인에 대한 응답 출력
+            console.log(response);
+            });
+        }
     }, []);
-
 
 
     return (
       <div style={{textAlign: 'center'}}>
-        <h4>결제에 성공하였습니다.</h4>
+        {payresult === 'success' && <h4>결제에 성공하였습니다.</h4>}
+        {payresult === 'fail' && <h4>결제에 실패하였습니다.</h4>}
+        {payresult === 'cancel' && <h4>결제를 취소하였습니다.</h4>}        
         <Link to="/main/Internet/Shop"><Button>쇼핑으로 돌아가기</Button></Link>
       </div>
     );

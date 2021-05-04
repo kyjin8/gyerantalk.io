@@ -28,7 +28,7 @@ const AddBaner = () => {
         console.log(randomNum);
     }, [])
     return (
-        <div classname="big_ad">
+        <div className="big_ad">
             <img className="ad_ver" src={Image} />
         </div>
     )

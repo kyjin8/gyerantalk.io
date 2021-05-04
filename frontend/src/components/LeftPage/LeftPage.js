@@ -52,10 +52,10 @@ const LeftPage = ({match, UserData, Update, setUpdate}) => {
                 {/* <NavLink className="default_active" activeClassName="active" to="/main/ChatList">
                     <QuestionAnswerRoundedIcon style={{ fontSize: 30 }} />
                 </NavLink> */}
-                <NavLink className="default_active" activeClassName="active" to="/main/ChatingList">
+                <NavLink className="default_active" activeClassName="active" to="/main/ChatingList" style={{position: 'relative'}}>
                     <QuestionAnswerRoundedIcon style={{ fontSize: 30 }} />
                     {MesCount !== 0 ?
-                        <div>{MesCount}</div>
+                        <div className="unread_cnt">{MesCount}</div>
                         :
                         <></>
                     }

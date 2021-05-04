@@ -40,9 +40,22 @@
                     color : #310b0b;
                     }
                 }
+                .unread_cnt{
+                    position: absolute;
+                    top: 50%;
+                    right: -30%;
+                    color: #fff;
+                    font-size: 13px;
+                    background: #ff1515;
+                    width: 17px;
+                    height: 17px;
+                    text-align: center;
+                    line-height: 1.2;
+                    border-radius: 50%;
+                }
             }
             .left_title{
-                padding: 5px;
+                padding: 5%;
                 display: flex;
                 justify-content: space-between;
                 font-size: 25px;
@@ -92,6 +105,7 @@
                     width: 60px;
                     height: 60px;
                     border-radius: 50%;
+                    object-fit: cover;
                 }
                 .text_site{
                     margin-left : 20px;
@@ -166,6 +180,7 @@
                         width: 60px;
                         height: 60px;
                         border-radius: 50%;
+                        object-fit: cover;
                     }
                     .text_site{
                         margin-left : 20px;
@@ -185,20 +200,28 @@
             }
             // 친구 추가 버튼
             .plus_site{
-                width: 80%;
+                // width: 80%;
                 margin: 0 auto;
-                padding: 5px;
+                padding: 3% 5%;
                 display: flex;
                 align-items: center;
                 cursor: pointer;
+                background-color: #ffe194d1;
+                color: #404040;
                 .plus_icon{
-                    width: 50px;
-                    height: 40px;
+                    width: 35px;
+                    border-radius: 30%;
+                    height: 30px;
+                    padding: 3.5%;
+                    font-size: small;
+                    margin-left: 5%;
+                    background: #ffce7f;
+                    border: 1px solid #b3b3b3;
                 }
                 div{
-                    margin-left : 10px;
-                    font-weight: bolder;
-                    font-size: 18px;
+                    margin-left : 8%;
+                    // font-weight: bolder;
+                    font-size: 13px;
                 }
             }
             // 친구 리스트 영역
@@ -211,6 +234,7 @@
                     width: 60px;
                     height: 60px;
                     border-radius: 50%;
+                    object-fit: cover;
                 }
                 .text_site{
                     margin-left : 20px;
@@ -238,7 +262,7 @@
                 display: flex;
                 justify-content: space-around;
                 border-bottom: 2px solid rgba(170, 170, 170, 0.829);
-                padding: 5px;
+                padding: 3%;
                 font-weight: bolder;
                 font-size: 16px;
                 .default_active:hover{
@@ -386,14 +410,14 @@
                         height: 25px;
                     }
                     font-size: 25px;
-                    padding: 5px;
+                    padding: 5%;
                     font-weight: bolder;
-                    border-bottom: 2px solid rgba(170, 170, 170, 0.829);
+                    // border-bottom: 2px solid rgba(170, 170, 170, 0.829);
                 }
                 img{
                     width : 280px;
                     height: 60px;
-                    border-bottom: 2px solid rgba(170, 170, 170, 0.829);
+                    // border-bottom: 2px solid rgba(170, 170, 170, 0.829);
                 }
                 .talking{
                     img{
@@ -403,7 +427,7 @@
                     }
                     .talk_site{
                         margin-top: 2px;
-                        border-bottom: 2px solid rgba(170, 170, 170, 0.829);
+                        border-bottom: 1px solid rgba(170, 170, 170, 0.829);
                         display: flex;
                         align-items: center;
                         font-weight: bolder;

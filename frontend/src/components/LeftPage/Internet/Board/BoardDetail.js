@@ -34,7 +34,7 @@ const BoardDetail = ({UserData, match, history, selection}) => {
         <div>
         { post ?
         <div className="wrapper" style={{display: 'block', margin: '10%'}}>
-            <div className="writer_profile" style={{display: 'flex', backgroundColor: 'rgba(182, 182, 182, 0.521)', padding: '5%', borderRadius: '10px'}}>
+            <div className="writer_profile" style={{display: 'flex', backgroundColor: 'rgb(214 211 211 / 52%)', padding: '5%', borderRadius: '10px'}}>
                 <img className="profile_imgStyle" src={post.writerData.image}/>
                 <div className="profile_txtStyle">{post.writerData.userNickName}</div>
             </div>

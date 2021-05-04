@@ -104,7 +104,7 @@ const FriendList = ({UserData}) => {
             <MyProfile
                 UserData={UserData}
             />
-            <div className="line" />
+            {/* <div className="line" /> */}
             {InputText2.length === 0 ?
                 <PlusFriend
                     onToggle3={onToggle3}
@@ -117,7 +117,7 @@ const FriendList = ({UserData}) => {
                     ListFriend={ListFriend}
                 />
             }
-            <div className="line" />
+            {/* <div className="line" /> */}
             <ShowFriend
                 UserData={UserData}
                 ListFriend={ListFriend}

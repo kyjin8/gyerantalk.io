@@ -57,8 +57,6 @@ const Shop = ({location, match}) => {
       margin: '3% 0 3%'
     };
 
-    console.log('shop comp select', match.params.select);
-
     return (
         <div>
             <div className="products_section" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', width: '90%', margin: '0 auto'}}>
@@ -67,7 +65,7 @@ const Shop = ({location, match}) => {
                 //리스트
                 dataBase.map((productBox, index) => (
                     // <Link to={`/main/Internet/Shop/${index+1}`} className="products_box" style={boxStyle}>
-                    <Link to={`/main/Internet/Shop?item=${index}`} className="products_box" style={boxStyle}>
+                    <Link to={`/main/Internet/Shop?item=${index}`} className="products_box" style={boxStyle} key={index}>
                         <img className="products_img" src={productBox.image} style={{width: '100%'}}/>
                         <div className="products_title" style={titleStyle}>{productBox.productName}</div>
                         <div className="products_price" style={{fontWeight: '700'}}>{productBox.productPrice.toLocaleString()}원</div>
@@ -80,7 +78,6 @@ const Shop = ({location, match}) => {
                 query.item === undefined ?
                 //결제승인
                 <PayResult/>
-                // <div>안녕! <br/></div>
                 :
                 <div>페이지가 없습니다.</div>
                 }

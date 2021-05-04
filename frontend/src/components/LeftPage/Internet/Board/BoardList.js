@@ -24,7 +24,7 @@ const BoardList = ({match, UserData}) => {
             <h3 className="board_title">Egg 게시판</h3>
             {/* <div style={{display: 'flex', justifyContent: 'flex-end'}}> */}
             <div style={{position: 'absolute', top: -5, right: 0,}}>
-                <Link to="/main/Internet/posts/create"><Button className="btn_style">글쓰기</Button></Link>
+                <Link to="/main/Internet/posts/create"><Button className="btn_style" style={{backgroundColor: '#f6bd63', color: '#fff', marginRight: '5%'}}>글쓰기</Button></Link>
             </div>
             {posts.length !== 0 ? 
                 posts.map(post => (
