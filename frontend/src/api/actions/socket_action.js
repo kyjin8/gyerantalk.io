@@ -5,6 +5,7 @@ const SOCKET_RECEIVE = 'socket_receive'
 const SOCKET_LIST = 'socket_list';
 const SOCKET_CHATINFORM = 'socket_chatinform';
 const SOCKET_FRIEND_PROFILE = 'socket_profile';
+const SOCKET_COUNT = 'socket_count';
 
 export function getChats(dataToSubmit){
     const request = axios.post('/api/chats/getChat',dataToSubmit)
@@ -43,6 +44,16 @@ export function FriendProfile(dataToSubmit) {
 
     return {
         type : SOCKET_FRIEND_PROFILE,
+        payload : request
+    }
+}
+
+export function CountHow(dataToSubmit){
+    const request = axios.post('/api/chats/countMessage',dataToSubmit)
+    .then(response => response.data )
+
+    return {
+        type : SOCKET_COUNT,
         payload : request
     }
 }

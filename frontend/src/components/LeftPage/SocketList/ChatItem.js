@@ -7,22 +7,18 @@ import { FriendProfile } from '../../../api/actions/socket_action';
 import { withRouter } from 'react-router-dom';
 import '../../MainPage/Main.scss';
 import useChat from './useChat';
+import axios from 'axios';
+import { CountHow } from '../../../api/actions/socket_action';
 
-const ChatItem = ({ chat, UserData }) => {
-    
-    // const state = useSelector(state =>(
-    //     {
-    //         image : state.socket.indid.image,
-    //         userName : state.socket.indid.userName,
-    //         roomName : chat
-    //     }
-    // ))
+const ChatItem = ({ chat, UserData, checktUpdate }) => {
 
     const dispatch = useDispatch();
 
     const [Mes, setMes] = useState("");
     const [MatchUrl, setMatchUrl] = useState("");
     const [Fri, setFri] = useState("");
+    const {Messages} = useChat(chat);
+    const [Num, setNum] = useState("");
 
     useEffect(() => {
         let body ={
@@ -50,7 +46,23 @@ const ChatItem = ({ chat, UserData }) => {
                 })
             }
         })
-    }, [ UserData, chat ])
+    }, [ UserData, chat, Messages ])
+
+    useEffect(() => {
+        let body = {
+            roomId : chat,
+            _id : UserData._id,
+        }
+        dispatch(CountHow(body))
+        .then(response => {
+            setNum(response.payload.number);
+            console.log(response.payload.number,'1111111111111111111')
+        })
+        // axios.post('/api/chats/countMessage',body)
+        // .then(response => {
+        //     console.log(response)
+        // })
+    }, [UserData, Messages, checktUpdate, Fri ])
 
     return (
         <div className="talking">
@@ -71,7 +83,7 @@ const ChatItem = ({ chat, UserData }) => {
                         <div className="talk_time">
                             {moment(Mes.createdAt).format('A HH:MM분')}
                         </div>
-
+                        {Num}
                         </div>
                     </div>
                 </Link>

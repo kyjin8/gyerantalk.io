@@ -203,20 +203,32 @@ router.post('/addFriend',(req,res)=>{
 router.post('/updateUser', upload.single('profile_img'), (req, res) => {
   console.log('req.body', req.body);
   console.log('req.file', req.file);
-  console.log('req.file.filename',req.file.filename);
-  const changeName = '/uploads/'+req.file.filename;
+  // console.log('req.file.filename',req.file.filename);
   // console.log('ext', req.file.filename.split('.')[1]);
-  User.findOneAndUpdate({ userId : req.body.userId },
-    { userNickName: req.body.nick, message: req.body.message, image: changeName }, (err, user) =>{
-      Friend.updateMany({ friendId: req.body.userId }, 
-        { $set: { friendNickName: req.body.nick, friendMessage: req.body.message, friendImage: changeName } },(err,fr)=>{
-          if(err) return res.json({ success : false, err });
-          return res.status(200).send({
+  if(req.file !== undefined){
+    const changeName = '/uploads/'+req.file.filename;
+    User.findOneAndUpdate({ userId : req.body.userId },
+      { userNickName: req.body.nick, message: req.body.message, image: changeName }, (err, user) =>{
+        Friend.updateMany({ friendId: req.body.userId }, 
+          { $set: { friendNickName: req.body.nick, friendMessage: req.body.message, friendImage: changeName } }, (err,fr)=>{
+            if(err) return res.json({ success : false, err });
+            return res.status(200).send({
               success : true
+            })
           })
         })
-        }
-    )
+  } else {
+    User.findOneAndUpdate({ userId : req.body.userId },
+      { userNickName: req.body.nick, message: req.body.message}, (err, user) =>{
+        Friend.updateMany({ friendId: req.body.userId }, 
+          { $set: { friendNickName: req.body.nick, friendMessage: req.body.message} }, (err,fr)=>{
+            if(err) return res.json({ success : false, err });
+            return res.status(200).send({
+                success : true
+            })
+          })
+    })
+  }
 })
 
 router.post('/showList',(req,res)=>{

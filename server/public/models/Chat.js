@@ -14,6 +14,9 @@ const chatSchema = mongoose.Schema({
     roomName : {
         type : String,  
     },
+    user:{
+        type: String,
+    },
     // anotherUser : {
     //     type : String,
     // },

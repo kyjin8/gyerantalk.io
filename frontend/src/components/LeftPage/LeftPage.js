@@ -20,6 +20,8 @@ const LeftPage = ({match, UserData, Update, setUpdate}) => {
 // 잠시 ListFriend props에 빼고 밑에 FriendList 페이지에 상속 지움
     const data = match.params.category || 'FriendList';
 
+    const [checktUpdate, setchecktUpdate] = useState(false);
+
     return (
         <div className="left_side">
             <div className="left_category">
@@ -41,8 +43,8 @@ const LeftPage = ({match, UserData, Update, setUpdate}) => {
             </div>
             {data === 'FriendList' ? <FriendList UserData={UserData} /> : null}
             {/* {data === 'ChatList' ? <Chat UserData={UserData}/> : null}       */}
-            {data === 'ChatingList' && <ChatingList UserData={UserData}  /> }
-            {data === 'ChatingRoom' && <ChatingRoom UserData={UserData}  /> }
+            {data === 'ChatingList' && <ChatingList UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/> }
+            {data === 'ChatingRoom' && <ChatingRoom UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/> }
             {data === 'UpdateUser' && <UpdateUser UserData={UserData} Update={Update} setUpdate={setUpdate}/> }
             {data === 'Internet' && <Internet UserData={UserData}/> }
             {data === 'ViewFriend' && <ViewFriend UserData={UserData} /> }

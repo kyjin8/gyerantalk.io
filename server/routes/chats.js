@@ -36,10 +36,8 @@ router.post('/checkMember', async(req, res)=>{
   const ones = req.body.one+'_'+req.body.two;
   const twos = req.body.two+'_'+req.body.one;
   await Chat.find({roomName : ones},(err,chats)=>{
-    console.log(chats,'ssssssssssssssss');
     if(chats.length !== 0) return res.json({url : ones});
     Chat.find({roomName : twos},(err,cha)=>{
-      console.log('twos 체크 : ',cha)
       if(cha.length !== 0) return res.json({url : twos});
       else res.json({url : ones});
     })
@@ -49,8 +47,6 @@ router.post('/checkMember', async(req, res)=>{
 
 /* GET users listing. */
 router.post('/getChat' , async(req, res) => {
-    console.log('디스패치');
-    console.log(req.body, '해당방번호')
     await Chat.find({roomName : req.body.roomId})
     .populate('sendUser')
     .exec((err, chats) => {
@@ -112,6 +108,30 @@ router.post('/textMessage',(req,res)=>{
 router.post('/profiles',(req,res)=>{
   User.find({_id:req.body.mem},(err,data)=>{
     res.send(data);
+  })
+})
+
+router.post('/changeMes',(req,res)=>{
+  // user:{$ne:req.body._id}
+  Chat.updateMany({$and : [{roomName:req.body.roomId},{user:req.body._id}]},
+    {$set:{readMessage:true}},(err,data)=>{
+    if(err) console.log(err)
+    // console.log(data);
+  })
+  // Chat.find({roomName:req.body.roomId,user:{$ne:req.body._id}})
+  // .updateMany({$set:{readMessage:true}},(err,data)=>{
+  //   if(err) console.log(err)
+  //   // console.log(data);
+  // })
+})
+
+router.post('/countMessage',(req,res)=>{
+  Chat.find({roomName:req.body.roomId,readMessage:false,user:{$ne:req.body._id}})
+  .count({readMessage:false},(err,data)=>{
+    let body ={
+      number : data
+    }
+    res.send(body);
   })
 })
 

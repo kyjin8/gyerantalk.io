@@ -3,39 +3,43 @@ import { useDispatch } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom';
 import { getPosts } from '../../../../api/actions/post_action'
 // import { createPost } from './BoardCU'
-import {Button} from '@material-ui/core'
+import { Button } from "@material-ui/core";
+import { LoadingOutlined } from '@ant-design/icons';
+import './Board.scss';
 
 const BoardList = ({match, UserData}) => {
     const dispatch = useDispatch();
     const [posts, setPosts] = useState('');
-    // useEffect(()=>{
-        console.log('params', match.params);
-    // }, [match.params])
 
+    console.log('posts', posts);
     useEffect(()=>{
         dispatch(getPosts())
         .then(res => {
-            console.log('aaaa', res.payload.posts)
             setPosts(res.payload.posts);
-            console.log(res.payload.posts);
         })
     }, [match.params]);
-    
-    console.log('posts', posts);
 
     return (
-        <div>
-            <Link to="/main/Internet/posts/create"><Button>글쓰기</Button></Link>
+        <div className="wrapper" style={{position: 'relative'}}>
+            <h3 className="board_title">Egg 게시판</h3>
+            {/* <div style={{display: 'flex', justifyContent: 'flex-end'}}> */}
+            <div style={{position: 'absolute', top: -5, right: 0,}}>
+                <Link to="/main/Internet/posts/create"><Button className="btn_style">글쓰기</Button></Link>
+            </div>
             {posts.length !== 0 ? 
                 posts.map(post => (
-                    <Link className="post_box" to={`/main/Internet/posts/${post._id}`}>
-                        <div className="title">{post.title}</div>
+                    <Link key={post._id} className="post_box" to={`/main/Internet/posts/${post._id}`}>
+                        <div className="title_row" >
+                            <div className="title_text">{post.title}</div>
+                            <div className="img_wrapper"><img className="list_profile_img" src={post.writerData.image}/></div>
+                        </div>
                         {/* <div className="body">{post.body}</div> */}
-                        <hr/>
                     </Link>
                 ))
                 :
-                <div>게시글이 없습니다.</div>}
+                // <div>게시글이 없습니다.</div>
+                <LoadingOutlined className="loading"/>
+            }
         </div>
     )
 }
