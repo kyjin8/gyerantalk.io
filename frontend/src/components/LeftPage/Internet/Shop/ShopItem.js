@@ -21,9 +21,9 @@ const ShopItem = ({productBox, querynum}) => {
         // total_amount: productBox.productPrice,
         total_amount: 30000,
         tax_free_amount: 0,
-        approval_url: "http://localhost:3000/payment/approve",
-        fail_url: "http://localhost:3000/payment/fail",
-        cancel_url: "http://localhost:3000/payment/cancel",
+        approval_url: "http://localhost:3000/main/Options",
+        fail_url: "http://localhost:3000/main/Internet/Shop/Fail",
+        cancel_url: "http://localhost:3000/main/Internet/Shop",
       },
     });
 
@@ -58,19 +58,19 @@ const ShopItem = ({productBox, querynum}) => {
 
     const onClick = (e) => {
         axios({
-          url: "https://kapi.kakao.com/v1/payment/ready",
+          url: "/v1/payment/ready",
           // 결제 준비 API는 POST 메소드라고 한다.
           method: "POST",
           headers: {
             // 카카오 developers에 등록한 admin키를 헤더에 줘야 한다.
-            Authorization: "KakaoAK ca4cd7847b43dd1a89e836e3ce896daf",
+            Authorization: "KakaoAK 2dee8d3f161198cdc441fa1f152f7cac",
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
             // "Access-Control-Allow-Origin": "http://localhost:3000",
           },
           // 설정한 매개변수들
           params,
         }).then((response) => {
-            axios(response.next_redirect_pc_url)
+            // axios(response.next_redirect_pc_url)
           // 응답에서 필요한 data만 뽑는다.
           const {
             data: { next_redirect_pc_url, tid }
