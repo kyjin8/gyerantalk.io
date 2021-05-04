@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import ShopItem from './ShopItem';
+import PayResult from './PayResult';
 
-const Shop = ({location}) => {
+const Shop = ({location, match}) => {
     function getUrlParams() {
         var params = {};
         location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
@@ -56,10 +57,14 @@ const Shop = ({location}) => {
       margin: '3% 0 3%'
     };
 
+    console.log('shop comp select', match.params.select);
+
     return (
         <div>
             <div className="products_section" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', width: '90%', margin: '0 auto'}}>
-                {query.item === undefined ?
+                {match.params.select === undefined ?
+                query.item === undefined ? 
+                //리스트
                 dataBase.map((productBox, index) => (
                     // <Link to={`/main/Internet/Shop/${index+1}`} className="products_box" style={boxStyle}>
                     <Link to={`/main/Internet/Shop?item=${index}`} className="products_box" style={boxStyle}>
@@ -69,7 +74,15 @@ const Shop = ({location}) => {
                     </Link>
                 ))
                 :
+                //상품조회
                 <ShopItem key={query.item} productBox={dataBase[query.item]} querynum={query.item}/>
+                :
+                query.item === undefined ?
+                //결제승인
+                <PayResult/>
+                // <div>안녕! <br/></div>
+                :
+                <div>페이지가 없습니다.</div>
                 }
             </div>
         </div>
