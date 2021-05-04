@@ -5,28 +5,7 @@ import { useDispatch } from 'react-redux';
 // import { payReady } from '../../../../api/actions/pay_action';
 
 const ShopItem = ({productBox, querynum}) => {
-    const [state, setState] = useState(""
-    //   {
-    //   // 응답에서 가져올 값들
-    //   next_redirect_pc_url: "",
-    //   tid: "",
-    //   // 요청에 넘겨줄 매개변수들
-    //   params: {
-    //     cid: "TC0ONETIME",
-    //     partner_order_id: "partner_order_id",
-    //     partner_user_id: "partner_user_id",
-    //     // item_name: productBox.title,
-    //     item_name: "choco",
-    //     quantity: 1,
-    //     // total_amount: productBox.productPrice,
-    //     total_amount: 30000,
-    //     tax_free_amount: 0,
-    //     approval_url: "http://localhost:3000/main/Internet/Shop/payresult",
-    //     fail_url: "http://localhost:3000/main/Internet/Shop/payresult",
-    //     cancel_url: "http://localhost:3000/main/Internet/Shop/payresult",
-    //   },
-    // }
-    );
+    const [state, setState] = useState("");
 
     useEffect(() => {
       setState({
@@ -44,9 +23,9 @@ const ShopItem = ({productBox, querynum}) => {
           total_amount: productBox.productPrice,
           // total_amount: 30000,
           tax_free_amount: 0,
-          approval_url: "http://localhost:3000/main/Internet/Shop/payresult",
-          fail_url: "http://localhost:3000/main/Internet/Shop/payresult",
-          cancel_url: "http://localhost:3000/main/Internet/Shop/payresult",
+          approval_url: "http://localhost:3000/main/Internet/Shop/success",
+          fail_url: "http://localhost:3000/main/Internet/Shop/fail",
+          cancel_url: "http://localhost:3000/main/Internet/Shop/cancel",
         },
       })
     }, [productBox])
@@ -82,28 +61,32 @@ const ShopItem = ({productBox, querynum}) => {
       const { next_redirect_pc_url} = state;
       console.log('kakao', next_redirect_pc_url);
 
+    const wrapperStyle = {
+      display: 'flex',
+      position: 'relative',
+      alignItems: 'center',
+      margin: '5% 0 8%',
+    }
+
+    const payStyle = {
+      margin: '5% 0',
+      padding: '4%',
+      backgroundColor: '#fbf0b0',
+      borderRadius: '10px',
+      height: '30px',
+    }
+
     return (
         productBox !== undefined ?
         <div style={{overflow:'scroll',height:'500px'}}>
             <img className="products_img" src={productBox.image} style={{width: '100%'}}/>
             <div className="products_title" style={{fontSize: '13px',  margin: '5% 0 3%', lineHeight: '1.8'}}>{productBox.productName}</div>
-            <div className="products_price" style={{fontWeight: '700'}}>{productBox.productPrice.toLocaleString()}원</div>
-            {/* ye */}
-            <a href={ next_redirect_pc_url }>{ next_redirect_pc_url }</a>
-            {/* <button onClick={onClick}>Gyeran PAY</button> */}
-            
-            {/* min */}
-            {/* {next_redirect_pc_url !== "" ?
-              <Link to={next_redirect_pc_url}>
-                결제 수단 : <img style={{width : '150px', height : '50px'}} src="/gayran_pay.png" />
-              </Link>
-              :<></>
-            } */}
-            <Link to={next_redirect_pc_url}>
-                결제 수단 : <img style={{width : '150px', height : '50px'}} src="/gayran_pay.png" />
-            </Link>
-            {/* <a href={ next_redirect_pc_url }>{ next_redirect_pc_url }</a> */}
-            <button onClick={onClick}>구매하기</button>
+            <div className="pay_wrapper" style={wrapperStyle}>
+              <div className="products_price" style={{display: 'inline-block', width: '65%', fontWeight: '700'}}>{productBox.productPrice.toLocaleString()}원</div>
+              <div className="img_wrapper" style={{display: 'inline-block'}}><a href={ next_redirect_pc_url }>
+                  <img style={payStyle} src="/gayran_pay.png" />
+              </a></div>
+            </div>
             <img className="products_desc" style={{width: '100%'}} src={productBox.productDesc}/>
         </div>
         :
