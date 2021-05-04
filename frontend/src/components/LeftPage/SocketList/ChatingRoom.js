@@ -31,15 +31,17 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
         setchecktUpdate(!checktUpdate)
     }, [])
     useEffect(() => {
+        setchecktUpdate(!checktUpdate)
+        
         let body = {
             roomId : roomId,
             userId : UserData._id
         }
         axios.post('/api/chats/changeMes',body)
 
-        setchecktUpdate(!checktUpdate)
         
-    }, [UserData, Messages])
+        
+    }, [])
 
     useEffect(()=>{
         let member = {
@@ -83,6 +85,7 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
         if(newMessage===""){
             setWrite('');
         }
+        setchecktUpdate(!checktUpdate)
     }, [newMessage])
 
     const onSubmitMessage = () => {
@@ -99,7 +102,7 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
                         {
                             StartData.map((data)=>(
                                 data.sendUser._id === UserData._id ?
-                                <div key={data.message}className="talk_box">
+                                <div className="talk_box">
                                     <div className="say">
                                         <span className="span_name">{data.sendUser.userName}</span>
                                         <span className="span_mess">{data.message}</span>

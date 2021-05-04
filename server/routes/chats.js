@@ -112,24 +112,28 @@ router.post('/profiles',(req,res)=>{
 })
 
 router.post('/changeMes',(req,res)=>{
-  // user:{$ne:req.body._id}
-  Chat.updateMany({$and : [{roomName:req.body.roomId},{user:req.body._id}]},
+  Chat.updateMany({$and : [{roomName:req.body.roomId,readMessage:false,user:{$ne : req.body._id}}]},
     {$set:{readMessage:true}},(err,data)=>{
     if(err) console.log(err)
-    // console.log(data);
   })
-  // Chat.find({roomName:req.body.roomId,user:{$ne:req.body._id}})
-  // .updateMany({$set:{readMessage:true}},(err,data)=>{
-  //   if(err) console.log(err)
-  //   // console.log(data);
-  // })
 })
 
 router.post('/countMessage',(req,res)=>{
-  Chat.find({roomName:req.body.roomId,readMessage:false,user:{$ne:req.body._id}})
-  .count({readMessage:false},(err,data)=>{
-    let body ={
-      number : data
+  // Chat.find({$and : [{roomName:req.body.roomId},{user:{$ne:req.body._id}},{readMessage:false}]},(err,data)=>{
+    Chat.find({$and : [{roomName:req.body.roomId,user:{$ne:req.body._id},readMessage:false}]},(err,data)=>{  
+      console.log('개인채팅 개수 : ',data.length);
+      let body={
+        number : data.length
+      }
+      res.send(body);
+    })
+})
+
+router.post('/total',(req,res)=>{
+  Chat.find({$and : [{user:{$ne:req.body.userId},readMessage:false}]},(err,data)=>{
+    console.log('전체채팅 개수 : ',data.length);
+    let body = {
+      number : data.length
     }
     res.send(body);
   })

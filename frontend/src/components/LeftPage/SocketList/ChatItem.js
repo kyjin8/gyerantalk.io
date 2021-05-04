@@ -10,7 +10,7 @@ import useChat from './useChat';
 import axios from 'axios';
 import { CountHow } from '../../../api/actions/socket_action';
 
-const ChatItem = ({ chat, UserData, checktUpdate }) => {
+const ChatItem = ({ chat, UserData, checktUpdate, setchecktUpdate }) => {
 
     const dispatch = useDispatch();
 
@@ -56,14 +56,16 @@ const ChatItem = ({ chat, UserData, checktUpdate }) => {
         dispatch(CountHow(body))
         .then(response => {
             setNum(response.payload.number);
-            console.log(response.payload.number,'1111111111111111111')
         })
         // axios.post('/api/chats/countMessage',body)
         // .then(response => {
         //     console.log(response)
         // })
-    }, [UserData, Messages, checktUpdate, Fri ])
+    }, [ Messages, Fri ])
 
+    useEffect(() => {
+        setchecktUpdate(!checktUpdate)
+    }, [Num])
     return (
         <div className="talking">
             {
