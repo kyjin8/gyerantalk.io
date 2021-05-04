@@ -10,7 +10,9 @@ const IntTitle = () => {
             <NavLink className="default_active" activeClassName="active" to="/main/Internet/Shop">
                 <div>쇼핑</div>
             </NavLink>
-            <div>Egg TV</div>
+            <NavLink className="default_active" activeClassName="active" to="/main/Internet/TV">
+                <div>Egg TV</div>
+            </NavLink>
             <NavLink className="default_active" activeClassName="active" to="/main/Internet/posts">
                 <div>Egg Board</div>
             </NavLink>
