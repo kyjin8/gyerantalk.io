@@ -4,6 +4,7 @@ const SOCKET_LIST = 'socket_list';
 const SOCKET_CHATINFORM = 'socket_chatinform';
 const SOCKET_FRIEND_PROFILE = 'socket_profile';
 const SOCKET_COUNT = 'socket_count';
+const SOCKET_ALL = 'socket_all';
 
 export default function(state={}, action){
     switch (action.type) {
@@ -21,6 +22,8 @@ export default function(state={}, action){
             return {...state, indid: action.payload}
         case SOCKET_COUNT:
             return {...state, count : action.payload}
+        case SOCKET_ALL:
+            return {...state, ass : action.payload}
         default:
             return state;
     }

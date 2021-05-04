@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter, NavLink, Route } from 'react-router-dom';
 import '../MainPage/Main.scss';
 import PersonIcon from '@material-ui/icons/Person';
@@ -15,12 +15,33 @@ import ChatingList from './SocketList/ChatingList';
 import ChatingRoom from './SocketList/ChatingRoom';
 import ViewFriend from './ViewFriend/ViewFriend';
 import Options from './Options/Options';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import {allChat} from '../../api/actions/socket_action';
 
 const LeftPage = ({match, UserData, Update, setUpdate}) => {
+
+    const dispatch = useDispatch();
+
 // 잠시 ListFriend props에 빼고 밑에 FriendList 페이지에 상속 지움
     const data = match.params.category || 'FriendList';
+    // const state = useSelector(state => ({
+    //     num : state.socket
+    // }))
 
     const [checktUpdate, setchecktUpdate] = useState(false);
+    const [MesCount, setMesCount] = useState(0)
+    
+    useEffect(() => {
+        let body = {
+            userId : UserData._id,
+        }
+        dispatch(allChat(body))
+        .then(response=>{
+            setMesCount(response.payload.number);
+            // console.log(response.data);
+        })
+    }, [ checktUpdate ])
 
     return (
         <div className="left_side">
@@ -33,6 +54,11 @@ const LeftPage = ({match, UserData, Update, setUpdate}) => {
                 </NavLink> */}
                 <NavLink className="default_active" activeClassName="active" to="/main/ChatingList">
                     <QuestionAnswerRoundedIcon style={{ fontSize: 30 }} />
+                    {MesCount !== 0 ?
+                        <div>{MesCount}</div>
+                        :
+                        <></>
+                    }
                 </NavLink>
                 <NavLink className="default_active" activeClassName="active" to="/main/Internet">
                     <LanguageIcon style={{ fontSize: 30 }} />

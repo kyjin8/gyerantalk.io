@@ -6,7 +6,7 @@ const SOCKET_LIST = 'socket_list';
 const SOCKET_CHATINFORM = 'socket_chatinform';
 const SOCKET_FRIEND_PROFILE = 'socket_profile';
 const SOCKET_COUNT = 'socket_count';
-
+const SOCKET_ALL = 'socket_all';
 export function getChats(dataToSubmit){
     const request = axios.post('/api/chats/getChat',dataToSubmit)
     .then(response => response.data)
@@ -54,6 +54,16 @@ export function CountHow(dataToSubmit){
 
     return {
         type : SOCKET_COUNT,
+        payload : request
+    }
+}
+
+export function allChat(dataToSubmit){
+    const request = axios.post('/api/chats/total',dataToSubmit)
+    .then(response=> response.data )
+
+    return {
+        type : SOCKET_ALL,
         payload : request
     }
 }

@@ -26,11 +26,11 @@ const ChatingList = ({UserData, checktUpdate, setchecktUpdate}) => {
         .then(response => {
             setListRoom(response.payload);
         });
-    }, [UserData])
+    }, [UserData, checktUpdate])
     
     const renderChat = () => 
         ListRoom.map( (chat)=>(
-            <ChatItem key={chat} chat={chat} UserData={UserData} checktUpdate={checktUpdate}/>
+            <ChatItem key={chat} chat={chat} UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/>
         ))
 
     return (

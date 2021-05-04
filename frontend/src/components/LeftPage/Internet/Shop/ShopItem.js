@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // import { payReady } from '../../../../api/actions/pay_action';
 
@@ -88,8 +88,22 @@ const ShopItem = ({productBox, querynum}) => {
             <img className="products_img" src={productBox.image} style={{width: '100%'}}/>
             <div className="products_title" style={{fontSize: '13px',  margin: '5% 0 3%', lineHeight: '1.8'}}>{productBox.productName}</div>
             <div className="products_price" style={{fontWeight: '700'}}>{productBox.productPrice.toLocaleString()}원</div>
+            {/* ye */}
             <a href={ next_redirect_pc_url }>{ next_redirect_pc_url }</a>
             {/* <button onClick={onClick}>Gyeran PAY</button> */}
+            
+            {/* min */}
+            {/* {next_redirect_pc_url !== "" ?
+              <Link to={next_redirect_pc_url}>
+                결제 수단 : <img style={{width : '150px', height : '50px'}} src="/gayran_pay.png" />
+              </Link>
+              :<></>
+            } */}
+            <Link to={next_redirect_pc_url}>
+                결제 수단 : <img style={{width : '150px', height : '50px'}} src="/gayran_pay.png" />
+            </Link>
+            {/* <a href={ next_redirect_pc_url }>{ next_redirect_pc_url }</a> */}
+            <button onClick={onClick}>구매하기</button>
             <img className="products_desc" style={{width: '100%'}} src={productBox.productDesc}/>
         </div>
         :
