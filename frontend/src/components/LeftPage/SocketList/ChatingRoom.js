@@ -86,7 +86,12 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
     }, [newMessage])
 
     const onSubmitMessage = () => {
-        sendMessage(newMessage, UserData._id, changeRoom, UserData.userName, UserData.image);
+        if(checkMembers[0] == UserData._id){
+            const another = checkMembers[1];
+        }else{
+            const another = checkMembers[0];
+        }
+        sendMessage(newMessage, UserData._id, changeRoom, UserData.userName, UserData.image, another);
         setnewMessage("");
     }
 

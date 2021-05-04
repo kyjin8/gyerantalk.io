@@ -34,7 +34,7 @@ const useChat = (roomId) => {
     }, [roomId])
 
     // 같은 방에 있는 유저들에게 메세지를 전송한다
-    const sendMessage = (messageBody, Id, roomId, userName, image) => {
+    const sendMessage = (messageBody, Id, roomId, userName, image, another) => {
         socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
             message: messageBody,
             senderId: socketRef.current.id,
@@ -42,7 +42,8 @@ const useChat = (roomId) => {
             roomName : roomId,
             userName : userName,
             image : image,
-            user : Id
+            user : Id,
+            toUser : another,
         })
     }
 

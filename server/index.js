@@ -51,6 +51,7 @@ io.on("connection",(socket)=>{
       sendUser: data.sendUser,
       roomName: data.roomName,
       user : data.user,
+      toUser : data.toUser,
     }
     
     const chat = new Chat(body);
