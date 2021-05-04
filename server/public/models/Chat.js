@@ -17,16 +17,13 @@ const chatSchema = mongoose.Schema({
     user:{
         type: String,
     },
-    // anotherUser : {
-    //     type : String,
-    // },
+    toUser:{
+        type: String,
+    },
     readMessage : {
         type : Boolean,
         default : false,
     },
-    // anotherUser : {
-    //     type : String,
-    // },
 },{timestamps:true});
 
 // 유저 스키마 모델 만들기
