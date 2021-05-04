@@ -103,7 +103,7 @@ const ShopItem = ({productBox, querynum}) => {
                 결제 수단 : <img style={{width : '150px', height : '50px'}} src="/gayran_pay.png" />
             </Link>
             {/* <a href={ next_redirect_pc_url }>{ next_redirect_pc_url }</a> */}
-            <button onClick={onClick}>구매하기</button>
+            {/* <button onClick={onClick}>구매하기</button> */}
             <img className="products_desc" style={{width: '100%'}} src={productBox.productDesc}/>
         </div>
         :

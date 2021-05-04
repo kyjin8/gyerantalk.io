@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import useChat from './useChat';
 import { withRouter } from 'react-router-dom';
 import TextsmsIcon from '@material-ui/icons/Textsms';
@@ -15,9 +15,11 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
     const [Body, setBody] = useState("");
     const [changeRoom, setchangeRoom] = useState("")
 
-    const { Messages, sendMessage, setId } = useChat(changeRoom);
+    const { Messages, sendMessage, setId } = useChat(changeRoom, checktUpdate, setchecktUpdate);
     const [newMessage, setnewMessage] = useState("");
     const [Write, setWrite] = useState("")
+    let anoter ="";
+    let mesaagesEnd;
 
     // const roomId = match.params.search;
     const checkMembers = match.params.search.split('_');
@@ -39,9 +41,7 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
         }
         axios.post('/api/chats/changeMes',body)
 
-        
-        
-    }, [])
+    }, [UserData])
 
     useEffect(()=>{
         let member = {
@@ -90,14 +90,24 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
 
     const onSubmitMessage = () => {
         if(checkMembers[0] == UserData._id){
-            const another = checkMembers[1];
+            anoter = checkMembers[1];
         }else{
-            const another = checkMembers[0];
+            anoter = checkMembers[0];
         }
-        sendMessage(newMessage, UserData._id, changeRoom, UserData.userName, UserData.image, another);
+        sendMessage(newMessage, UserData._id, changeRoom, UserData.userName, UserData.image, anoter);
         setnewMessage("");
     }
 
+    const onKeyPress = (e) => {
+        if(e.key === 'Enter'){
+            onSubmitMessage();
+        }
+    };
+
+    const scrollRef = useRef();          
+    useEffect(() => {         
+        scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    },[ Messages, checktUpdate ]);
 
     return (
         <div className="chatting_area">
@@ -142,18 +152,14 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
                                         <span className="span_mess1">{message.message}</span>
                                     </div>
                                 </div>
-                                // <li
-                                //     key={i}
-                                //     className={`message-item ${
-                                //         message.ownedByCurrentUser ? "my-message" : "received-message"
-                                //     }`}
-                                // >
-                                //     {message.message}
-                                // </li>
                             ))
                         }
+                        <div
+                            ref={scrollRef}
+                        ></div>
                     </ol>
                 </div>
+                
             </div>
             {/* <input
                 value={Write}
@@ -171,6 +177,7 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
                     value={newMessage}
                     onChange={onDoingTyping}
                     placeholder="메시지를 작성하세요"
+                    onKeyPress={onKeyPress}
                 />
                 <button onClick={onSubmitMessage} className="send-message-button" >
                     Send

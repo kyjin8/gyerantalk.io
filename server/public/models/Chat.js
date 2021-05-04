@@ -24,6 +24,10 @@ const chatSchema = mongoose.Schema({
         type : Boolean,
         default : false,
     },
+    date : {
+        type : Date,
+        default : Date.now()
+    }
 },{timestamps:true});
 
 // 유저 스키마 모델 만들기

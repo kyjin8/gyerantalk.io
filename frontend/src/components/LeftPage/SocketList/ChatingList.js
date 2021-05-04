@@ -28,17 +28,19 @@ const ChatingList = ({UserData, checktUpdate, setchecktUpdate}) => {
         });
     }, [UserData, checktUpdate])
     
-    const renderChat = () => 
-        ListRoom.map( (chat)=>(
-            <ChatItem key={chat} chat={chat} UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/>
-        ))
+    // let renderChat = () => 
+    //     ListRoom.map( (chat)=>(
+    //         <ChatItem key={chat} chat={chat} UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/>
+    //     ))
 
     return (
         <div className="home-container">
             <ChatTitle />
             <AddBaner />
             {
-                renderChat()
+                ListRoom.map( (chat)=>(
+                    <ChatItem key={chat} chat={chat} UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/>
+                ))
             }
             {/* <input 
                 type="text"
