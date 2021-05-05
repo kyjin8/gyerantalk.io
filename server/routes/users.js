@@ -244,7 +244,6 @@ router.post('/updateUser', upload.single('profile_img'), (req, res) => {
 
 router.post('/showList',(req,res)=>{
   const data = req.body.userId;
-
   Friend.find({ userId : {$regex : "^"+data}},(err,user)=>{
     res.status(200).json({
       Myfriend : user

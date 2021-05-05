@@ -18,6 +18,7 @@ import Options from './Options/Options';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import {allChat} from '../../api/actions/socket_action';
+import useChat from '../LeftPage/SocketList/useChat';
 
 const LeftPage = ({match, UserData, Update, setUpdate}) => {
 
@@ -25,12 +26,10 @@ const LeftPage = ({match, UserData, Update, setUpdate}) => {
 
 // 잠시 ListFriend props에 빼고 밑에 FriendList 페이지에 상속 지움
     const data = match.params.category || 'FriendList';
-    // const state = useSelector(state => ({
-    //     num : state.socket
-    // }))
 
     const [checktUpdate, setchecktUpdate] = useState(false);
     const [MesCount, setMesCount] = useState(0)
+    const { Messages } = useChat();
     
     useEffect(() => {
         let body = {
@@ -41,7 +40,7 @@ const LeftPage = ({match, UserData, Update, setUpdate}) => {
             setMesCount(response.payload.number);
             // console.log(response.data);
         })
-    }, [ checktUpdate ])
+    }, [ checktUpdate, data, Messages ])
 
     return (
         <div className="left_side">
@@ -67,11 +66,11 @@ const LeftPage = ({match, UserData, Update, setUpdate}) => {
                     <MoreHorizIcon style={{ fontSize: 30 }} />
                 </NavLink>
             </div>
-            {data === 'FriendList' ? <FriendList UserData={UserData} /> : null}
+            {data === 'FriendList' && <FriendList UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate} />}
             {/* {data === 'ChatList' ? <Chat UserData={UserData}/> : null}       */}
             {data === 'ChatingList' && <ChatingList UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/> }
             {data === 'ChatingRoom' && <ChatingRoom UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/> }
-            {data === 'UpdateUser' && <UpdateUser UserData={UserData} Update={Update} setUpdate={setUpdate}/> }
+            {data === 'UpdateUser' && <UpdateUser UserData={UserData} Update={Update} setUpdate={setUpdate} /> }
             {data === 'Internet' && <Internet UserData={UserData}/> }
             {data === 'ViewFriend' && <ViewFriend UserData={UserData} /> }
             {data === 'Options' && <Options UserData={UserData}/> }

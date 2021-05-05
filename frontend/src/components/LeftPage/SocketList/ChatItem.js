@@ -67,6 +67,7 @@ const ChatItem = ({ chat, UserData, checktUpdate, setchecktUpdate }) => {
     useEffect(() => {
         setchecktUpdate(!checktUpdate)
     }, [Num])
+
     return (
         <div className="talking">
             {
@@ -99,6 +100,7 @@ const ChatItem = ({ chat, UserData, checktUpdate, setchecktUpdate }) => {
             }
         </div>
     )
+    
 }
 
 export default withRouter(ChatItem);

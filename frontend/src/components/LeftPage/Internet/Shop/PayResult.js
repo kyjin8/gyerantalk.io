@@ -4,7 +4,7 @@ import { Button } from "@material-ui/core";
 
 import axios from "axios";
 
-const PayResult= ({location, match}) => {
+const PayResult= ({location, match, UserData}) => {
     const [search, setSearch] = useState('');
     const [state, setState] = useState({
         params: {
@@ -17,7 +17,7 @@ const PayResult= ({location, match}) => {
         pg_token: location.search.split("=")[1]
         },
     });
-    
+
     const payresult = match.params.select;
     // url에 붙어서 온 pg_token을 결제 API에 줄 params에 할당
     // params.pg_token = search.split("=")[1];

@@ -10,7 +10,7 @@ import ShowFriend from './ShowFriend/ShowFriend';
 import { getFriendList } from '../../../api/actions/friend_action';
 import { alreadyFriend } from '../../../api/actions/friend_action';
 
-const FriendList = ({UserData}) => {
+const FriendList = ({UserData, checktUpdate, setchecktUpdate}) => {
 
     const dispatch = useDispatch();
 
@@ -59,6 +59,7 @@ const FriendList = ({UserData}) => {
 
     useEffect(()=>{
         setClickEvent(!ClickEvent);
+        setchecktUpdate(!checktUpdate);
     },[UserData])
 
     useEffect(()=>{
