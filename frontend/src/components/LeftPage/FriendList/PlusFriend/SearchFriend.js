@@ -4,7 +4,7 @@ import '../../../MainPage/Main.scss';
 import { withRouter } from 'react-router-dom';
 
 const SearchFriend = React.memo(({friendDB, UserData, onPlustHandler, ListFriend }) => {
-
+    console.log(ListFriend);
     if(friendDB.friend){
         if(friendDB.friend.length !== 0){ //검색결과 있을 때
             return (
@@ -22,7 +22,7 @@ const SearchFriend = React.memo(({friendDB, UserData, onPlustHandler, ListFriend
                                     <AddBoxIcon className="plus"/>
                                 </div>
                                 :
-                                <></>
+                                <div className="error_me">검색결과가 없습니다</div>
                         ))           
                     }
                 </div>
@@ -30,12 +30,12 @@ const SearchFriend = React.memo(({friendDB, UserData, onPlustHandler, ListFriend
         }
         else{          //검색결과 없을 때
             return(
-                <div>검색 결과가 없습니다</div>
+                <div className="plus_site">검색 결과가 없습니다</div>
             )
         }
     }else{          //검색결과 없을 때
         return(
-            <div>검색 결과가 없습니다</div>
+            <div className="plus_site">검색 결과가 없습니다</div>
         )
     }
     

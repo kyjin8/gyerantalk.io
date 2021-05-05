@@ -50,7 +50,7 @@ const useChat = (roomId, checktUpdate, setchecktUpdate) => {
 
 
 
-    return { Messages, sendMessage }
+    return { Messages, sendMessage, checktUpdate, setchecktUpdate}
 }
 
 export default useChat;

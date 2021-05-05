@@ -7,7 +7,7 @@ import AddBaner from './AddBaner';
 import { ListFind } from '../../../api/actions/socket_action';
 import ChatItem from './ChatItem';
 
-const ChatingList = ({UserData, checktUpdate, setchecktUpdate}) => {
+const ChatingList = React.memo(({UserData, checktUpdate, setchecktUpdate}) => {
 
     const dispatch = useDispatch();
 
@@ -32,6 +32,19 @@ const ChatingList = ({UserData, checktUpdate, setchecktUpdate}) => {
     //     ListRoom.map( (chat)=>(
     //         <ChatItem key={chat} chat={chat} UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/>
     //     ))
+    useEffect(() => {
+        return () => {
+            <div className="home-container">
+            <ChatTitle />
+            <AddBaner />
+            {
+                ListRoom.map( (chat)=>(
+                    <ChatItem key={chat} chat={chat} UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/>
+                ))
+            }
+        </div>
+        }
+    }, [checktUpdate])
 
     return (
         <div className="home-container">
@@ -42,19 +55,8 @@ const ChatingList = ({UserData, checktUpdate, setchecktUpdate}) => {
                     <ChatItem key={chat} chat={chat} UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/>
                 ))
             }
-            {/* <input 
-                type="text"
-                placeholder="Room"
-                value={roomName}
-                onChange={handleRoomNameChange}
-                className="text-input-field"
-            /> */}
-            {/* <Link to={`/main/ChatingRoom/${roomName}`}>
-                Join room
-            </Link> */}
-            
         </div>
     )
-}
+})
 
 export default withRouter(ChatingList);

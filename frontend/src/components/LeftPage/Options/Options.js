@@ -53,13 +53,13 @@ const Options = ({UserData}) => {
                             <li>쇼핑</li>
                         </ul>
                     </Link>
-                    <Link to="/main/FriendList">
+                    <Link to="/main/Internet/TV">
                         <ul>
                             <li><LiveTvIcon /></li>
                             <li>TV</li>
                         </ul>
                     </Link>
-                    <Link to="/main/FriendList">
+                    <Link to="/main/Internet/posts">
                         <ul>
                             <li><ChatIcon /></li>
                             <li>Board</li>

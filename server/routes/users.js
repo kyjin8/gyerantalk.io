@@ -177,27 +177,38 @@ router.post('/addFriend',(req,res)=>{
   const friendId = req.body.data;
   console.log(friendId)
   const userId = req.body.user;
+  
+  Friend.find({$and : [{userId : userId, friendId : friendId}]},(err,data)=>{
+    console.log(data);
+    if(data.length === 0){
+      User.findOne({ userId : friendId},(err,user)=>{
 
-  User.findOne({ userId : friendId},(err,user)=>{
-
-    let body = {
-      userId : userId,
-      friendId : user.userId,
-      friendName : user.userName,
-      friendNickName : user.userNickName,
-      friendImage : user.image,
-      friendMessage : user.message,
-    }
-    console.log('body',body);
-    const friend = new Friend(body);
-
-    friend.save((err,doc)=>{
-      if(err) return res.json({ success : false, err})
-      return res.status(200).json({
-          success : true
+        let body = {
+          userId : userId,
+          friendId : user.userId,
+          friendName : user.userName,
+          friendNickName : user.userNickName,
+          friendImage : user.image,
+          friendMessage : user.message,
+        }
+        console.log('body',body);
+        const friend = new Friend(body);
+    
+        friend.save((err,doc)=>{
+          if(err) return res.json({ success : false, err})
+          return res.status(200).json({
+              success : true
+          })
+        })
       })
-    })
+    }else{
+      return res.status(200).json({
+        success : false
+      })
+    }
   })
+
+  
 })
 
 router.post('/updateUser', upload.single('profile_img'), (req, res) => {
@@ -233,13 +244,11 @@ router.post('/updateUser', upload.single('profile_img'), (req, res) => {
 
 router.post('/showList',(req,res)=>{
   const data = req.body.userId;
-
   Friend.find({ userId : {$regex : "^"+data}},(err,user)=>{
     res.status(200).json({
       Myfriend : user
     });
   })
-
 })
 
 module.exports = router;

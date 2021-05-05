@@ -91,6 +91,7 @@ router.post('/ListShow',(req,res)=>{
   const data1 = req.body._id;
   Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
   .sort({'date':-1})
+  // .sort([[&#39;date&#39;, 1]])
   .distinct('roomName',(err,db)=>{
     res.send(db);
   })
