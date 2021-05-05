@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import AnnouncementIcon from '@material-ui/icons/Announcement';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LiveTvIcon from '@material-ui/icons/LiveTv';
 import ChatIcon from '@material-ui/icons/Chat';

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useChat from './useChat';
 import { withRouter } from 'react-router-dom';
-import TextsmsIcon from '@material-ui/icons/Textsms';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getChats } from '../../../api/actions/socket_action';
 import '../../MainPage/Main.scss';
 import { checkMember } from '../../../api/actions/chat_action';
@@ -19,7 +18,6 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
     const [newMessage, setnewMessage] = useState("");
     const [Write, setWrite] = useState("")
     let anoter ="";
-    let mesaagesEnd;
 
     // const roomId = match.params.search;
     const checkMembers = match.params.search.split('_');

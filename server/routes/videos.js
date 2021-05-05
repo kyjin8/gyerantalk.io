@@ -3,8 +3,8 @@ const router = express.Router();
 const cheerio = require("cheerio");
 const client = require("cheerio-httpcli");
 
-router.get('/', function(req, res, next) {
-    // res.render('index', { title: 'Express' });
+router.get('/', (req, res, next) => {
+    res.render('index', { title: 'Express' });
     let titleList = [];
     let titleli=""
 
@@ -20,7 +20,8 @@ router.get('/', function(req, res, next) {
         //         img: $(this).find("div.thumb a img").attr("src")
         //     }
         // });
-        const list = $('ytd-vertical-list-renderer.ytd-shelf-renderer div#items ytd-video-renderer.ytd-vertical-list-renderer')
+        // const list = $('ytd-vertical-list-renderer.ytd-shelf-renderer div#items ytd-video-renderer.ytd-vertical-list-renderer')
+        const list = $('#video-title > yt-formatted-string')
         list.each(function(i, elem){
             // console.log($(this).text());
             titleList[i] = {
@@ -37,6 +38,7 @@ router.get('/', function(req, res, next) {
         })
       }
     );
+
 });
 
 module.exports = router;

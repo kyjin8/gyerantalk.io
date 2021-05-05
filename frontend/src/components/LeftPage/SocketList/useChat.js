@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { useSelector } from 'react-redux';
 import socketIOClient from 'socket.io-client';
 
 const NEW_CHAT_MESSAGE_EVENT = 'newChatMessage';

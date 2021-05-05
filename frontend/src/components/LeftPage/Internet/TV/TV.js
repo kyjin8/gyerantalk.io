@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import client from 'cheerio-httpcli'
 import cheerio from 'cheerio'
 import axios from 'axios'
@@ -80,12 +80,12 @@ const TV = () => {
     //     });
     //   }
     // );
-
     axios.get('/api/videos')
-    .then(response => {
-        const { data } = response.data;
-        console.log('aaaaaaaaaa', response.data);
-    })
+            .then(response => {
+                const { data } = response.data;
+                console.log('aaaaaaaaaa', response.data);
+            })
+    
 
     return (
         <div>
