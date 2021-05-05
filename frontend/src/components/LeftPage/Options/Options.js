@@ -9,6 +9,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import Weather from './option/Weather';
 import {Link} from 'react-router-dom';
 import '../../MainPage/Main.scss';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 const Options = ({UserData}) => {
 
@@ -39,10 +40,10 @@ const Options = ({UserData}) => {
                             <li>친구</li>
                         </ul>
                     </Link>
-                    <Link to="/main/Internet/News">
+                    <Link to="/main/Bucket">
                         <ul>
-                            <li><AnnouncementIcon /></li>
-                            <li>뉴스</li>
+                            <li><ShoppingBasketIcon /></li>
+                            <li>보관함</li>
                         </ul>
                     </Link>
                 </div>

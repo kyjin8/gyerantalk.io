@@ -5,7 +5,7 @@ const { Post } = require('../public/models/Post');
 // Index 
 router.get('/', function(req, res){
     Post.find({})
-    .sort('-createdAt')
+    .sort({'createdAt':-1})
     .exec(function(err, posts){
       if(err) return res.json({ success : false, err});
       // res.render('posts/index', {posts:posts});

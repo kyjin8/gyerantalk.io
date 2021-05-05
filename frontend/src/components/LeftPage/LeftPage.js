@@ -19,6 +19,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import {allChat} from '../../api/actions/socket_action';
 import useChat from '../LeftPage/SocketList/useChat';
+import Bucket from './Bucket/Bucket';
 
 const LeftPage = ({match, UserData, Update, setUpdate}) => {
 
@@ -74,6 +75,7 @@ const LeftPage = ({match, UserData, Update, setUpdate}) => {
             {data === 'Internet' && <Internet UserData={UserData}/> }
             {data === 'ViewFriend' && <ViewFriend UserData={UserData} /> }
             {data === 'Options' && <Options UserData={UserData}/> }
+            {data === 'Bucket' && <Bucket UserData={UserData}/>}
         </div>
     )
 }
