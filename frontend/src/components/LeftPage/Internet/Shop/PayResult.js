@@ -4,8 +4,9 @@ import { Button } from "@material-ui/core";
 
 import axios from "axios";
 
-const PayResult= ({location, match, UserData}) => {
-    const [search, setSearch] = useState('');
+const PayResult= ({location, match}) => {
+    // const [customerId, setCustomerId] = useState('');
+    const customerId = window.localStorage.getItem("customerId");
     const [state, setState] = useState({
         params: {
         cid: "TC0ONETIME",
@@ -39,11 +40,12 @@ const PayResult= ({location, match, UserData}) => {
             params,
             }).then((response) => {
             // 결제 승인에 대한 응답 출력
-            console.log(response);
+            const bucketData = response.data;
+            console.log(customerId, bucketData);
+            axios.post('/api/bucket', {customerId, bucketData});
             });
         }
     }, []);
-
 
     return (
       <div style={{textAlign: 'center'}}>

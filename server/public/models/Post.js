@@ -7,13 +7,13 @@ const postSchema = mongoose.Schema({
     },
     body: {
         type: String,
-        require: true,
+        required: true,
     },
     writerData: {
         // type: mongoose.Schema.Types.ObjectId,
         type: mongoose.Schema.Types,
         ref: 'Post',
-        require: true,
+        required: true,
     },
     createdAt: {
         type: Date,

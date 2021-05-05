@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // import { payReady } from '../../../../api/actions/pay_action';
 
-const ShopItem = ({productBox, querynum}) => {
+const ShopItem = ({UserData, productBox, querynum}) => {
     const [state, setState] = useState("");
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const ShopItem = ({productBox, querynum}) => {
           partner_order_id: "partner_order_id",
           partner_user_id: "partner_user_id",
           item_name: productBox.productName,
-          // item_name: productBox.title,
+          item_code: productBox.productCode,
           quantity: 1,
           total_amount: productBox.productPrice,
           // total_amount: 30000,
@@ -53,6 +53,7 @@ const ShopItem = ({productBox, querynum}) => {
         console.log(tid);
         // localstorage에 tid 저장
         window.localStorage.setItem("tid", tid);
+        window.localStorage.setItem("customerId", UserData.userId);
         // 응답 data로 state 갱신
         setState({ next_redirect_pc_url, tid });
       });

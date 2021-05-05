@@ -38,12 +38,14 @@ const usersRouter = require('./routes/users');
 const chatRouter = require('./routes/chats');
 const postRouter = require('./routes/posts');
 const videoRouter = require('./routes/videos');
+const bucketRouter = require('./routes/bucket');
 // 라우터 적용
 app.use('/', indexRouter); // index 위치
 app.use('/api/users', usersRouter); // 로그인 / 회원가입 위치
 app.use('/api/chats', chatRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/videos', videoRouter);
+app.use('/api/bucket', bucketRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -81,6 +81,7 @@ const TV = () => {
     //   }
     // );
 
+    //네이버 웹툰 - 백에서 됨
     axios.get('/api/videos')
     .then(response => {
         const { data } = response.data;
