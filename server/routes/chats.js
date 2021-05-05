@@ -90,7 +90,7 @@ router.post('/friend',(req,res)=>{
 router.post('/ListShow',(req,res)=>{
   const data1 = req.body._id;
   Chat.find({$or : [{roomName : {$regex : "^"+data1}}, {roomName : {$regex : data1+"$"}}]})
-  .sort({'date':-1})
+  .sort({'createdAt':-1})
   // .sort([[&#39;date&#39;, 1]])
   .distinct('roomName',(err,db)=>{
     res.send(db);
@@ -101,7 +101,7 @@ router.post('/textMessage',(req,res)=>{
   Chat.find({roomName : req.body.chat})
   .populate('sendUser')
   .limit(1)
-  .sort({'date':-1})
+  .sort({'createdAt':-1})
   .then(response => {
     res.send(response);
   });
