@@ -32,19 +32,6 @@ const ChatingList = React.memo(({UserData, checktUpdate, setchecktUpdate}) => {
     //     ListRoom.map( (chat)=>(
     //         <ChatItem key={chat} chat={chat} UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/>
     //     ))
-    useEffect(() => {
-        return () => {
-            <div className="home-container">
-            <ChatTitle />
-            <AddBaner />
-            {
-                ListRoom.map( (chat)=>(
-                    <ChatItem key={chat} chat={chat} UserData={UserData} checktUpdate={checktUpdate} setchecktUpdate={setchecktUpdate}/>
-                ))
-            }
-        </div>
-        }
-    }, [checktUpdate])
 
     return (
         <div className="home-container">

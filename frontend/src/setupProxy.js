@@ -24,4 +24,11 @@ module.exports = function(app) {
         changeOrigin: true,
       })
     )
+    // app.use(
+    //   '',
+    //   createProxyMiddleware({
+    //     target: 'https://www.youtube.com/results?search_query=%EC%B8%84',
+    //     changeOrigin: true,
+    //   })
+    // )
   };

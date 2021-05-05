@@ -23,12 +23,13 @@ const ChatItem = ({ chat, UserData, checktUpdate, setchecktUpdate }) => {
 
     useEffect(() => {
         let body ={
-            chat : chat
+            chat : chat,
+            userdata : UserData
         }
         dispatch(ChatInform(body))
         .then(response => {
             setMes(response.payload[0]);
-            setMatchUrl(response.payload[0].roomName.split('_'))
+            setMatchUrl(response.payload[0].roomName.split('_'));
             if(UserData._id===response.payload[0].roomName.split('_')[0]){
                 let body ={
                     mem : response.payload[0].roomName.split('_')[1]
@@ -47,7 +48,7 @@ const ChatItem = ({ chat, UserData, checktUpdate, setchecktUpdate }) => {
                 })
             }
         })
-    }, [ UserData, chat, Messages ])
+    }, [ UserData, chat, Messages, checktUpdate ])
 
     useEffect(() => {
         let body = {
