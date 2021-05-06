@@ -26,7 +26,8 @@ const BoardDetail = ({UserData, match, history, selection}) => {
     const onClick = (e) => {
         dispatch(deletePost({UserData, selection}))
         .then(res => {
-            history.push('/main/Internet/posts');
+            // history.push('/main/Internet/posts');
+            window.location.assign(`/main/Internet/posts`);
         })
     }
 

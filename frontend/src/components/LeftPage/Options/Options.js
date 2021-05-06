@@ -43,7 +43,7 @@ const Options = ({UserData}) => {
                     <Link to="/main/Bucket">
                         <ul>
                             <li><ShoppingBasketIcon /></li>
-                            <li>보관함</li>
+                            <li>주문내역</li>
                         </ul>
                     </Link>
                 </div>
@@ -63,7 +63,7 @@ const Options = ({UserData}) => {
                     <Link to="/main/Internet/posts">
                         <ul>
                             <li><ChatIcon /></li>
-                            <li>Board</li>
+                            <li>게시판</li>
                         </ul>
                     </Link>
                 </div>
@@ -77,12 +77,14 @@ const Options = ({UserData}) => {
             
             <Weather UserData={UserData}/>
             <div className="egg_cont">
-                <img className="egg_box" src="/gyeran.png" /><br/>
+                <img className="egg_box" src="/gyeran_height_cut.png" /><br/>
                 항상 계란톡을 이용해주셔서 감사합니다.
             </div>
-            <button className="egg_log" style={{marginLeft:'10px'}} onClick={onClickHandler}>
-                    로그아웃
-            </button>
+            <div className="log_cont">
+                <button className="egg_log" onClick={onClickHandler}>
+                        로그아웃
+                </button>
+            </div>
         </div>
     )
 }

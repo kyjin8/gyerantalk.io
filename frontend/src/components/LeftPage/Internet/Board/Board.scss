@@ -29,6 +29,7 @@
             display: inline-block;
             margin-bottom: -1.5%;
             .list_profile_img{
+                border-radius: 50%;
                 width: 30px;
                 height: 30px;
                 object-fit: cover;
@@ -64,5 +65,48 @@
         margin-left: 10%;
         height: 50px;
         transform: translateY(12.5px);
+    }
+}
+//bucketitem
+.item_container{
+    overflow: scroll;
+    height: 416px;
+    .item_wrapper{
+        background: #f9f9f9;
+        margin: 5%;
+        padding: 8%;
+        h5{
+            margin-top: 0;
+            margin-bottom: 8%;
+        }
+        .item_approvedAt{
+            font-size: 12px;
+            color: gray;
+            margin-bottom: 2%;
+        }
+        .item_row{
+            display: flex;
+            justify-content: space-between;
+            margin: 10% 0 10%;
+            .item_img{
+                display: inline-flex;
+                width: 25%;
+                // height: 50px;
+                img{
+                    width: 100%;
+                }
+            }
+            .item_title{
+                display: inline-flex;
+                width: 70%;
+                font-size: 11px;
+                align-items: center;
+                margin-left: 10%;
+            }
+        }
+        .item_price{
+            font-weight: 700;
+            margin-top: 5%;
+        }
     }
 }

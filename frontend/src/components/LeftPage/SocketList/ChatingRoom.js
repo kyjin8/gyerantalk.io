@@ -180,7 +180,7 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
                     onKeyPress={onKeyPress}
                 />
                 <button onClick={onSubmitMessage} className="send-message-button" >
-                    Send
+                    전송
                 </button>
             </div>
         </div>
