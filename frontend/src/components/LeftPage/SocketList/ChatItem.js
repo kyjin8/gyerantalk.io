@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ChatInform } from '../../../api/actions/socket_action';
 import moment from 'moment';
@@ -7,7 +7,6 @@ import { FriendProfile } from '../../../api/actions/socket_action';
 import { withRouter } from 'react-router-dom';
 import '../../MainPage/Main.scss';
 import useChat from './useChat';
-import axios from 'axios';
 import { CountHow } from '../../../api/actions/socket_action';
 import 'moment/locale/ko'; 
 

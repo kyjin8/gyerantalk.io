@@ -1,11 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './Main.scss';
 import LeftPage from '../LeftPage/LeftPage';
 import { getUser } from '../../api/actions/main_action';
-import { getFriendList } from '../../api/actions/friend_action';
 
 const Main = (props) => {
 
@@ -15,16 +13,16 @@ const Main = (props) => {
     // const [ListFriend, setListFriend] = useState("");
     const [Update, setUpdate] = useState(false);
 
-    const onClickHandler = () =>{
-        axios.get('/api/users/logout')
-        .then(response => {
-            if(response.data.success){
-                props.history.push("/");
-            }else{
-                alert('로그아웃 하는데 실패 했습니다.');
-            }
-        })
-    }
+    // const onClickHandler = () =>{
+    //     axios.get('/api/users/logout')
+    //     .then(response => {
+    //         if(response.data.success){
+    //             props.history.push("/");
+    //         }else{
+    //             alert('로그아웃 하는데 실패 했습니다.');
+    //         }
+    //     })
+    // }
     
     useEffect(()=>{
         dispatch(getUser())
