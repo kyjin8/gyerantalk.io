@@ -42,12 +42,16 @@ const BoardDetail = ({UserData, match, history, selection}) => {
             <h3 className="form_group" >{post.title}</h3>
             <div className="form_group" style={{margin: '15% 0'}}>{post.body}</div>
             <div>{moment(post.createdAt).startOf('sec').fromNow()}</div>
+            {post.writerData.userId === UserData.userId ? 
             <div style={{display: 'block', textAlign: 'center', marginTop: '15%'}}>
                 <Link to={`/main/Internet/posts/${post._id}/update`}>
                     <Button style={{backgroundColor: '#f6bd63', color: '#fff', marginRight: '5%'}}>수정</Button>
                 </Link>
                 <Button style={{backgroundColor: 'rgba(182, 182, 182, 0.521)'}} onClick={onClick}>삭제</Button>
             </div>
+            :
+            null
+            }
         </div>
         : <></>
         }

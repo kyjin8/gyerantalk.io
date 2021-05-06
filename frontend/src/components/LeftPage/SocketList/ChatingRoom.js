@@ -6,6 +6,8 @@ import { getChats } from '../../../api/actions/socket_action';
 import '../../MainPage/Main.scss';
 import { checkMember } from '../../../api/actions/chat_action';
 import axios from 'axios';
+import moment from 'moment';
+import 'moment/locale/ko'; 
 
 const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
 
@@ -116,6 +118,7 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
                             StartData.map((data)=>(
                                 data.sendUser._id === UserData._id ?
                                 <div className="talk_box">
+                                    <div className="time">{moment(data.date).format('A h:mm')}</div>
                                     <div className="say">
                                         <span className="span_name">{data.sendUser.userName}</span>
                                         <span className="span_mess">{data.message}</span>
@@ -129,6 +132,7 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
                                         <span className="span_name1">{data.sendUser.userName}</span>
                                         <span className="span_mess1">{data.message}</span>
                                     </div>
+                                    <div className="time">{moment(data.date).format('A h:mm')}</div>
                                 </div>
                             ))
                         }
@@ -136,6 +140,7 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
                             Messages.map((message, i)=>(
                                 message.ownedByCurrentUser ? 
                                 <div className="talk_box">
+                                    <div className="time">{moment(message.date).format('A h:mm')}</div>
                                     <div className="say">
                                         <span className="span_name">{UserData.userName}</span>
                                         <span className="span_mess">{message.message}</span>
@@ -149,6 +154,7 @@ const ChatingRoom = ({match, UserData, checktUpdate, setchecktUpdate }) => {
                                         <span className="span_name1">{message.userName}</span>
                                         <span className="span_mess1">{message.message}</span>
                                     </div>
+                                    <div className="time">{moment(message.date).format('A h:mm')}</div>
                                 </div>
                             ))
                         }
