@@ -285,7 +285,33 @@
                     margin-left: 50px;
                 }
             }
-
+            .chu_box{
+                overflow: scroll;
+                height: 470px;
+                width: 100%;
+                .chu_src{
+                    width: 100%;     
+                    margin-top: 5px;
+                    margin-bottom: 10px;
+                    border-bottom: 2px solid #b3b3b3;
+                    .chu_div{
+                        width: 100%;
+                        text-align: center;
+                        img{
+                            width: 90%;
+                            border-radius: 10px;
+                        }
+                    }
+                    .chu_span{
+                        font-size: 12px;
+                        text-align: center;
+                        width: 80%;
+                        text-align: center;
+                        text-align: center;
+                        margin: 0 auto;
+                    }
+                }
+            }
 
             // Internet-title
             .intTitle{
