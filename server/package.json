@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node index",
-    "server": "nodemon index",
+    "start": "node web",
+    "server": "nodemon web",
     "dev": "concurrently \" npm run server \" \" npm run start --prefix ../frontend \""
   },
   "dependencies": {
