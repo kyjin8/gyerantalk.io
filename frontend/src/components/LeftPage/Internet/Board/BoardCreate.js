@@ -50,7 +50,7 @@ const BoardCreate = ({UserData, match, history}) => {
                 </div>
                 <div className="btn_group">
                     <Button type="submit" className="btn btn_style">제출</Button>
-                    <a className="btn btn_primary" href="main/Internet/posts"><Button>취소</Button></a>
+                    <a className="btn btn_primary" href="/main/Internet/posts"><Button>취소</Button></a>
                 </div>
             </form>
         </div>
