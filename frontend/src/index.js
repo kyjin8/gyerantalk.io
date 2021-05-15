@@ -22,7 +22,7 @@ ReactDOM.render(
       )}
   >
     <BrowserRouter>
-      <App />,
+      <App />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
